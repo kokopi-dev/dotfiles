@@ -6,18 +6,28 @@ sudo systemctl start fstrim.timer
 
 # needed packages after installing arch
 # make sure your'e not root when running
-sudo pacman -S git firefox xorg-server xorg-xinput xorg-xinit xorg-xset xorg-xsetroot neofetch feh rofi pass rsync bat ripgrep fd polybar man-db xclip flameshot peek screenkey tumbler thunar unzip polkit
+sudo pacman -S git firefox xorg-server xorg-xinput xorg-xinit xorg-xset xorg-xsetroot neofetch feh rofi pass rsync bat ripgrep fd polybar man-db xclip flameshot peek screenkey tumbler thunar unzip polkit openssh
+
+# https://wiki.archlinux.org/title/backlight
+# intel screen brightness control
+sudo pacman -S xorg-xbacklight
 
 # fn keys, check dotfiles/acpid
 sudo pacman -S acpid
 sudo systemctl start acpid
 sudo systemctl enable acpid
 
+# xrandr GUI
+sudo pacman -S arandr
+
 # audio
 ## i think sof-firmware is required for asus zenbook UX325E
 ## audio should just work after installing
 ## run alsamixer to change volume in terminal
 sudo pacman -S pulseaudio pulseaudio-bluetooth pulseaudio-alsa sof-firmware
+
+#audio GUI
+sudo pacman -S pavucontrol
 
 # bluetooth
 ## bluetooth audio should automatically switch sinks
@@ -57,6 +67,9 @@ yay -S picom-git
 sudo pacman -S bspwm xdo sxhkd
 
 # check https://wiki.archlinux.org/title/Xorg : driver installation
+## amd
+sudo pacman -S xf86-video-amdgpu mesa vulkan-radeon
+## intel
 sudo pacman -S xf86-video-intel mesa vulkan-intel
 
 # installing yay
@@ -79,6 +92,9 @@ sudo pacman -S postgresql dbeaver
 
 # gtk3.0 theme
 # https://github.com/phisch/phinger-cursors
+# gtk themes are in /usr/share/themes
+# gtk cursor themes are in /usr/share/icons
+# systemwide cursor settings are in /usr/share/icons/default/index.theme
 yay -S juno-ocean-gtk-theme-git phinger-cursors
 
 # lockscreen
@@ -95,6 +111,9 @@ git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 
 # bun
 curl -fsSL https://bun.sh/install | bash
+
+#hugo latest extended
+sudo pacman -S hugo
 
 # bazecor
 # install bazecor

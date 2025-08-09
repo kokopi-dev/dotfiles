@@ -25,7 +25,7 @@ vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 vim.api.nvim_create_autocmd({"FileType"}, {
-    pattern = {"typescriptreact", "javascript", "css", "html", "yaml", "json", "md", "toml"},
+    pattern = {"typescriptreact", "typescript", "javascript", "css", "html", "htmldjango", "yaml", "json", "md", "toml"},
     command = "setlocal shiftwidth=2 tabstop=2 softtabstop=2"
 })
 
@@ -38,3 +38,29 @@ vim.g.python3_host_prog = "/usr/bin/python3"
 -- skeletons
 vim.cmd [[autocmd BufNewFile *.py 0r ~/.config/nvim/templates/skeleton.py]]
 vim.cmd [[autocmd BufNewFile *.sh 0r ~/.config/nvim/templates/skeleton.sh]]
+
+-- filetypes
+vim.filetype.add({
+    extension = {
+        templ = "templ",
+    },
+})
+
+-- popout styling
+vim.api.nvim_create_autocmd("ColorScheme", {
+  callback = function()
+    vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+    vim.api.nvim_set_hl(0, "FloatBorder", { bg = "none" })
+  end,
+})
+vim.keymap.set('n', '<leader>x', function()
+  vim.lsp.buf.clear_references()
+  local win_ids = vim.fn.getwininfo()
+  for _, win in pairs(win_ids) do
+    if win.quickfix == 0 and win.loclist == 0 and win.terminal == 0 and win.tabnr == vim.fn.tabpagenr() then
+      if vim.api.nvim_win_get_config(win.winid).relative ~= '' then
+        vim.api.nvim_win_close(win.winid, false)
+      end
+    end
+  end
+end, { desc = "Close LSP floating windows" })

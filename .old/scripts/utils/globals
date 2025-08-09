@@ -1,8 +1,0 @@
-#!/usr/bin/env bash
-# Colors
-C='\033[0;36m'
-R='\033[0;31m'
-G='\033[0;32m'
-NC='\033[0m'
-# Variables
-SCRIPT_FOLDER="$HOME/.$USER.scripts"

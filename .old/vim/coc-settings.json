@@ -1,9 +1,0 @@
-{
-    "python.jediEnabled": false,
-    "python.analysis.diagnosticEnabled": false,
-    "python.autoComplete.addBrackets": true,
-    "vetur.trace.server": "verbose",
-    "vetur.ignoreProjectWarning": true,
-    "pyright.enable": true,
-    "omnisharp.version": "latest"
-}

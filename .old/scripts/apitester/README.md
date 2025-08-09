@@ -1,4 +1,0 @@
-# Apitester
-
-## Setup
-Run `./setup`

@@ -7,12 +7,14 @@ killall -q polybar
 
 pgrep -x sxhkd > /dev/null || sxhkd &
 
-if [[ $(xrandr -q | grep -w connected | grep "HDMI1") ]]
+# depending on the laptop, it will be either eDP1 or eDP-1
+# run xrandr --current to check
+if [[ $(xrandr -q | grep -w connected | grep "DisplayPort-2") ]]
 then
-  bspc monitor HDMI1 -d 1 2 3 4 5
-  bspc monitor eDP1 -d 6 7 8 9
+  bspc monitor DisplayPort-2 -d 1 2 3 4 5
+  bspc monitor eDP -d 6 7 8 9
 else
-  bspc monitor eDP1 -d 1 2 3 4 5 6 7 8 9
+  bspc monitor eDP -d 1 2 3 4 5 6 7 8 9
 fi
 
 # borders
@@ -41,9 +43,9 @@ picom -b
 ## polybar
 polybar leftbar &
 polybar rightbar &
+udiskie &
 
-if [[ $(xrandr -q | grep -w connected | grep "HDMI1") ]]
+if [[ $(xrandr -q | grep -w connected | grep "DisplayPort-2") ]]
 then
-  polybar leftbar2 &
-  polybar rightbar2 &
+    polybar midbar &
 fi

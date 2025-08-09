@@ -1,0 +1,14 @@
+[Unit]
+Description=Lock screen before suspend
+Before=sleep.target suspend.target hibernate.target hybrid-sleep.target
+Wants=display-manager.service
+
+[Service]
+User=%i
+Type=oneshot
+Environment=DISPLAY=:0
+ExecStart=/home/%i/.local/bin/lock-on-suspend
+TimeoutSec=5
+
+[Install]
+WantedBy=sleep.target suspend.target hibernate.target hybrid-sleep.target

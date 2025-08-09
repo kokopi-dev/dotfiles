@@ -7,7 +7,7 @@ super + Return
 	kitty
 
 super + d
-    rofi -show drun -theme ~/.config/rofi/config.rasi
+    ~/.config/rofi/runrofi.sh
 
 # program launcher
 super + @space
@@ -148,3 +148,18 @@ super + shift + {Left,Down,Up,Right}
 # resize window
 super + ctrl + {Left,Down,Up,Right}
 	bspwm_resize {west,south,north,east}
+
+# framework brightness
+XF86MonBrightnessUp
+    python ~/00/framework_arch_tools/brightness.py +
+XF86MonBrightnessDown
+    python ~/00/framework_arch_tools/brightness.py -
+
+XF86AudioRaiseVolume
+    sh ~/00/framework_arch_tools/volume.sh up
+
+XF86AudioLowerVolume
+    sh ~/00/framework_arch_tools/volume.sh down
+
+XF86AudioMute
+    sh ~/00/framework_arch_tools/volume.sh mute

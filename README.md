@@ -19,7 +19,7 @@ Each folder should have a README of some tips.
 - File Explorer: thunar-git
 - Search: fzf, fd, ripgrep
 - Misc: exa, bat
-- Lockscreen: betterlockscreen
+- Lockscreen: i3lock
 - Password Manager: pass
 
 ## Wallpapers
@@ -44,8 +44,12 @@ Audio:
 ## Useful wikis
 - NVME storage: https://wiki.archlinux.org/title/Solid_state_drive/NVMe
 
+## USB Auto Mounting
+
+- using packages: udisks2 and udiskie (for automatic mounting)
+- unmounting needs manual: udiskie-umount /run/media/$USER/usb_folder_name
+
 ## TODO
 - Multiple Monitor setup
 - Wifi script?
-- Test mic
 - Auto detect usb mounts
