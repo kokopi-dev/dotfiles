@@ -22,9 +22,6 @@ Each folder should have a README of some tips.
 - Lockscreen: i3lock
 - Password Manager: pass
 
-## Wallpapers
-- Justin Maller (Modified by me)
-
 ## Commands
 
 Wifi:

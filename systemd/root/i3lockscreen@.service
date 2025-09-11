@@ -1,14 +1,14 @@
 [Unit]
 Description=Lock screen before suspend
-Before=sleep.target suspend.target hibernate.target hybrid-sleep.target
-Wants=display-manager.service
+Before=sleep.target suspend.target hibernate.target
 
 [Service]
 User=%i
-Type=oneshot
+Type=forking
 Environment=DISPLAY=:0
-ExecStart=/home/%i/.local/bin/lock-on-suspend
-TimeoutSec=5
+ExecStart=/bin/bash /home/%i/.local/bin/lock-on-suspend
+TimeoutSec=10
+RemainAfterExit=no
 
 [Install]
-WantedBy=sleep.target suspend.target hibernate.target hybrid-sleep.target
+WantedBy=sleep.target suspend.target hibernate.target

@@ -1,0 +1,49 @@
+* {
+  border: none;
+  border-radius: 0;
+  font-family: "Geist", monospace;
+  font-size: 12px;
+  min-height: 0;
+}
+
+window#waybar {
+  border-radius: 10px;
+  background-color: rgba(18, 18, 36, 0.35);      /* Bar background color */
+  border: 1px solid rgba(225, 180, 226, 0.75);
+  transition-property: background-color;
+  transition-duration: .5s;
+}
+
+.modules-left {
+  padding-left: 18px;
+}
+.modules-right {
+  padding-right: 18px;
+}
+#clock,
+#workspaces,
+#network,
+#pulseaudio,
+#cpu,
+#memory,
+#battery,
+#battery.charging,
+#battery.plugged {
+  background: transparent; /* Let only modules show */
+  color: #E6D4E6;
+  padding: 8px 0px;
+}
+
+#workspaces button {
+  font-family: "Geist Mono", monospace;
+  background: transparent;
+  color: #7f849c;
+  padding: 0 6px;
+  border-radius: 8px;
+}
+
+#workspaces button.active {
+  background: #F3E2A9;
+  color: #4F3F1C;
+  font-weight: bold;
+}

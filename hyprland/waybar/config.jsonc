@@ -1,0 +1,52 @@
+{
+  "layer": "top",
+  "position": "top",
+  "margin-top": 10,
+  "margin-left": 10,
+  "margin-right": 10,
+  "spacing": 12,
+  "modules-left": ["clock", "hyprland/workspaces"],
+  "modules-right": ["pulseaudio", "network", "cpu", "memory", "battery"],
+
+  "cpu": {
+    "format": "{usage}% ",
+    "tooltip": false
+  },
+  "memory": {
+    "format": "{}% "
+  },
+  "clock": {
+    "format": "{:%H:%M}"
+  },
+
+  "network": {
+    // "interface": "wlp2*", // (Optional) To force the use of this interface
+    "format-wifi": "{essid} ",
+    "format-ethernet": "{ipaddr}/{cidr} ",
+    "tooltip-format": "{ifname} via {gwaddr} ",
+    "format-linked": "{ifname} (No IP) ",
+    "format-disconnected": "Disconnected ⚠",
+    // "format-alt": "{ifname}: {ipaddr}/{cidr}",
+    "on-click": "kitty nmtui"
+  },
+  "pulseaudio": {
+    "format": "{volume}% ",
+    "format-muted": "",
+    "on-click": "pavucontrol"
+  },
+  "battery": {
+    "states": {
+      // "good": 95,
+      "warning": 30,
+      "critical": 15
+    },
+    "format": "{capacity}% {icon}",
+    "format-full": "{capacity}% {icon}",
+    "format-charging": "{capacity}% ",
+    "format-plugged": "{capacity}% ",
+    "format-alt": "{time} {icon}",
+    // "format-good": "", // An empty format will hide the module
+    // "format-full": "",
+    "format-icons": ["", "", "", "", ""]
+  }
+}
