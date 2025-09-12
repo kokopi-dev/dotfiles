@@ -1,0 +1,6 @@
+#!/bin/bash
+ln -s ~/.config/rofi/app-manager/rofi-app-manager.sh ~/.local/bin/rofi-app-manager.sh
+ln -s ~/.config/rofi/config-manager/rofi-config-manager.sh ~/.local/bin/rofi-config-manager.sh
+ln -s ~/.config/rofi/settings-manager/rofi-settings-manager.sh ~/.local/bin/rofi-settings-manager.sh
+ln -s ~/.config/rofi/power-manager/rofi-power-manager.sh ~/.local/bin/rofi-power-manager.sh
+

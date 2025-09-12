@@ -1,0 +1,98 @@
+configuration {
+  font: "Geist 12";
+  hover-select: true;
+  me-select-entry: "MousePrimary";
+  me-accept-entry: "!MousePrimary";
+  click-to-exit: true;
+}
+
+@theme "~/.config/rofi/theme.rasi"
+
+// Main //
+window {
+    width: 15em;
+    height: 9em;
+    // transparency: "real";
+    fullscreen: false;
+    enabled: true;
+    cursor: "default";
+    spacing: 0em;
+    opacity: 0;
+    background-color: transparent;
+}
+mainbox {
+    enabled: true;
+    spacing: 0em;
+    padding: 1.2em 0.2em;
+    orientation: horizontal;
+    children: [ "listview" ];
+    background-color: #180C1F45;
+    border-color: #BF9FD8;
+    border: 1px;
+    border-radius: 1em;
+}
+
+// Lists //
+listview {
+    enabled: true;
+    spacing: 0.6em;
+    padding: 0em 1em;
+    columns: 1;
+    lines: 3;
+    cycle: true;
+    dynamic: true;
+    scrollbar: false;
+    layout: vertical;
+    reverse: false;
+    expand: true;
+    fixed-height: true;
+    fixed-columns: true;
+    cursor: "default";
+    background-color: transparent;
+}
+
+// Elements //
+element {
+    enabled: true;
+    spacing: 1em;
+    padding: 0.4em 0.5em 0.4em 1.5em;
+    cursor: pointer;
+    background-color: transparent;
+    text-color: #E6D5E6;
+}
+element selected.normal {
+    border-radius: 0.5em;
+    background-color: #f5e0dcff;
+    text-color: #4F3F1C;
+    border-color: #4F3F1C;
+    border: 1px;
+}
+element-icon {
+    size: 1.5em;
+    cursor: inherit;
+    background-color: transparent;
+    text-color: inherit;
+}
+element-text {
+    vertical-align: 0.5;
+    horizontal-align: 0.0;
+    cursor: inherit;
+    background-color: transparent;
+    text-color: inherit;
+    highlight: bold;
+}
+
+// Error message //
+error-message {
+    text-color: #cdd6f4ff;
+    background-color: #11111be6;
+    text-transform: capitalize;
+    children: [ "textbox" ];
+}
+
+textbox {
+    text-color: inherit;
+    background-color: inherit;
+    vertical-align: 0.5;
+    horizontal-align: 0.5;
+}

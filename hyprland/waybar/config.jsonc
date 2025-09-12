@@ -1,33 +1,63 @@
 {
   "layer": "top",
   "position": "top",
-  "margin-top": 10,
-  "margin-left": 10,
-  "margin-right": 10,
+  "margin-top": 12,
+  "margin-left": 15,
+  "margin-right": 15,
   "spacing": 12,
-  "modules-left": ["clock", "hyprland/workspaces"],
-  "modules-right": ["pulseaudio", "network", "cpu", "memory", "battery"],
+  "modules-left": ["clock", "hyprland/workspaces", "custom/settings", "custom/configs", "custom/discord"],
+  "modules-right": ["pulseaudio", "network", "cpu", "memory", "battery", "custom/power"],
 
+  "custom/configs": {
+    "format": "󰈙",
+    "tooltip": false,
+    "on-click": "~/.local/bin/rofi-config-manager.sh"
+  },
+  "custom/settings": {
+    "format": "",
+    "tooltip": false,
+    "on-click": "~/.local/bin/rofi-settings-manager.sh"
+  },
+  "custom/discord": {
+    "format": "",
+    "tooltip": false,
+    "on-click": "discord --enable-features=UseOzonePlatform --ozone-platform=wayland"
+  },
+  "hyprland/workspaces": {
+    "format": "{icon}",
+    "format-icons": {
+        "active": "",
+        "default": "",
+        "urgent": ""
+    },
+    "on-click": "activate"
+  },
   "cpu": {
     "format": "{usage}% ",
     "tooltip": false
   },
   "memory": {
-    "format": "{}% "
+    "format": "{}% "
   },
   "clock": {
     "format": "{:%H:%M}"
   },
+  "custom/power": {
+      "format": "",
+      "tooltip": false,
+      "on-click": "~/.local/bin/rofi-power-manager.sh"
+  },
 
   "network": {
     // "interface": "wlp2*", // (Optional) To force the use of this interface
-    "format-wifi": "{essid} ",
+    "max-length": 10,
+    "format-wifi": "{essid}  ",
     "format-ethernet": "{ipaddr}/{cidr} ",
     "tooltip-format": "{ifname} via {gwaddr} ",
     "format-linked": "{ifname} (No IP) ",
     "format-disconnected": "Disconnected ⚠",
+    "on-click": "ghostty -e nmtui"
     // "format-alt": "{ifname}: {ipaddr}/{cidr}",
-    "on-click": "kitty nmtui"
   },
   "pulseaudio": {
     "format": "{volume}% ",
@@ -42,11 +72,11 @@
     },
     "format": "{capacity}% {icon}",
     "format-full": "{capacity}% {icon}",
-    "format-charging": "{capacity}% ",
-    "format-plugged": "{capacity}% ",
+    "format-charging": "{capacity}% 󰂄",
     "format-alt": "{time} {icon}",
+    "format-icons": ["", "", "", "", ""]
     // "format-good": "", // An empty format will hide the module
     // "format-full": "",
-    "format-icons": ["", "", "", "", ""]
+    // "format-plugged": "{capacity}% ",
   }
 }
