@@ -40,7 +40,7 @@ imageBoxOverlay {
 }
 imageBox {
     enabled: true;
-    background-image: url("/home/kokopi/.config/rofi/images/sg/8.jpg", width);
+    background-image: url("~/.config/rofi/images/sg/17.jpg", width);
     border-radius: 1em;
 }
 

@@ -10,12 +10,14 @@
 
   "custom/configs": {
     "format": "󰈙",
-    "tooltip": false,
+    "tooltip": true,
+    "tooltip-format": "Config list",
     "on-click": "~/.local/bin/rofi-config-manager.sh"
   },
   "custom/settings": {
     "format": "",
-    "tooltip": false,
+    "tooltip": true,
+    "tooltip-format": "Control panel",
     "on-click": "~/.local/bin/rofi-settings-manager.sh"
   },
   "custom/discord": {

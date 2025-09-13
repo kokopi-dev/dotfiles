@@ -5,7 +5,7 @@ IMAGE_DIR=~/.config/rofi/images/sg
 THEME_FILE=~/.config/rofi/config-manager/config-manager.rasi
 LOG_FILE=~/.config/rofi/.randomized_image.log
 
-IMAGE=$(find "$IMAGE_DIR" -type f | sort -R | head -n 1)
+IMAGE=$(find "$IMAGE_DIR" -type f | sort -R | head -n 1 | sed "s|^$HOME|~|")
 LAST_IMAGE=$(cat ~/.config/rofi/.randomized_image.log)
 
 while true; do
@@ -34,6 +34,7 @@ chosen=$(echo -e "$NVIM\n$HYPRLAND\n$WAYBAR\n$GHOSTTY\n$ROFI_APP\n$ROFI_SETT\n$R
 case $chosen in
     "$NVIM")
         ghostty -e nvim ~/.config/nvim/init.lua & disown
+        ghostty -e nvim ~/.config/nvim/lua/settings.lua & disown
         ;;
     "$HYPRLAND")
         ghostty -e nvim ~/.config/hypr/hyprland.conf & disown
@@ -56,14 +57,18 @@ case $chosen in
         ;;
     "$ROFI_APP")
         ghostty -e nvim ~/.config/rofi/app-manager/app-manager.rasi & disown
+        ghostty -e nvim ~/.config/rofi/app-manager/rofi-app-manager.sh & disown
         ;;
     "$ROFI_SETT")
         ghostty -e nvim ~/.config/rofi/settings-manager/settings-manager.rasi & disown
+        ghostty -e nvim ~/.config/rofi/settings-manager/rofi-settings-manager.sh & disown
         ;;
     "$ROFI_CONF")
         ghostty -e nvim ~/.config/rofi/config-manager/config-manager.rasi & disown
+        ghostty -e nvim ~/.config/rofi/config-manager/rofi-config-manager.sh & disown
         ;;
     "$ROFI_POW")
         ghostty -e nvim ~/.config/rofi/power-manager/power-manager.rasi & disown
+        ghostty -e nvim ~/.config/rofi/power-manager/rofi-power-manager.sh & disown
         ;;
 esac

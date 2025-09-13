@@ -3,7 +3,17 @@
 This is a work in progress, check back for updates. Might look into making a changelog.
 Each folder should have a README of some tips.
 
-## Current Machine: Arch
+## Hyprland Setup (2025) (hyprland/)
+- Shell: bash
+    * Prompt: Starship
+- WM: hyprland
+- Terminal: ghostty
+- Editor: neovim
+- Menus: rofi
+- Lockscreen: hyprlock
+- Password Manager: pass (syncpass)
+
+## X11 Setup (~2020) (X11/)
 - Shell: bash
     * Prompt: Starship
 - WM: bspwm
@@ -45,8 +55,3 @@ Audio:
 
 - using packages: udisks2 and udiskie (for automatic mounting)
 - unmounting needs manual: udiskie-umount /run/media/$USER/usb_folder_name
-
-## TODO
-- Multiple Monitor setup
-- Wifi script?
-- Auto detect usb mounts

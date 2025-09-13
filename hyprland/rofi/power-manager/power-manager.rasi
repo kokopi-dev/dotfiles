@@ -1,5 +1,4 @@
 configuration {
-  font: "Geist 12";
   hover-select: true;
   me-select-entry: "MousePrimary";
   me-accept-entry: "!MousePrimary";
@@ -7,11 +6,11 @@ configuration {
 }
 
 @theme "~/.config/rofi/theme.rasi"
-
 // Main //
 window {
+    font: "Geist 12";
     width: 15em;
-    height: 9em;
+    height: 13em;
     // transparency: "real";
     fullscreen: false;
     enabled: true;
@@ -24,12 +23,26 @@ mainbox {
     enabled: true;
     spacing: 0em;
     padding: 1.2em 0.2em;
-    orientation: horizontal;
-    children: [ "listview" ];
+    orientation: vertical;
+    children: [ "message", "listview" ];
     background-color: #180C1F45;
     border-color: #BF9FD8;
     border: 1px;
     border-radius: 1em;
+}
+
+// decorative text at top
+message {
+    enabled: true;
+    background-color: transparent;
+    text-color: #BF9FD8;
+    border: none;
+}
+textbox {
+    padding: 8px 120px 8px 0px;
+    font: "Geist Mono Bold 20";
+    horizontal-align: 0.0;
+    vertical-align: 0.5;
 }
 
 // Lists //
@@ -60,6 +73,13 @@ element {
     background-color: transparent;
     text-color: #E6D5E6;
 }
+
+element.normal.normal,
+element.alternate.normal {
+    background-color: transparent;
+    text-color: #E6D5E6;
+}
+
 element selected.normal {
     border-radius: 0.5em;
     background-color: #f5e0dcff;

@@ -8,10 +8,10 @@
 
 window#waybar {
   border-radius: 10px;
-  background-color: rgba(18, 18, 36, 0.35);      /* Bar background color */
+  background-color: rgba(18, 18, 36, 0.35);
   border: 1px solid rgba(225, 180, 226, 0.75);
   transition-property: background-color;
-  transition-duration: .5s;
+  transition-duration: 0.5s;
 }
 
 .modules-left {
@@ -31,8 +31,8 @@ window#waybar {
 #battery,
 #battery.charging,
 #battery.plugged {
-  background: transparent; /* Let only modules show */
-  color: #E6D4E6;
+  background: transparent;
+  color: #e6d4e6;
   padding: 8px 0px;
 }
 #custom-power {
@@ -45,28 +45,42 @@ window#waybar {
   padding: 0 4px;
 }
 
+#workspaces button:hover {
+  box-shadow: none;
+}
+
 #workspaces button.active {
-  color: #F3E2A9;
+  color: #f3e2a9;
   background: transparent;
   font-weight: bold;
 }
 #workspaces button.urgent {
-  color: #E39696;
+  color: #e39696;
 }
 
 #battery.charging {
-    animation: battery-charging 2s steps(5) infinite;
-    color: #a6e3a1; /* Green charging color */
+  animation: battery-charging 2s steps(5) infinite;
+  color: #a6e3a1; /* Green charging color */
 }
 
 #battery.charging {
-    animation: color-shift 8s ease-in-out infinite;
+  animation: color-shift 8s ease-in-out infinite;
 }
 
 @keyframes color-shift {
-    0% { color: #a6e3a1; }
-    25% { color: #74c7ec; }
-    50% { color: #cba6f7; }
-    75% { color: #74c7ec; }
-    100% { color: #a6e3a1; }
+  0% {
+    color: #a6e3a1;
+  }
+  25% {
+    color: #74c7ec;
+  }
+  50% {
+    color: #cba6f7;
+  }
+  75% {
+    color: #74c7ec;
+  }
+  100% {
+    color: #a6e3a1;
+  }
 }

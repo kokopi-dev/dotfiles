@@ -4,8 +4,7 @@
 LOCKSCREEN="   Lock Screen"
 REBOOT="   Reboot"
 SHUTDOWN="   Shutdown"
-TEST=" Test"
-chosen=$(echo -e "$LOCKSCREEN\n$REBOOT\n$SHUTDOWN\n$TEST" | rofi -dmenu -p "Action:" -config ~/.config/rofi/power-manager/power-manager.rasi)
+chosen=$(echo -e "$LOCKSCREEN\n$REBOOT\n$SHUTDOWN" | rofi -mesg "$HOSTNAME" -dmenu -p "Action:" -config ~/.config/rofi/power-manager/power-manager.rasi)
 
 case $chosen in
     "$LOCKSCREEN")
@@ -16,8 +15,5 @@ case $chosen in
         ;;
     "$SHUTDOWN")
         systemctl poweroff
-        ;;
-    "$TEST")
-        notify-send "test" "test"
         ;;
 esac

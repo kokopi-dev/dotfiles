@@ -10,8 +10,8 @@ configuration {
 
 // Main //
 window {
-    width: 20em;
-    height:11.3em;
+    width: 26em;
+    height: 14em;
     fullscreen: false;
     enabled: true;
     cursor: "default";
@@ -40,7 +40,7 @@ imageBoxOverlay {
 }
 imageBox {
     enabled: true;
-    background-image: url("/home/kokopi/.config/rofi/images/sg/3.jpg", width);
+    background-image: url("~/.config/rofi/images/sg/14.jpg", width);
     border-radius: 1em;
 }
 
@@ -67,7 +67,7 @@ listview {
 element {
     enabled: true;
     spacing: 1em;
-    padding: 0.4em 0.5em 0.4em 1.5em;
+    padding: 0.4em 0em 0.4em 2.9em;
     cursor: pointer;
     background-color: transparent;
     text-color: #E6D5E6;
