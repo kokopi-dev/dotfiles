@@ -40,7 +40,7 @@ imageBoxOverlay {
 }
 imageBox {
     enabled: true;
-    background-image: url("~/.config/rofi/images/sg/14.jpg", width);
+    background-image: url("~/.config/rofi/images/sg/12.jpg", width);
     border-radius: 1em;
 }
 

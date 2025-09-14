@@ -14,6 +14,6 @@ cp ~/.config/waybar/* ./waybar
 
 cp ~/.config/mako/* ./mako
 
-cp ~/.config/ghostty/* ./ghostty
+cp -r ~/.config/ghostty/* ./ghostty
 
 cp -r ~/.config/btop/* ./btop

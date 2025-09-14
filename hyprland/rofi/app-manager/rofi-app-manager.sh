@@ -1,19 +1,17 @@
 #!/bin/bash
-IMAGE_DIR=~/.config/rofi/images/neco
 THEME_FILE=~/.config/rofi/app-manager/app-manager.rasi
-LOG_FILE=~/.config/rofi/.randomized_image.log
-
-IMAGE=$(find "$IMAGE_DIR" -type f | sort -R | head -n 1 | sed "s|^$HOME|~|")
-LAST_IMAGE=$(cat ~/.config/rofi/.randomized_image.log)
-
-while true; do
-    if [[ "$IMAGE" != "$LAST_IMAGE" ]]; then
-        echo "$IMAGE" > $LOG_FILE
-        break
-    fi
-    IMAGE=$(find "$IMAGE_DIR" -type f | sort -R | head -n 1)
-done
-
-sed -i "s|background-image: url(\".*\", width);|background-image: url(\"$IMAGE\", width);|" $THEME_FILE
+post_rofi() {
+    local image_dir="$HOME/.config/rofi/images/neco"
+    local current_image=$(grep "background-image: url" file | cut -d'"' -f2)
+    local new_image=$(find "$image_dir" -type f | sort -R | head -n 1 | sed "s|^$HOME|~|")
+    while true; do
+        if [[ "$new_image" != "$current_image" ]]; then
+            sed -i 's|url("[^"]*"|url("'"$new_image"'"|' "$THEME_FILE"
+            break
+        fi
+        new_image=$(find "$image_dir" -type f | sort -R | head -n 1 | sed "s|^$HOME|~|")
+    done
+}
 
 rofi -show drun -theme $THEME_FILE
+post_rofi &
