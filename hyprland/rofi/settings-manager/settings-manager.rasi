@@ -11,7 +11,7 @@ configuration {
 // Main //
 window {
     width: 26em;
-    height: 14em;
+    height: 15.8em;
     fullscreen: false;
     enabled: true;
     cursor: "default";
@@ -23,24 +23,42 @@ window {
 mainbox {
     enabled: true;
     spacing: 0em;
-    padding: 1.2em 0.2em;
-    orientation: horizontal;
-    children: [ "listview", "imageBoxOverlay" ];
-    background-color: #180C1F45;
-    border-color: #BF9FD8;
+    orientation: vertical;
+    children: [ "message", "mainContent" ];
+    border-color: @primary-opa;
     border: 1px;
     border-radius: 1em;
+    background-color: transparent;
+}
+// decorative text at top
+message {
+    enabled: true;
+    background-color: @base-200;
+    text-color: @primary;
+    border: none;
+}
+textbox {
+    padding: 10px 1em 10px 0px;
+    font: "Geist Mono Medium 18";
+    horizontal-align: 0.0;
+    vertical-align: 0.5;
+}
+mainContent {
+    padding: 1em 0;
+    orientation: horizontal;
+    children: [ "listview", "imageBoxOverlay" ];
+    background-color: @base-200-opa;
 }
 imageBoxOverlay {
     children: ["imageBox"];
     margin: 0em 1em 0em 0em;
     border-radius: 1em;
     padding: 0.3em;
-    background-image: linear-gradient(135deg,#B37ADE,#F5C827,#7A7FDE);
+    background-image: linear-gradient(135deg,#B575E6,#EBD488,#9084E8);
 }
 imageBox {
     enabled: true;
-    background-image: url("~/.config/rofi/images/sg/12.jpg", width);
+    background-image: url("~/.config/rofi/images/sg/15.jpg", width);
     border-radius: 1em;
 }
 
@@ -74,9 +92,9 @@ element {
 }
 element selected.normal {
     border-radius: 0.5em;
-    background-color: #f5e0dcff;
-    text-color: #4F3F1C;
-    border-color: #4F3F1C;
+    background-image: linear-gradient(135deg,#d5aed666,#7866C44d,#7A7FDE66);
+    text-color: @secondary;
+    border-color: @primary-opa;
     border: 1px;
 }
 element-icon {

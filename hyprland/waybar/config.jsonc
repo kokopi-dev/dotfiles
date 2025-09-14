@@ -9,19 +9,22 @@
   "modules-right": ["pulseaudio", "network", "cpu", "memory", "battery", "custom/power"],
 
   "custom/configs": {
-    "format": "󰈙",
+    "format-icons": ["<span color='#BCB9EB'>󰈙</span>"],
+    "format": "{icon}",
     "tooltip": true,
     "tooltip-format": "Config list",
     "on-click": "~/.local/bin/rofi-config-manager.sh"
   },
   "custom/settings": {
-    "format": "",
+    "format-icons": ["<span color='#BCB9EB'></span>"],
+    "format": "{icon}",
     "tooltip": true,
     "tooltip-format": "Control panel",
     "on-click": "~/.local/bin/rofi-settings-manager.sh"
   },
   "custom/discord": {
-    "format": "",
+    "format-icons": ["<span color='#BCB9EB'></span>"],
+    "format": "{icon}",
     "tooltip": false,
     "on-click": "discord --enable-features=UseOzonePlatform --ozone-platform=wayland"
   },
@@ -35,25 +38,27 @@
     "on-click": "activate"
   },
   "cpu": {
-    "format": "{usage}% ",
+    "format-icons": ["<span color='#BCB9EB'></span>"],
+    "format": "{usage}% {icon}",
     "tooltip": false
   },
   "memory": {
-    "format": "{}% "
+    "format-icons": ["<span color='#BCB9EB'></span>"],
+    "format": "{}% {icon}"
   },
   "clock": {
-    "format": "{:%H:%M}"
+    "format": "{:%m/%d - %H:%M}"
   },
   "custom/power": {
-      "format": "",
-      "tooltip": false,
-      "on-click": "~/.local/bin/rofi-power-manager.sh"
+    "format-icons": ["<span color='#C97F87'></span>"],
+    "format": "{icon}",
+    "tooltip": false,
+    "on-click": "~/.local/bin/rofi-power-manager.sh"
   },
 
   "network": {
-    // "interface": "wlp2*", // (Optional) To force the use of this interface
     "max-length": 10,
-    "format-wifi": "{essid}  ",
+    "format-wifi": "{essid}  <span color='#BCB9EB'></span>",
     "format-ethernet": "{ipaddr}/{cidr} ",
     "tooltip-format": "{ifname} via {gwaddr} ",
     "format-linked": "{ifname} (No IP) ",
@@ -62,8 +67,9 @@
     // "format-alt": "{ifname}: {ipaddr}/{cidr}",
   },
   "pulseaudio": {
-    "format": "{volume}% ",
-    "format-muted": "",
+    "format-icons": ["<span color='#BCB9EB'></span>"],
+    "format": "{volume}% {icon}",
+    "format-muted": "<span color='#BCB9EB'></span>",
     "on-click": "pavucontrol"
   },
   "battery": {
@@ -76,7 +82,7 @@
     "format-full": "{capacity}% {icon}",
     "format-charging": "{capacity}% 󰂄",
     "format-alt": "{time} {icon}",
-    "format-icons": ["", "", "", "", ""]
+    "format-icons": ["<span color='#BCB9EB'></span>", "<span color='#BCB9EB'></span>", "<span color='#BCB9EB'></span>", "<span color='#BCB9EB'></span>", "<span color='#BCB9EB'></span>"]
     // "format-good": "", // An empty format will hide the module
     // "format-full": "",
     // "format-plugged": "{capacity}% ",

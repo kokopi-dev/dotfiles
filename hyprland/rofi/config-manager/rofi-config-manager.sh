@@ -27,7 +27,7 @@ HYPRLOCK="   Hyprlock"
 HYPRIDLE="󰒲   Hypridle"
 HYPRPAPER="   Hyprpaper"
 MAKO="   Mako"
-chosen=$(echo -e "$NVIM\n$HYPRLAND\n$WAYBAR\n$GHOSTTY\n$ROFI_APP\n$ROFI_SETT\n$ROFI_CONF\n$ROFI_POW\n$HYPRLOCK\n$HYPRIDLE\n$MAKO\n$HYPRPAPER" | rofi -dmenu -p "Action:" -config ~/.config/rofi/config-manager/config-manager.rasi)
+chosen=$(echo -e "$NVIM\n$HYPRLAND\n$WAYBAR\n$GHOSTTY\n$ROFI_APP\n$ROFI_SETT\n$ROFI_CONF\n$ROFI_POW\n$HYPRLOCK\n$HYPRIDLE\n$MAKO\n$HYPRPAPER" | rofi -mesg " Configs" -dmenu -p "Action:" -config ~/.config/rofi/config-manager/config-manager.rasi)
 
 case $chosen in
     "$NVIM")

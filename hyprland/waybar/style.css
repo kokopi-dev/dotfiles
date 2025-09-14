@@ -9,7 +9,7 @@
 window#waybar {
   border-radius: 10px;
   background-color: rgba(18, 18, 36, 0.35);
-  border: 1px solid rgba(225, 180, 226, 0.75);
+  border: 1px solid rgb(213, 174, 214);
   transition-property: background-color;
   transition-duration: 0.5s;
 }
@@ -35,13 +35,16 @@ window#waybar {
   color: #e6d4e6;
   padding: 8px 0px;
 }
+#clock {
+  color: #C9C5BB;
+}
 #custom-power {
   padding-right: 1px;
 }
 
 #workspaces button {
   background: transparent;
-  color: #7f849c;
+  color: #9EA0AD;
   padding: 0 4px;
 }
 

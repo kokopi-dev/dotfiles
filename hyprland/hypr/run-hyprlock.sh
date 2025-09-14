@@ -12,5 +12,5 @@ post_unlock() {
     done
 }
 
+post_unlock
 hyprlock
-post_unlock &

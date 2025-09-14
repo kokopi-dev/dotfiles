@@ -10,6 +10,8 @@ cp ~/.config/wlsunset/run-wlsunset.sh ./wlsunset
 
 cp ~/.config/hypr/* ./hypr
 
+cp ~/.config/fastfetch/* ./fastfetch
+
 cp ~/.config/waybar/* ./waybar
 
 cp ~/.config/mako/* ./mako

@@ -1,0 +1,18 @@
+{
+    "modules": [
+        "title",
+        "separator", 
+        "os",
+        "kernel",
+        "uptime",
+        "packages",
+        "shell",
+        "de",
+        "wm",
+        "terminal",
+        "cpu",
+        "gpu", 
+        "memory",
+        "colors"
+    ]
+}

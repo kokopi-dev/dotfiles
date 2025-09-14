@@ -10,36 +10,34 @@ configuration {
 window {
     font: "Geist 12";
     width: 15em;
-    height: 13em;
-    // transparency: "real";
-    fullscreen: false;
+    height: 11.3em;
+    transparency: "real";
     enabled: true;
     cursor: "default";
     spacing: 0em;
-    opacity: 0;
     background-color: transparent;
+    border-radius: 1em;
 }
 mainbox {
     enabled: true;
     spacing: 0em;
-    padding: 1.2em 0.2em;
     orientation: vertical;
     children: [ "message", "listview" ];
-    background-color: #180C1F45;
-    border-color: #BF9FD8;
-    border: 1px;
+    background-color: @base-200-opa;
     border-radius: 1em;
+    border-color: @base-200;
+    border: 3px;
 }
 
 // decorative text at top
 message {
     enabled: true;
-    background-color: transparent;
-    text-color: #BF9FD8;
+    background-color: @base-200;
+    text-color: @primary;
     border: none;
 }
 textbox {
-    padding: 8px 120px 8px 0px;
+    padding: 9px 1em 9px 0px;
     font: "Geist Mono Bold 20";
     horizontal-align: 0.0;
     vertical-align: 0.5;
@@ -49,7 +47,7 @@ textbox {
 listview {
     enabled: true;
     spacing: 0.6em;
-    padding: 0em 1em;
+    padding: 1em;
     columns: 1;
     lines: 3;
     cycle: true;
@@ -68,23 +66,23 @@ listview {
 element {
     enabled: true;
     spacing: 1em;
-    padding: 0.4em 0.5em 0.4em 1.5em;
+    padding: 0.4em 0.5em 0.4em 3.3em;
     cursor: pointer;
     background-color: transparent;
-    text-color: #E6D5E6;
 }
 
 element.normal.normal,
 element.alternate.normal {
     background-color: transparent;
-    text-color: #E6D5E6;
+    text-color: @neutral;
 }
 
 element selected.normal {
     border-radius: 0.5em;
-    background-color: #f5e0dcff;
-    text-color: #4F3F1C;
-    border-color: #4F3F1C;
+    // background-color: @primary-opa;
+    background-image: linear-gradient(135deg,#d5aed666,#7866C44d,#7A7FDE66);
+    text-color: @secondary;
+    border-color: @primary-opa;
     border: 1px;
 }
 element-icon {
