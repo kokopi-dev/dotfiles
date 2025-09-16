@@ -49,6 +49,7 @@ case $chosen in
         ;;
     "$GHOSTTY")
         ghostty -e nvim ~/.config/ghostty/config & disown
+        ghostty -e nvim ~/.config/ghostty/themes/navarch & disown
         ;;
     "$MAKO")
         ghostty -e nvim ~/.config/mako/config & disown

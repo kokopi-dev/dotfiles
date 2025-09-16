@@ -1,4 +1,5 @@
 #!/bin/bash
+
 cp ~/.config/rofi/theme.rasi ./rofi
 cp ~/.config/rofi/app-manager/* ./rofi/app-manager
 cp ~/.config/rofi/settings-manager/* ./rofi/settings-manager
@@ -19,3 +20,8 @@ cp ~/.config/mako/* ./mako
 cp -r ~/.config/ghostty/* ./ghostty
 
 cp -r ~/.config/btop/* ./btop
+
+cp -r ~/.config/gtk-3.0/* ./gtk-3.0
+
+cp -r ~/.config/gtk-4.0/* ./gtk-4.0
+

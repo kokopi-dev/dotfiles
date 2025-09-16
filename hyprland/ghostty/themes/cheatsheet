@@ -1,0 +1,8 @@
+0=#1e1f21 # Black - terminal background color
+1=#bf6b69 # Red - error messages and warnings
+2=#b7bd73 # Green - success messages
+3=#e9c880 # Yellow - warnings and highlights
+4=#88a1bb # Blue - links and info
+5=#ad95b8 # Purple - special syntax
+6=#95bdb7 # Cyan - comments in code
+7=#c5c8c6 # White - normal text

@@ -1,0 +1,88 @@
+/* global */
+check:checked, check:indeterminate,
+radio:checked,
+radio:indeterminate,
+switch:checked {
+  background-color: #d093d1;
+}
+menubar {
+  background-color: #211C2E;
+}
+window.background headerbar {
+  background-color: #211C2E;
+}
+.background {
+    background: rgba(33, 28, 46, 0.8);
+    color: #ddced8;
+}
+
+treeview.view {
+  color: #8aade0;
+  background-color: transparent;
+}
+treeview.view:selected {
+  color: #d093d1;
+  background-color: rgba(208, 181, 210, 0.2);
+}
+
+toolbar.primary-toolbar {
+  background: rgba(21,24,40,0.3);
+}
+
+/* global, target: thunar menu item text hover */
+menu menuitem:hover {
+  transition: none;
+  background-color: rgba(233, 233, 237, 0.04);
+}
+menu menuitem label {
+  color: #8aade0;
+}
+/* menu item right label */
+menu menuitem:hover accelerator {
+  color: #d093d1;
+}
+menu {
+  background-color: #211C2E;
+}
+
+/* icon styles */
+.thunar .view:hover {
+    color: #8aade0;
+}
+.thunar .view .cell {
+  border-radius: 8px;
+  background: rgba(33, 28, 46, 0.15);
+}
+
+.thunar {
+  background: none;
+}
+.thunar .sidebar {
+  background: rgba(21,24,40,0.3);
+}
+.thunar toolbar {
+  background: rgba(21,24,40,0.3);
+  padding-top: 10px;
+  padding-bottom: 8px;
+  border-top: 1px solid #d0b5d2;
+}
+/* toolbar back btns and stuff */
+.thunar toolbar .image-button {
+  color: #e0cd93;
+}
+/* input bar */
+.thunar toolbar toolitem widget box entry {
+  color: #e0cd93;
+  background: rgba(33, 28, 46, 0.75);
+}
+.thunar .sidebar .view {
+  background: rgba(33, 28, 46, 0.6);
+  color: #e0cd93;
+}
+.thunar notebook .view {
+  background: rgba(33, 28, 46, 0.8);
+}
+.thunar statusbar {
+  color: #e0cd93;
+  background: rgba(33, 28, 46, 0.8);
+}

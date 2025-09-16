@@ -133,20 +133,20 @@ case "$1" in
                 if pidof wlsunset > /dev/null; then
                     if killall wlsunset; then
                         gum style --foreground "$MUTED" "Disabled night light"
-                        notify-send "wlsunset" "Disabled night light"
+                        notify-send "wlsunset" " Disabled night light"
                     else
-                        notify-send "wlsunset" "Failed to disable night light"
+                        notify-send "wlsunset" " Failed to disable night light"
                     fi
                 else
                     setsid wlsunset -l "$LAT" -L "$LON" -t $STRENGTH & disown
                     gum style --foreground "$SUCCESS" "Enabled night light"
-                    notify-send "wlsunset" "Enabled night light"
+                    notify-send "wlsunset" " Enabled night light"
                 fi
                 exit 0
                 ;;
             *"Force"*)
                 setsid wlsunset -s 00:00 -S 23:59 -t $STRENGTH & disown
-                notify-send "wlsunset" "Force enabled night light"
+                notify-send "wlsunset" " Force enabled night light"
                 exit 0
                 ;;
             *"Exit"*)
@@ -155,7 +155,7 @@ case "$1" in
                 exit 0
                 ;;
             *)
-                echo "choice not found"
+                echo " choice not found"
                 exit 0
                 ;;
         esac

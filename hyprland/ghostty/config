@@ -15,6 +15,8 @@
 # Additionally, each config option is also explained in detail
 # on Ghostty's website, at https://ghostty.org/docs/config.
 
+theme=navarch
+
 font-size=12.5
 font-family="Geist Mono"
 window-padding-x=10
@@ -31,6 +33,7 @@ background=#171519
 background-opacity=0.89
 background-blur=true
 foreground=#E6DDD1
+cursor-style=bar
 # # Any line beginning with a # is a comment. It's not possible to put
 # # a comment after a config option, since it would be interpreted as a
 # # part of the value. For example, this will have a value of "#123abc":
@@ -43,3 +46,6 @@ foreground=#E6DDD1
 # # which is explained in the docs for that config option.
 # # Just for example:
 # resize-overlay-duration = 4s 200ms
+#
+keybind = ctrl+shift+.=move_tab:1
+keybind = ctrl+shift+,=move_tab:-1

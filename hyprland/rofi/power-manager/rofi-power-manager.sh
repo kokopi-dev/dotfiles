@@ -8,7 +8,7 @@ chosen=$(echo -e "$LOCKSCREEN\n$REBOOT\n$SHUTDOWN" | rofi -mesg "󰚥 $HOSTNAME"
 
 case $chosen in
     "$LOCKSCREEN")
-        pid hyprlock || hyprlock
+        pid hyprlock || ~/.config/hypr/run-hyprlock.sh
         ;;
     "$REBOOT")
         systemctl reboot

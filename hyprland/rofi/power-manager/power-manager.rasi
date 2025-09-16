@@ -25,7 +25,7 @@ mainbox {
     children: [ "message", "listview" ];
     background-color: @base-200-opa;
     border-radius: 1em;
-    border-color: @base-200;
+    border-color: @primary-opa;
     border: 3px;
 }
 
@@ -37,8 +37,8 @@ message {
     border: none;
 }
 textbox {
-    padding: 9px 1em 9px 0px;
-    font: "Geist Mono Bold 20";
+    padding: 12px 1em 12px 0px;
+    font: "Octal Light 20";
     horizontal-align: 0.0;
     vertical-align: 0.5;
 }
