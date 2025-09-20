@@ -22,6 +22,7 @@ format=<b>%s</b>\n%b
 background-color=#3D344580
 
 [urgency=low]
+default-timeout=3000
 border-color=#6c7086
 text-color=#B1B4C7
 

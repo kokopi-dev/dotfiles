@@ -1,7 +1,7 @@
 * {
   border: none;
   border-radius: 0;
-  font-family: "Geist", monospace;
+  font-family: "Geist", sans-serif;
   font-size: 12px;
   min-height: 0;
 }
@@ -37,6 +37,12 @@ window#waybar {
 }
 #clock {
   color: #C9C5BB;
+}
+#clock.time {
+  font-family: "Octal", monospace;
+  font-weight:400;
+  letter-spacing: 1px;
+  font-size: 14px;
 }
 #custom-power {
   padding-right: 1px;

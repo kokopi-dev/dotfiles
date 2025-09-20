@@ -145,6 +145,7 @@ require("lazy").setup({
                 html = { "prettierd" },
                 css = { "prettierd" },
                 json = { "prettierd" },
+                jsonc = { "prettierd" },
             },
         },
         formatters = {

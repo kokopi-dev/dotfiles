@@ -2,9 +2,9 @@ configuration {
   hover-select: true;
   me-select-entry: "MousePrimary";
   me-accept-entry: "!MousePrimary";
-  show-icons: true;
   font: "Geist 12";
-  icon-theme: "Adwaita";
+  show-icons: true;
+  icon-theme: "Papirus";
   display-drun: " ";
 }
 
@@ -21,6 +21,7 @@ window {
     padding: 0em;
     background-color: transparent;
 }
+
 mainbox {
     enabled: true;
     spacing: 0em;
@@ -50,7 +51,7 @@ imageBoxOverlay {
 }
 imageBox {
     enabled: true;
-    background-image: url("~/.config/rofi/images/neco/4.jpg", width);
+    background-image: url("~/.config/rofi/images/neco/31.jpg", width);
     border-radius: 1em;
 }
 // Lists //

@@ -15,25 +15,24 @@
 # Additionally, each config option is also explained in detail
 # on Ghostty's website, at https://ghostty.org/docs/config.
 
-theme=navarch
+theme = navarch
 
-font-size=12.5
-font-family="Geist Mono"
-window-padding-x=10
-window-padding-y=10
-window-padding-color=background
-window-title-font-family="Geist"
-window-theme=ghostty
-window-inherit-working-directory=true
-window-inherit-font-size=true
-focus-follows-mouse=true
-gtk-tabs-location=bottom
-gtk-adwaita=false
-background=#171519
-background-opacity=0.89
-background-blur=true
-foreground=#E6DDD1
-cursor-style=bar
+font-size = 12.5
+font-family = "Geist Mono"
+window-padding-x = 10
+window-padding-y = 10
+window-padding-color = background
+window-title-font-family = "Geist"
+window-theme = ghostty
+window-inherit-working-directory = true
+window-inherit-font-size = true
+focus-follows-mouse = true
+gtk-tabs-location = bottom
+background = #14111C
+background-opacity = 0.35
+background-blur = true
+foreground = #E6DDD1
+cursor-style = bar
 # # Any line beginning with a # is a comment. It's not possible to put
 # # a comment after a config option, since it would be interpreted as a
 # # part of the value. For example, this will have a value of "#123abc":
@@ -49,3 +48,5 @@ cursor-style=bar
 #
 keybind = ctrl+shift+.=move_tab:1
 keybind = ctrl+shift+,=move_tab:-1
+
+app-notifications = no-clipboard-copy

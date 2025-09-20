@@ -64,3 +64,18 @@ vim.keymap.set('n', '<leader>x', function()
     end
   end
 end, { desc = "Close LSP floating windows" })
+
+-- disable italics on conditionals
+vim.api.nvim_create_autocmd("ColorScheme", {
+  pattern = "*",
+  callback = function()
+    -- Get all highlight groups and remove italic styling
+    for _, group in ipairs(vim.fn.getcompletion("", "highlight")) do
+      local hl = vim.api.nvim_get_hl(0, { name = group })
+      if hl.italic then
+        hl.italic = nil
+        vim.api.nvim_set_hl(0, group, hl)
+      end
+    end
+  end,
+})

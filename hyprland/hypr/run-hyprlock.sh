@@ -1,6 +1,6 @@
 #!/bin/bash
 post_unlock() {
-    local image_dir="$HOME/pictures/bgs"
+    local image_dir="$HOME/pictures/bgs/lockscreen"
     local current_image=$(grep "path =" ~/.config/hypr/hyprlock.conf | cut -d'=' -f2 | tr -d ' ' | head -1)
     local new_image=$(find "$image_dir" -type f | sort -R | head -n 1 | sed "s|^$HOME|~|")
     while true; do

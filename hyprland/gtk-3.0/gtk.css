@@ -1,19 +1,34 @@
+@define-color hl_text_color #e0cd93;
+@define-color cover_bg rgba(27, 22, 38, 0.9);
+@define-color border_color rgb(113, 142, 184);
+@define-color text_color #ddced8;
+
 /* global */
-check:checked, check:indeterminate,
+.view:hover, iconview:hover, .view:hover:focus, iconview:hover:focus, .view text:hover, iconview text:hover, textview text:hover, iconview text:hover:focus, textview text:hover:focus, flowbox flowboxchild:hover, row:hover, .view:selected, iconview:selected, .view:selected:focus, iconview:selected:focus, .view text:selected, iconview text:selected, textview text:selected, iconview text:selected:focus, textview text:selected:focus, .view text selection:focus, iconview text selection:focus, .view text selection, iconview text selection, textview text selection:focus, textview text selection, flowbox flowboxchild:selected, entry selection, entry selection:focus, row:selected {
+  color: @cover_bg;
+  background-color: #8aade0;
+}
+check:checked,
+check:indeterminate,
 radio:checked,
 radio:indeterminate,
 switch:checked {
   background-color: #d093d1;
 }
 menubar {
-  background-color: #211C2E;
+  background-color: #211c2e;
 }
 window.background headerbar {
-  background-color: #211C2E;
+  background-color: #211c2e;
 }
 .background {
-    background: rgba(33, 28, 46, 0.8);
-    color: #ddced8;
+  background: rgba(33, 28, 46, 0.8);
+  color: @text_color;
+}
+
+/* most inputs */
+entry:focus {
+  box-shadow: inset 0 0 0 2px @border_color;
 }
 
 treeview.view {
@@ -24,12 +39,17 @@ treeview.view:selected {
   color: #d093d1;
   background-color: rgba(208, 181, 210, 0.2);
 }
-
 toolbar.primary-toolbar {
-  background: rgba(21,24,40,0.3);
+  background: rgba(21, 24, 40, 0.3);
 }
 
-/* global, target: thunar menu item text hover */
+/* firefox */
+firefox headerbar {
+  background: rgba(33, 28, 46, 0.5);
+  color: @text_color;
+}
+
+/* global dropdowns, target: thunar menu item text hover */
 menu menuitem:hover {
   transition: none;
   background-color: rgba(233, 233, 237, 0.04);
@@ -37,52 +57,59 @@ menu menuitem:hover {
 menu menuitem label {
   color: #8aade0;
 }
+
 /* menu item right label */
 menu menuitem:hover accelerator {
   color: #d093d1;
 }
 menu {
-  background-color: #211C2E;
+  background-color: #211c2e;
 }
 
 /* icon styles */
-.thunar .view:hover {
-    color: #8aade0;
+.thunar .view .cell:hover {
+  color: @hl_text_color;
 }
 .thunar .view .cell {
   border-radius: 8px;
   background: rgba(33, 28, 46, 0.15);
+  color: @text_color;
 }
 
 .thunar {
   background: none;
 }
-.thunar .sidebar {
-  background: rgba(21,24,40,0.3);
-}
 .thunar toolbar {
-  background: rgba(21,24,40,0.3);
-  padding-top: 10px;
-  padding-bottom: 8px;
-  border-top: 1px solid #d0b5d2;
+  background: @cover_bg;
+  padding: 8px 10px;
+  border-top: 1px solid @border_color;
 }
 /* toolbar back btns and stuff */
 .thunar toolbar .image-button {
-  color: #e0cd93;
+  color: @hl_text_color;
 }
 /* input bar */
 .thunar toolbar toolitem widget box entry {
-  color: #e0cd93;
-  background: rgba(33, 28, 46, 0.75);
+  color: @hl_text_color;
+  background: linear-gradient(35deg, rgb(68, 59, 79), rgb(33, 28, 46));
 }
+/* sidebar */
 .thunar .sidebar .view {
-  background: rgba(33, 28, 46, 0.6);
-  color: #e0cd93;
+  background: @cover_bg;
+  color: @hl_text_color;
+  border-radius: 0px;
 }
+/* main body */
 .thunar notebook .view {
-  background: rgba(33, 28, 46, 0.8);
+  background: linear-gradient(
+    135deg,
+    rgba(35, 34, 56, 0.8),
+    rgba(54, 33, 52, 0.8),
+    rgba(33, 28, 46, 0.8)
+  );
 }
+/* bottom right section */
 .thunar statusbar {
-  color: #e0cd93;
-  background: rgba(33, 28, 46, 0.8);
+  color: @hl_text_color;
+  background: @cover_bg;
 }
