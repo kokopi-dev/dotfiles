@@ -22,7 +22,8 @@ require("lazy").setup({
     -- finder
     {
         "nvim-telescope/telescope.nvim",
-        tag = "0.1.5",
+        branch = 'master',
+        -- tag = "0.1.5",
         dependencies = { "nvim-lua/plenary.nvim" },
     },
     -- looks
@@ -58,7 +59,22 @@ require("lazy").setup({
     -- https://github.com/nvim-pack/nvim-spectre
     {
         "nvim-pack/nvim-spectre",
-        event = "InsertEnter",
+        event = "VeryLazy",
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+        },
+        keys = {
+            {
+                "<leader>S",
+                function()
+                    local root = vim.fs.root(0, { ".git" })
+                    require("spectre").open({
+                        cwd = root or vim.fn.getcwd()
+                    })
+                end,
+                desc = "Open Spectre at project root"
+            },
+        },
     },
     -- syntax highlighter and stuff
     {
@@ -149,8 +165,29 @@ require("lazy").setup({
             },
         },
         formatters = {
+            prettierd_json = {
+                command = vim.fn.stdpath("data") .. "~/.local/share/nvim/mason/bin/prettierd",
+                args = {
+                    "--stdin-filepath", "$FILENAME",
+                    "--parser", "json",
+                    "--trailing-comma", "none"
+                },
+                stdin = true,
+            },
             prettierd = {
                 command = vim.fn.stdpath("data") .. "~/.local/share/nvim/mason/bin/prettierd",
+                args = function(self, ctx)
+                    local args = { "--stdin-filepath", "$FILENAME" }
+
+                    if vim.bo[ctx.buf].filetype == "jsonc" then
+                        table.insert(args, "--parser")
+                        table.insert(args, "json")
+                        table.insert(args, "--trailing-comma")
+                        table.insert(args, "none")
+                    end
+
+                    return args
+                end,
             },
         },
     },
@@ -175,6 +212,9 @@ require("lazy").setup({
 
 
 -- lsp stuff
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
+capabilities.offsetEncoding = { "utf-16", "utf-8" }
 require("mason").setup()
 require("mason-lspconfig").setup({
     ensure_installed = {
@@ -185,11 +225,81 @@ require("mason-lspconfig").setup({
         "tailwindcss",
         "ts_ls",
         "html",
-        -- "templ",
-        -- "gopls",
+        "pyright",
+        "templ",
+        "gopls",
         "emmet_ls", -- for cmp mainly, helps with auto quotes in html
     },
-    automatic_installation = false,
+    automatic_installation = true,
+    automatic_enable = false
+})
+local lspconfig = require("lspconfig")
+-- Tailwind CSS
+lspconfig.tailwindcss.setup({
+    capabilities = capabilities,
+    settings = {
+        tailwindCSS = {
+            experimental = {
+                -- this will capture any variable assignment in single/double quotes and encased in brackets as well
+                classRegex = {
+                    "Css = (\\{[^\\{\\}]+\\}|\\[[^\\[\\]]+\\]|'[^']+'|\"[^\"]+\")",
+                },
+            },
+        },
+    },
+    filetypes = { "htmldjango" },
+})
+-- Python
+lspconfig.pyright.setup({
+    capabilities = capabilities,
+})
+-- Bash
+lspconfig.bashls.setup({
+    capabilities = capabilities,
+})
+-- Astro
+lspconfig.astro.setup({
+    capabilities = capabilities,
+})
+-- Typescript
+lspconfig.ts_ls.setup({
+    capabilities = capabilities,
+})
+-- Emmet
+lspconfig.emmet_ls.setup({
+    capabilities = capabilities,
+})
+-- HTML
+lspconfig.html.setup({
+    capabilities = capabilities,
+    filetypes = { "htmldjango" },
+})
+-- Templ
+lspconfig.templ.setup({
+    capabilities = capabilities,
+})
+-- Gopls
+lspconfig.gopls.setup({
+    capabilities = capabilities,
+    -- settings = {
+    --     gopls = {
+    --         -- directoryFilters = { "-**/*_templ.go" },
+    --     },
+    -- },
+})
+-- Lua LS
+lspconfig.lua_ls.setup({
+    capabilities = capabilities,
+    settings = {
+        Lua = {
+            diagnostics = {
+                globals = { "vim" },
+            },
+            telemetry = { enable = false },
+            workspace = { checkThirdParty = false },
+            hint = { enable = true },
+        },
+    },
 })
 local has_words_before = function()
     unpack = unpack or table.unpack
@@ -277,67 +387,6 @@ cmp.setup({
         { name = "path" },
     },
 })
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
-local lspconfig = require("lspconfig")
-lspconfig.lua_ls.setup({
-    settings = {
-        Lua = {
-            diagnostics = {
-                globals = { "vim" },
-            },
-            telemetry = { enable = false },
-            workspace = { checkThirdParty = false },
-            hint = { enable = true },
-        },
-    },
-})
--- lspconfig.pylsp.setup({ capabilities = capabilities })
-lspconfig.pyright.setup({ capabilities = capabilities })
--- lspconfig.ruff_lsp.setup({
--- 	capabilities = capabilities,
--- 	commands = {
--- RuffAutofix = {
---     function()
---         vim.lsp.buf.execute_command {
---             command = 'ruff.applyAutofix',
---             arguments = {
---                 { uri = vim.uri_from_bufnr(0) },
---             },
---         }
---     end,
---     description = 'Ruff: Fix all auto-fixable problems',
--- },
--- 		RuffOrganizeImports = {
--- 			function()
--- 				vim.lsp.buf.execute_command({
--- 					command = "ruff.applyOrganizeImports",
--- 					arguments = {
--- 						{ uri = vim.uri_from_bufnr(0) },
--- 					},
--- 				})
--- 			end,
--- 			description = "Ruff: Format imports",
--- 		},
--- 	},
--- })
-lspconfig.tailwindcss.setup({
-    capabilities = capabilities,
-    settings = {
-        tailwindCSS = {
-            experimental = {
-                -- this will capture any variable assignment in single/double quotes and encased in brackets as well
-                classRegex = {
-                    "Css = (\\{[^\\{\\}]+\\}|\\[[^\\[\\]]+\\]|'[^']+'|\"[^\"]+\")",
-                },
-            },
-        },
-    },
-})
-lspconfig.html.setup({ capabilities = capabilities, filetypes = { "htmldjango" } })
-lspconfig.eslint.setup({ capabilities = capabilities })
--- lspconfig.gopls.setup({ capabilities = capabilities })
--- lspconfig.templ.setup({ capabilities = capabilities })
 
 -- Global mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
@@ -359,6 +408,117 @@ vim.cmd(
     [[autocmd CursorHold,CursorHoldI * lua if not require("cmp").visible() then vim.diagnostic.open_float(nil, {focus=false}) end]]
 )
 -- ## end lsp diagnostics
+
+-- override gopls qualified template definition jumping
+local function custom_go_to_definition()
+    -- Early exit for non-Go/templ files
+    local ft = vim.bo.filetype
+    -- if ft == "python" then
+    --     vim.lsp.buf.definition()
+    --     return
+    if ft ~= "go" and ft ~= "templ" then
+        require('telescope.builtin').lsp_definitions()
+        return
+    end
+    -- Early exit if no gopls client attached
+    local clients = vim.lsp.get_clients({ bufnr = 0, name = "gopls" })
+    if #clients == 0 then
+        require('telescope.builtin').lsp_definitions()
+        return
+    end
+    -- Use the gopls client for position encoding
+    local gopls_client = clients[1]
+    local params = vim.lsp.util.make_position_params(0, gopls_client.offset_encoding)
+    vim.lsp.buf_request(0, 'textDocument/definition', params, function(err, result, ctx, config)
+        if err or not result or vim.tbl_isempty(result) then
+            require('telescope.builtin').lsp_definitions()
+            return
+        end
+        -- Convert single result to array
+        if result.uri then
+            result = { result }
+        end
+        -- Quick check: do we have any _templ.go files in results?
+        local has_templ_generated = false
+        for _, location in ipairs(result) do
+            local uri = location.uri or location.targetUri
+            local filepath = vim.uri_to_fname(uri)
+            if filepath:match("_templ%.go$") then
+                has_templ_generated = true
+                break
+            end
+        end
+        -- If no generated templ files, use normal telescope
+        if not has_templ_generated then
+            require('telescope.builtin').lsp_definitions()
+            return
+        end
+        -- Only do the heavy processing if we found generated files
+        local word_under_cursor = vim.fn.expand('<cword>')
+        local processed_results = {}
+        for _, location in ipairs(result) do
+            local uri = location.uri or location.targetUri
+            local filepath = vim.uri_to_fname(uri)
+            if filepath:match("_templ%.go$") then
+                local templ_file = filepath:gsub("_templ%.go$", ".templ")
+                if vim.fn.filereadable(templ_file) == 1 then
+                    -- Simple search for the symbol
+                    local cmd = string.format("grep -n 'templ %s\\|func %s' %s",
+                        word_under_cursor, word_under_cursor, vim.fn.shellescape(templ_file))
+                    local output = vim.fn.system(cmd)
+                    if vim.v.shell_error == 0 and output ~= "" then
+                        local lnum = output:match("^(%d+)")
+                        if lnum then
+                            table.insert(processed_results, {
+                                uri = vim.uri_from_fname(templ_file),
+                                range = {
+                                    start = { line = tonumber(lnum) - 1, character = 0 },
+                                    ["end"] = { line = tonumber(lnum) - 1, character = 0 }
+                                }
+                            })
+                        end
+                    else
+                        -- Keep original if not found in templ
+                        table.insert(processed_results, location)
+                    end
+                else
+                    table.insert(processed_results, location)
+                end
+            else
+                table.insert(processed_results, location)
+            end
+        end
+        local final_results = #processed_results > 0 and processed_results or result
+        if #final_results == 1 then
+            -- Use modern API instead of deprecated jump_to_location
+            local location = final_results[1]
+            local uri = location.uri or location.targetUri
+            local range = location.range or location.targetRange
+            -- Open the file
+            vim.cmd('edit ' .. vim.fn.fnameescape(vim.uri_to_fname(uri)))
+            -- Jump to position
+            local row = range.start.line + 1
+            local col = range.start.character + 1
+            vim.api.nvim_win_set_cursor(0, { row, col - 1 })
+            -- Center the view
+            vim.cmd('normal! zz')
+        else
+            local qf_items = {}
+            for _, location in ipairs(final_results) do
+                local filename = vim.uri_to_fname(location.uri or location.targetUri)
+                local range = location.range or location.targetRange
+                table.insert(qf_items, {
+                    filename = filename,
+                    lnum = range.start.line + 1,
+                    col = range.start.character + 1,
+                    text = "",
+                })
+            end
+            vim.fn.setqflist(qf_items)
+            require('telescope.builtin').quickfix()
+        end
+    end)
+end
 
 vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float)
 vim.keymap.set("n", "[d", vim.diagnostic.goto_prev)
@@ -382,18 +542,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
         local opts = { noremap = true, silent = true, buffer = ev.buf }
 
-        -- formatting
-        -- local method = "textDocument/formatting"
-        -- if client.supports_method(method) then
-        --     vim.keymap.set('n', '<leader>F', function()
-        --         vim.lsp.buf.format { async = true }
-        --     end, opts)
-        -- end
-
         -- Buffer local mappings.
         -- See `:help vim.lsp.*` for documentation on any of the below functions
         vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
-        vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
         vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
         vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
         vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, opts)
@@ -405,7 +556,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
         vim.keymap.set("n", "<leader>D", vim.lsp.buf.type_definition, opts)
         vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
         vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts)
-        vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
+        vim.keymap.set("n", "gd", custom_go_to_definition, opts)
+        vim.keymap.set("n", "gr", require('telescope.builtin').lsp_references, opts)
     end,
 })
 -- end lsp stuff
@@ -453,6 +605,17 @@ require("telescope").setup({
             -- `hidden = true` will still show the inside of `.git/` as it's not `.gitignore`d.
             find_command = { "rg", "--files", "--hidden", "--glob", "!**/.git/*" },
         },
+        lsp_definitions = {
+            show_line = false,
+            file_ignore_patterns = { ".*_templ.go" },
+            theme = "dropdown",
+        },
+        lsp_references = {
+            show_line = false,
+            include_declaration = false,
+            file_ignore_patterns = { ".*_templ.go" },
+            theme = "dropdown",
+        },
     },
 })
 local telescope_builtin = require("telescope.builtin")
@@ -460,7 +623,7 @@ vim.keymap.set("n", "<leader>fg", telescope_builtin.live_grep, {})
 vim.keymap.set("n", "<leader>f", telescope_builtin.find_files, {})
 vim.keymap.set("n", "<C-f>", function()
     -- Handling error to output 1 line instead of several
-    if pcall(telescope_builtin.git_files) then
+    if pcall(telescope_builtin.git_files, { show_untracked = true }) then
     else
         print("Not a git project. Try running git init in root.")
     end
@@ -471,12 +634,13 @@ end)
 local ft = require("Comment.ft")
 ft.set("typescriptreact", "{/* %s */}")
 ft.htmldjango = "{# %s #}"
+ft.templ = "// %s"
 -- end commenter
 
 -- nvim spectre search and replace
-vim.keymap.set("n", "<leader>S", '<cmd>lua require("spectre").toggle()<CR>', {
-    desc = "Toggle Spectre",
-})
+-- vim.keymap.set("n", "<leader>S", '<cmd>lua require("spectre").toggle({cwd = vim.fn.getcwd()})<CR>', {
+--     desc = "Toggle Spectre",
+-- })
 vim.keymap.set("n", "<leader>sw", '<cmd>lua require("spectre").open_visual({select_word=true})<CR>', {
     desc = "Search current word",
 })

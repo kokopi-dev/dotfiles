@@ -1,0 +1,41 @@
+# Hyprland notes
+
+main config: ~/.config/hypr/hyprland.conf
+
+* mako (toasts)
+    - config: ~/.config/mako/config
+* hyprpaper (wallpaper, used in hyprland config)
+* hypridle (auto lock watcher + screen off timer)
+    - config: ~/.config/hypr/hypridle.conf
+* hyprlock (lock on laptop lid close)
+    - config: ~/.config/hypr/hyprlock.conf
+* waybar
+    - configs: ~/.config/waybar/config.jsonc + style.css
+
+* ability to use clipboard:
+    - sudo pacman -S wl-clipboard
+
+* hyprmon (monitor manager) (https://github.com/erans/hyprmon/)
+    - yay -S hyprmon-bin
+
+* sudo pacman -S xdg-desktop-portal-hyprland xdg-desktop-portal-gtk
+    - this helps with obs having a screen capture source
+    - this also helps with general screen capturing on most apps
+
+* sudo pacman -S obs-studio
+* sudo pacman -S mpv (lightweight video player/image viewer)
+
+---
+## Non config settings
+
+Thunar custom action Open Terminal Here:
+    - command: ghostty -e bash -c "cd %f && exec bash" & disown
+Thunar default image viewer:
+    - mpv with custom command: mpv --image-display-duration=inf
+---
+master settings:
+
+## Fonts
+- Geist (sans) (https://github.com/vercel/geist-font/releases/tag/1.5.1)
+- Geist (mono) (https://github.com/vercel/geist-font/releases/tag/1.5.1)
+- Octal (self-bought)

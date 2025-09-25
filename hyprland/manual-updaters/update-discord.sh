@@ -1,7 +1,7 @@
 #!/bin/bash
 if [ -z "$1" ]; then
 	echo "Usage: $0 <string_to_check>"
-	echo "Example: $0 discord-0.0.20.deb"
+	echo "Example: $0 discord-0.0.20.tar.gz"
 	exit 1
 fi
 
