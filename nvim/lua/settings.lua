@@ -1,3 +1,5 @@
+-- leader timeout
+vim.opt.timeoutlen = 350
 -- Vim sets and globals
 vim.opt.wrap = true
 vim.opt.relativenumber = true

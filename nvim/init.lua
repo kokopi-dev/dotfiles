@@ -247,7 +247,7 @@ lspconfig.tailwindcss.setup({
             },
         },
     },
-    filetypes = { "htmldjango" },
+    filetypes = { "htmldjango", "templ" },
 })
 -- Python
 lspconfig.pyright.setup({
@@ -272,7 +272,7 @@ lspconfig.emmet_ls.setup({
 -- HTML
 lspconfig.html.setup({
     capabilities = capabilities,
-    filetypes = { "htmldjango" },
+    filetypes = { "htmldjango", "templ" },
 })
 -- Templ
 lspconfig.templ.setup({
