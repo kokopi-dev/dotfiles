@@ -404,9 +404,32 @@ end
 
 -- show diagnostics on cursor hover
 vim.o.updatetime = 250
-vim.cmd(
-    [[autocmd CursorHold,CursorHoldI * lua if not require("cmp").visible() then vim.diagnostic.open_float(nil, {focus=false}) end]]
-)
+-- vim.cmd(
+--     [[autocmd CursorHold,CursorHoldI * lua if not require("cmp").visible() then vim.diagnostic.open_float(nil, {focus=false}) end]]
+-- )
+vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
+    callback = function()
+        -- Don't show diagnostic if completion menu is visible
+        if require("cmp").visible() then
+            return
+        end
+
+        -- Don't show diagnostic if a hover/signature window is already open
+        for _, win in ipairs(vim.api.nvim_list_wins()) do
+            local config = vim.api.nvim_win_get_config(win)
+            if config.relative ~= '' then
+                local buf = vim.api.nvim_win_get_buf(win)
+                local ft = vim.bo[buf].filetype
+                -- Check if it's a hover window (usually has 'markdown' filetype)
+                if ft == 'markdown' or config.focusable == true then
+                    return
+                end
+            end
+        end
+
+        vim.diagnostic.open_float(nil, { focus = false })
+    end
+})
 -- ## end lsp diagnostics
 
 -- override gopls qualified template definition jumping

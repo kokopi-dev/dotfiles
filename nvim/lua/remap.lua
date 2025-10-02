@@ -13,6 +13,30 @@ vim.keymap.set("n", "<A-Down>", "<C-w>j")
 vim.keymap.set("n", "<A-Up>", "<C-w>k")
 vim.keymap.set("n", "<A-Right>", "<C-w>l")
 
+-- netrw duplicate file, <leader>d
+vim.api.nvim_create_autocmd('FileType', {
+    pattern = 'netrw',
+    callback = function()
+        vim.keymap.set('n', '<leader>d', function()
+            -- Save current directory
+            local original_dir = vim.fn.getcwd()
+
+            -- Change to the directory shown in netrw
+            vim.cmd('lcd %:p:h')
+
+            -- Feed the keys with proper mode flag
+            vim.api.nvim_feedkeys('mt', 'x', false)
+            vim.api.nvim_feedkeys('mf', 'x', false)
+            vim.api.nvim_feedkeys('mc', 'x', false)
+
+            -- Return to original directory after delay
+            vim.defer_fn(function()
+                vim.fn.chdir(original_dir)
+            end, 500)
+        end, { buffer = true, desc = 'Duplicate file in netrw' })
+    end,
+})
+
 -- Jump buffers movement
 local tab_buffer_histories = {}
 local is_navigating = false
