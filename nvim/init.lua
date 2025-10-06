@@ -233,9 +233,8 @@ require("mason-lspconfig").setup({
     automatic_installation = true,
     automatic_enable = false
 })
-local lspconfig = require("lspconfig")
 -- Tailwind CSS
-lspconfig.tailwindcss.setup({
+vim.lsp.config('tailwindcss', {
     capabilities = capabilities,
     settings = {
         tailwindCSS = {
@@ -249,37 +248,53 @@ lspconfig.tailwindcss.setup({
     },
     filetypes = { "htmldjango", "templ" },
 })
+vim.lsp.enable('tailwindcss')
+
 -- Python
-lspconfig.pyright.setup({
+vim.lsp.config('pyright', {
     capabilities = capabilities,
 })
+vim.lsp.enable('pyright')
+
 -- Bash
-lspconfig.bashls.setup({
+vim.lsp.config('bashls', {
     capabilities = capabilities,
 })
+vim.lsp.enable('bashls')
+
 -- Astro
-lspconfig.astro.setup({
+vim.lsp.config('astro', {
     capabilities = capabilities,
 })
+vim.lsp.enable('astro')
+
 -- Typescript
-lspconfig.ts_ls.setup({
+vim.lsp.config('ts_ls', {
     capabilities = capabilities,
 })
+vim.lsp.enable('ts_ls')
+
 -- Emmet
-lspconfig.emmet_ls.setup({
+vim.lsp.config('emmet_ls', {
     capabilities = capabilities,
 })
+vim.lsp.enable('emmet_ls')
+
 -- HTML
-lspconfig.html.setup({
+vim.lsp.config('html', {
     capabilities = capabilities,
     filetypes = { "htmldjango", "templ" },
 })
+vim.lsp.enable('html')
+
 -- Templ
-lspconfig.templ.setup({
+vim.lsp.config('templ', {
     capabilities = capabilities,
 })
+vim.lsp.enable('templ')
+
 -- Gopls
-lspconfig.gopls.setup({
+vim.lsp.config('gopls', {
     capabilities = capabilities,
     -- settings = {
     --     gopls = {
@@ -287,8 +302,10 @@ lspconfig.gopls.setup({
     --     },
     -- },
 })
+vim.lsp.enable('gopls')
+
 -- Lua LS
-lspconfig.lua_ls.setup({
+vim.lsp.config('lua_ls', {
     capabilities = capabilities,
     settings = {
         Lua = {
@@ -301,6 +318,8 @@ lspconfig.lua_ls.setup({
         },
     },
 })
+vim.lsp.enable('lua_ls')
+
 local has_words_before = function()
     unpack = unpack or table.unpack
     local line, col = unpack(vim.api.nvim_win_get_cursor(0))
