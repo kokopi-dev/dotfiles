@@ -113,3 +113,13 @@ menu {
   color: @hl_text_color;
   background: @cover_bg;
 }
+
+/* dbeaver */
+/* partial label text */
+.image-button.flat.text-button box:dir(ltr).horizontal label:dir(ltr) {
+  color: @text_color;
+}
+/* dropdown arrow icon  */
+.flat.toggle.popup image {
+  color: @hl_text_color;
+}
