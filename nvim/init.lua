@@ -96,6 +96,28 @@ require("lazy").setup({
                     cmd = "sed"
                 }
             },
+            mapping = {
+                ['toggle_word_regexp'] = {
+                    map = "tw",
+                    cmd = "<cmd>lua require('spectre').change_options('word-regexp')<CR>",
+                    desc = "toggle word boundary"
+                },
+                ['toggle_case_sensitive'] = {
+                    map = "tc",
+                    cmd = "<cmd>lua require('spectre').change_options('case-sensitive')<CR>",
+                    desc = "toggle case sensitive"
+                },
+                ['toggle_ignore_case'] = {
+                    map = 'ti',
+                    cmd = "<cmd>lua require('spectre').change_options('ignore-case')<CR>",
+                    desc = 'toggle ignore case',
+                },
+                ['toggle_ignore_hidden'] = {
+                    map = 'th',
+                    cmd = "<cmd>lua require('spectre').change_options('hidden')<CR>",
+                    desc = 'toggle search hidden',
+                },
+            },
             find_engine = {
                 ['rg'] = {
                     cmd = 'rg',
