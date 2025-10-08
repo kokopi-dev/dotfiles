@@ -57,6 +57,7 @@ require("lazy").setup({
     },
     -- search and replacer
     -- https://github.com/nvim-pack/nvim-spectre
+    -- search and replace
     {
         "nvim-pack/nvim-spectre",
         event = "VeryLazy",
@@ -68,12 +69,68 @@ require("lazy").setup({
                 "<leader>S",
                 function()
                     local root = vim.fs.root(0, { ".git" })
-                    require("spectre").open({
-                        cwd = root or vim.fn.getcwd()
+                    require("spectre").open_visual({
+                        cwd = root or vim.fn.getcwd(),
+                        select_word = true,
                     })
                 end,
-                desc = "Open Spectre at project root"
+                desc = "Search current word at project root"
             },
+            {
+                "<leader>s",
+                function()
+                    require("spectre").open_file_search({
+                        select_word = true,
+                    })
+                end,
+                desc = "Search on current file"
+            },
+        },
+        opts = {
+            default = {
+                find = {
+                    cmd = "rg",
+                    options = { "case-sensitive", "word-regexp" } -- This makes rg case-sensitive
+                },
+                replace = {
+                    cmd = "sed"
+                }
+            },
+            find_engine = {
+                ['rg'] = {
+                    cmd = 'rg',
+                    -- default args
+                    args = {
+                        '--color=never',
+                        '--no-heading',
+                        '--with-filename',
+                        '--line-number',
+                        '--column',
+                    },
+                    options = {
+                        ['ignore-case'] = {
+                            value = '--ignore-case',
+                            icon = '[I]',
+                            desc = 'ignore case match',
+                        },
+                        ['hidden'] = {
+                            value = '--hidden',
+                            desc = 'hidden file',
+                            icon = '[H]',
+                        },
+                        ['word-regexp'] = {
+                            value = '-w',
+                            desc = 'match word only',
+                            icon = '[W]',
+                        },
+                        ['case-sensitive'] = {
+                            value = '--case-sensitive',
+                            desc = 'case sensitive match',
+                            icon = '[C]',
+                        }
+                    },
+                },
+            }
         },
     },
     -- syntax highlighter and stuff
@@ -678,14 +735,3 @@ ft.set("typescriptreact", "{/* %s */}")
 ft.htmldjango = "{# %s #}"
 ft.templ = "// %s"
 -- end commenter
-
--- nvim spectre search and replace
--- vim.keymap.set("n", "<leader>S", '<cmd>lua require("spectre").toggle({cwd = vim.fn.getcwd()})<CR>', {
---     desc = "Toggle Spectre",
--- })
-vim.keymap.set("n", "<leader>sw", '<cmd>lua require("spectre").open_visual({select_word=true})<CR>', {
-    desc = "Search current word",
-})
-vim.keymap.set("n", "<leader>sc", '<cmd>lua require("spectre").open_file_search({select_word=true})<CR>', {
-    desc = "Search on current file",
-})
