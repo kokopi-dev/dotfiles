@@ -724,7 +724,25 @@ require("telescope").setup({
     pickers = {
         find_files = {
             -- `hidden = true` will still show the inside of `.git/` as it's not `.gitignore`d.
-            find_command = { "rg", "--files", "--hidden", "--glob", "!**/.git/*" },
+            find_command = {
+                "rg",
+                "--files",
+                '--no-heading',
+                '--with-filename',
+                '--line-number',
+                '--column',
+                "--glob", "!**/.git/*",
+                -- "--hidden",
+            },
+        },
+        live_grep = {
+            additional_args = function()
+                return {
+                    "--glob", "!**/.git/*",
+                    "--glob", "!**/go.sum",
+                    "--glob", "!**/go.mod",
+                }
+            end
         },
         lsp_definitions = {
             show_line = false,
