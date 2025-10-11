@@ -191,3 +191,14 @@ vim.keymap.set("n", "<leader>e`", "bcw``<ESC>P")
 -- center cursor after going up or down
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
+
+
+-- lsp restart
+vim.keymap.set('n', '<leader>l', function()
+  vim.cmd('LspRestart')
+  vim.defer_fn(function()
+    -- Reload the plugin module
+    package.loaded['symbol-usage'] = nil
+    require('symbol-usage').refresh()
+  end, 1000)
+end, { desc = 'Restart LSP and reload symbol-usage' })
