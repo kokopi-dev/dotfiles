@@ -216,19 +216,6 @@ require("lazy").setup({
     {
         'Wansmer/symbol-usage.nvim',
         event = 'BufReadPre', -- need run before LspAttach if you use nvim 0.9. On 0.10 use 'LspAttach'
-        config = function()
-            local SymbolKind = vim.lsp.protocol.SymbolKind
-            require('symbol-usage').setup({
-                kinds = {
-                    SymbolKind.Function,
-                    SymbolKind.Method,
-                    SymbolKind.Constant,
-                    SymbolKind.Struct,    -- Add this for Go structs
-                    SymbolKind.Interface, -- You might also want interfaces
-                    SymbolKind.Class,     -- Some languages use Class
-                },
-            })
-        end
     },
     -- formatter
     {
@@ -373,6 +360,14 @@ require('symbol-usage').setup({
     text_format = text_format,
     references = { enabled = true, include_declaration = false },
     definition = { enabled = true },
+    kinds = {
+        vim.lsp.protocol.SymbolKind.Function,
+        vim.lsp.protocol.SymbolKind.Method,
+        vim.lsp.protocol.SymbolKind.Constant,
+        vim.lsp.protocol.SymbolKind.Struct,                -- Add this for Go structs
+        vim.lsp.protocol.SymbolKind.Interface,             -- You might also want interfaces
+        vim.lsp.protocol.SymbolKind.Class,                 -- Some languages use Class
+    }
 })
 -- end usage hints formatter
 
