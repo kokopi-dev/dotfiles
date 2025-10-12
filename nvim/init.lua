@@ -217,6 +217,44 @@ require("lazy").setup({
         'Wansmer/symbol-usage.nvim',
         event = 'BufReadPre', -- need run before LspAttach if you use nvim 0.9. On 0.10 use 'LspAttach'
     },
+    -- errors visibility
+    {
+        "folke/trouble.nvim",
+        opts = {}, -- for default options, refer to the configuration section for custom setup.
+        cmd = "Trouble",
+        keys = {
+            {
+                "<leader>xx",
+                "<cmd>Trouble diagnostics toggle<cr>",
+                desc = "Diagnostics (Trouble)",
+            },
+            {
+                "<leader>xX",
+                "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
+                desc = "Buffer Diagnostics (Trouble)",
+            },
+            {
+                "<leader>cs",
+                "<cmd>Trouble symbols toggle focus=false<cr>",
+                desc = "Symbols (Trouble)",
+            },
+            {
+                "<leader>cl",
+                "<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
+                desc = "LSP Definitions / references / ... (Trouble)",
+            },
+            {
+                "<leader>xL",
+                "<cmd>Trouble loclist toggle<cr>",
+                desc = "Location List (Trouble)",
+            },
+            {
+                "<leader>xQ",
+                "<cmd>Trouble qflist toggle<cr>",
+                desc = "Quickfix List (Trouble)",
+            },
+        },
+    },
     -- formatter
     {
         "stevearc/conform.nvim",
@@ -364,9 +402,9 @@ require('symbol-usage').setup({
         vim.lsp.protocol.SymbolKind.Function,
         vim.lsp.protocol.SymbolKind.Method,
         vim.lsp.protocol.SymbolKind.Constant,
-        vim.lsp.protocol.SymbolKind.Struct,                -- Add this for Go structs
-        vim.lsp.protocol.SymbolKind.Interface,             -- You might also want interfaces
-        vim.lsp.protocol.SymbolKind.Class,                 -- Some languages use Class
+        vim.lsp.protocol.SymbolKind.Struct,    -- Add this for Go structs
+        vim.lsp.protocol.SymbolKind.Interface, -- You might also want interfaces
+        vim.lsp.protocol.SymbolKind.Class,     -- Some languages use Class
     }
 })
 -- end usage hints formatter
