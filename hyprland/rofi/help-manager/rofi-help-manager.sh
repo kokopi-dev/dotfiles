@@ -1,5 +1,4 @@
 #!/bin/bash
-
 get_current_monitor_width() {
     # Get cursor position from Hyprland
     local pos=$(hyprctl cursorpos 2>/dev/null | head -n 1)
@@ -40,11 +39,29 @@ post_rofi() {
 
 width=$(get_current_monitor_width)
 if [ "$width" -gt 2256 ]; then
+    echo "showing wide"
     #is wider than laptop monitor
-    THEME_FILE=~/.config/rofi/app-manager/app-manager-wide.rasi
+    THEME_FILE=~/.config/rofi/help-manager/help-manager-wide.rasi
 else
     #laptop monitor
-    THEME_FILE=~/.config/rofi/app-manager/app-manager.rasi
+    THEME_FILE=~/.config/rofi/help-manager/help-manager.rasi
 fi
-rofi -show drun -theme $THEME_FILE
+
+
+SYSTEM="󰟀   System"
+NVIM="   Neovim"
+chosen=$(echo -e "$SYSTEM\n$NVIM" | rofi -mesg " Keybinds" -dmenu -p "Action:" -config ~/.config/rofi/config-manager/config-manager.rasi)
+
+case $chosen in
+    "$NVIM")
+        cat ~/.config/rofi/help-manager/neovim-keybinds.txt | rofi -mesg "  Neovim Binds" -dmenu -i -p "󰍉" -config $THEME_FILE \
+            -font "Geist Mono 14" \
+            -kb-accept-entry ""
+        ;;
+    "$SYSTEM")
+        cat ~/.config/rofi/help-manager/system-keybinds.txt | rofi -mesg "  System Binds" -dmenu -i -p "󰍉" -config $THEME_FILE \
+            -font "Geist Mono 14" \
+            -kb-accept-entry ""
+        ;;
+esac
 post_rofi &

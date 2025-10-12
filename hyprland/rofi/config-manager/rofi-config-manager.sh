@@ -4,7 +4,7 @@ THEME_FILE=~/.config/rofi/config-manager/config-manager.rasi
 
 post_rofi() {
     local image_dir="$HOME/.config/rofi/images/sg"
-    local current_image=$(grep "background-image: url" file | cut -d'"' -f2)
+    local current_image=$(grep "background-image: url" "$THEME_FILE" | cut -d'"' -f2)
     local new_image=$(find "$image_dir" -type f | sort -R | head -n 1 | sed "s|^$HOME|~|")
     while true; do
         if [[ "$new_image" != "$current_image" ]]; then

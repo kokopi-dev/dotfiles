@@ -1,0 +1,11 @@
+Super + Return          →   Terminal
+Super + B               →   Browser
+Super + Shift + q       →   Quit Window
+Super + Shift + c       →   Configs Launcher
+Super + Shift + x       →   Settings Launcher
+Super + Shift + p       →   Power/System Launcher
+Super + d               →   App/Program Launcher
+Super + t               →   Toggle Floating Window
+Super + Arrows          →   Navigate Windows
+Super + Shft + Arrows   →   Move Windows
+Super + s               →   Toggle Scratchpad/Special

@@ -10,7 +10,7 @@ configuration {
 window {
     font: "Geist 12";
     width: 15em;
-    height: 11.3em;
+    height: 13.75em;
     transparency: "real";
     enabled: true;
     cursor: "default";

@@ -1,0 +1,13 @@
+Ldr + l	      →  Refresh LSP
+Ldr + s	      →  Search Replace Current
+Ldr + S       →  Search Replace Global
+Ldr + cc      →  Comment/Uncomment
+Ldr + x       →  Navigate/Show Errors/Warnings
+Ctrl + f      →  Find Search File
+Ldr + fg      →  Find Live Grep Search
+Ldr + ca      →  Show Code Actions
+K             →  Peek Signature
+gd            →  Go To Definition
+gr            →  Find References
+Ctrl + l      →  Clear Highlights
+Alt + Arrows  →  Navigate/Switch Panels

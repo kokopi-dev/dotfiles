@@ -1,7 +1,5 @@
 configuration {
   hover-select: true;
-  me-select-entry: "MousePrimary";
-  me-accept-entry: "!MousePrimary";
   font: "Geist 12";
   show-icons: true;
   icon-theme: "Papirus";
@@ -28,7 +26,7 @@ mainbox {
     orientation: horizontal;
     children: [ "imageBoxOverlay" , "listbox", "rightTab" ];
     background-color: @base-200-opa;
-    margin: 24% 27.5%;
+    margin: 19% 22.5%;
     border-color: @primary-opa;
     border: 1px;
     border-radius: 1em;
@@ -51,7 +49,7 @@ imageBoxOverlay {
 }
 imageBox {
     enabled: true;
-    background-image: url("~/.config/rofi/images/neco/25.jpg", width);
+    background-image: url("~/.config/rofi/images/neco/11.jpg", width);
     border-radius: 1em;
 }
 // Lists //
@@ -91,7 +89,7 @@ entry {
 listview {
     enabled: true;
     spacing: 0.6em;
-    padding: 0em 1em;
+    padding: 0em 0em;
     columns: 1;
     lines: 8;
     cycle: true;
@@ -111,7 +109,7 @@ listview {
 element {
     enabled: true;
     spacing: 1em;
-    padding: 0.4em 0.5em 0.4em 1.5em;
+    padding: 0.4em 0.5em 0.4em 0.4em;
     cursor: pointer;
     background-color: transparent;
     text-color: #E6D5E6;
@@ -124,7 +122,7 @@ element selected.normal {
     border: 1px;
 }
 element-icon {
-    size: 1.5em;
+    size: 0em;
     cursor: inherit;
     background-color: transparent;
     text-color: inherit;
