@@ -26,6 +26,8 @@ main config: ~/.config/hypr/hyprland.conf
 * sudo pacman -S mpv (lightweight video player/image viewer)
 * sudo pacman -S slurp grim satty
     - printscreen/screenshot capabilities
+* yay -S wl-screenrec
+    - screen/video capture capabilities
 
 ---
 ## Non config settings

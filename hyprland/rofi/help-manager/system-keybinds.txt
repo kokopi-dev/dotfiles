@@ -1,4 +1,5 @@
 Super + ALT + p         →   Copy/Save Screenshot
+Super + ALT + v         →   Screen Region Video Capture
 Super + Return          →   Terminal
 Super + e               →   File Manager
 Super + Shft + q        →   Quit Window
