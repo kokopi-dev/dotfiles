@@ -2,16 +2,16 @@
 get_current_monitor_width() {
     # Get cursor position from Hyprland
     local pos=$(hyprctl cursorpos 2>/dev/null | head -n 1)
-    
+
     if [ -z "$pos" ]; then
         echo "Error: Could not get cursor position from Hyprland" >&2
         return 1
     fi
-    
+
     # Extract coordinates (hyprctl cursorpos returns: "x, y")
     local x=$(echo "$pos" | awk -F',' '{print $1}' | tr -d ' ')
     local y=$(echo "$pos" | awk -F',' '{print $2}' | tr -d ' ')
-    
+
     # Get the width of the monitor containing the cursor
     local width=$(hyprctl monitors -j | jq -r --argjson x "$x" --argjson y "$y" '
         .[] | select(
@@ -20,7 +20,7 @@ get_current_monitor_width() {
             (.x + .width) > $x and 
             (.y + .height) > $y
         ) | .width' | head -n 1)
-    
+
     echo "$width"
 }
 
@@ -47,21 +47,30 @@ else
     THEME_FILE=~/.config/rofi/help-manager/help-manager.rasi
 fi
 
-
 SYSTEM="󰟀   System"
 NVIM="   Neovim"
-chosen=$(echo -e "$SYSTEM\n$NVIM" | rofi -mesg " Keybinds" -dmenu -p "Action:" -config ~/.config/rofi/config-manager/config-manager.rasi)
+BASH_HELP="   Bash"
+chosen=$(echo -e "$SYSTEM\n$NVIM\n$BASH_HELP" | rofi -mesg " Keybinds" -dmenu -p "Action:" -config ~/.config/rofi/config-manager/config-manager.rasi)
 
 case $chosen in
-    "$NVIM")
-        cat ~/.config/rofi/help-manager/neovim-keybinds.txt | rofi -mesg "  Neovim Binds" -dmenu -i -p "󰍉" -config $THEME_FILE \
-            -font "Geist Mono 14" \
-            -kb-accept-entry ""
-        ;;
-    "$SYSTEM")
-        cat ~/.config/rofi/help-manager/system-keybinds.txt | rofi -mesg "  System Binds" -dmenu -i -p "󰍉" -config $THEME_FILE \
-            -font "Geist Mono 14" \
-            -kb-accept-entry ""
-        ;;
+"$NVIM")
+    cat ~/.config/rofi/help-manager/neovim-keybinds.txt | rofi -mesg "  Neovim Binds" -dmenu -i -p "󰍉" -config $THEME_FILE \
+        -font "Geist Mono 14" \
+        -kb-accept-entry ""
+    ;;
+"$SYSTEM")
+    cat ~/.config/rofi/help-manager/system-keybinds.txt | rofi -mesg "  System Binds" -dmenu -i -p "󰍉" -config $THEME_FILE \
+        -font "Geist Mono 14" \
+        -kb-accept-entry ""
+    ;;
+"$BASH_HELP")
+    if [ ! -d "/tmp/firefox-dev" ]; then
+        echo "Creating firefox profile"
+        mkdir -p /tmp/firefox-dev
+        firefox -CreateProfile "dev-profile /tmp/firefox-dev"
+    fi
+
+    firefox -P dev-profile -private-window https://devhints.io/bash &
+    ;;
 esac
 post_rofi &

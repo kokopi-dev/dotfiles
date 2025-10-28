@@ -1,11 +1,16 @@
 Super + Return          →   Terminal
-Super + B               →   Browser
-Super + Shift + q       →   Quit Window
-Super + Shift + c       →   Configs Launcher
-Super + Shift + x       →   Settings Launcher
-Super + Shift + p       →   Power/System Launcher
+Super + e               →   File Manager
+Super + Shft + q        →   Quit Window
+Super + Shft + c        →   Configs Launcher
+Super + Shft + x        →   Settings Launcher
+Super + Shft + p        →   Power/System Launcher
 Super + d               →   App/Program Launcher
 Super + t               →   Toggle Floating Window
 Super + Arrows          →   Navigate Windows
+Super + (0-9)           →   Navigate To Workspace#
 Super + Shft + Arrows   →   Move Windows
+Super + Shft + (0-9)    →   Move Window To Workspace#
 Super + s               →   Toggle Scratchpad/Special
+Super + S               →   Move Win To Scratchpad/Special
+Super + LMB (Drag)      →   Move Window
+Super + RMB (Drag)      →   Resize Window
