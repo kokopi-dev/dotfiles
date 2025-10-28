@@ -24,6 +24,8 @@ main config: ~/.config/hypr/hyprland.conf
 
 * sudo pacman -S obs-studio
 * sudo pacman -S mpv (lightweight video player/image viewer)
+* sudo pacman -S slurp grim satty
+    - printscreen/screenshot capabilities
 
 ---
 ## Non config settings
