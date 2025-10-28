@@ -1,0 +1,32 @@
+.thunar {
+  background: none;
+}
+.thunar .sidebar {
+  background: rgba(21,24,40,0.3);
+}
+.thunar toolbar {
+  background: rgba(21,24,40,0.3);
+  padding-top: 10px;
+  padding-bottom: 8px;
+  border-top: 1px solid #E5C38F;
+}
+/* toolbar back btns and stuff */
+.thunar toolbar .image-button {
+  color: #E5C38F;
+}
+/* input bar */
+.thunar toolbar toolitem widget box entry {
+  color: #E5C38F;
+  background: rgba(6, 2, 16, 0.75);
+}
+.thunar .sidebar .view {
+  background: rgba(6, 2, 16, 0.4);
+  color: #E5C38F;
+}
+.thunar notebook .view {
+  background: rgba(6, 2, 16, 0.6);
+}
+.thunar statusbar {
+  color: #E5C38F;
+  background: rgba(6, 2, 16, 0.6);
+}

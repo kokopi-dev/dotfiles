@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# print colors
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+BLUE='\033[0;34m'
+NC='\033[0m'
+
+print_status() {
+    local status=$1
+    local message=$2
+    case $status in
+        "OK") echo -e "${GREEN}[OK]${NC} $message" >&2 ;;
+        "WARN") echo -e "${YELLOW}[WARN]${NC} $message" >&2 ;;
+        "ERROR") echo -e "${RED}[ERROR]${NC} $message" >&2 ;;
+        "INFO") echo -e "${BLUE}[INFO]${NC} $message" >&2 ;;
+    esac
+}

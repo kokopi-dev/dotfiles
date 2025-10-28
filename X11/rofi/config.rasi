@@ -1,0 +1,119 @@
+configuration {
+  show-icons: true;
+  font: "Fira Code Retina 12";
+  display-drun: "";
+}
+
+* {
+  text-color: #E9E9E9;
+  spacing: 0;
+}
+
+window {
+  background-color: #00000050;
+  height: 100%;
+  width: 100%;
+  padding: 450px 550px;
+  enabled: true;
+  location: center;
+  anchor: center;
+  transparency: "real";
+  children: ["mainbox"];
+}
+
+mainbox {
+    border-radius: 10px;
+    border: 2px;
+    border-color: #BF9FD8;
+    location: center;
+    background-color: #0A041835;
+    enabled: true;
+    padding:                     1.25em;
+    spacing:                     1.25em;
+    children:                    [ "imageBox", "rightbox" ];
+    orientation:                 horizontal;
+    background-color:            transparent;
+}
+rightbox {
+    background-color: #0A041835;
+    width: 45%;
+    children:                    [ "inputbar", "listview" ];
+    border-radius: 0.65em;
+    border: 1px;
+    border-color: #E5C38F;
+    expand: true;
+}
+
+imageBox {
+    width: 45%;
+    padding: 5px;
+    expand: true;
+    background-image: url("/home/kokopi/pictures/rofi-sqrs/sgsqr5.png", height);
+    border-radius: 0.65em;  // Optional, for rounded corners
+}
+
+inputbar {
+  border: 0 0 1px 0;
+  children: [prompt,entry];
+  border-color: #E5C38F;
+  border-radius: 0px;
+  background-color: #0A041835;
+}
+
+prompt {
+  padding: 16px 16px 16px 16px;
+  border-radius:0px;
+  border: 0 1px 0 0;
+  border-color: #060813;
+  text-color: #E5C38F;
+  background-color: #0A041835;
+}
+
+/* search bar */
+entry {
+  padding: 16px;
+  border: 0px;
+  text-color: #BF9FD8;
+  cursor: text;
+  background-color: #0A041835;
+}
+
+textbox {
+  background-color: #2e343f;
+  border: 0 0 1px 0;
+  border-color: #282C33;
+  padding: 8px 16px;
+  background-color: #0A041835;
+}
+
+listview {
+  cycle: false;
+  margin: 0 0 -1px 0;
+  scrollbar: false;
+  dynamic: true;
+  border-radius: 0px;
+  border: 0;
+  background-color: #0A041835;
+}
+
+element {
+  border: 0;
+  padding: 20px;
+  border-radius: 0px;
+  spacing: 1em; /* gap between element-text and element-icon */
+  background-color: #0A041835;
+}
+
+element-text {
+  background-color: #0A041800;
+  color: #E5C38F;
+}
+element-icon {
+}
+
+element selected {
+  background-color: #BF9FD830;
+  border-radius:0px;
+  border: 0;
+}
+

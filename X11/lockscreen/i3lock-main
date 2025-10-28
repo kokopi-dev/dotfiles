@@ -1,0 +1,27 @@
+#!/bin/bash
+###
+# --keyhl = color of inside the ring when typing
+# --bshl = color of inside the ring when backspacing
+###
+i3lock --image=/home/$USER/pictures/redjuice.png -F \
+    --radius=120 --ring-width=8 \
+    --inside-color=ffffffaa \
+    --ring-color=333333aa \
+    --line-color=00000000 \
+    --separator-color=00000000 \
+    --insidewrong-color=ff000033 \
+    --ringwrong-color=ff0000aa \
+    \
+    --keyhl-color=000000 \
+    --bshl-color=ff4444 \
+    \
+    --clock --indicator \
+    --time-color=333333 \
+    --date-color=555555 \
+    --clock --indicator \
+    --noinput-text="Empty" \
+    \
+    --insidever-color=ffffff22 \
+    --ringver-color=ffffffaa \
+    --verif-color=ffffff
+

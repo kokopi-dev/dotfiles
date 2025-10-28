@@ -1,0 +1,2 @@
+event=video/brightnessup.*
+action=/etc/acpi/handlers/bl +

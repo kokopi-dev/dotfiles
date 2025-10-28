@@ -1,0 +1,26 @@
+{
+  "modules": [
+    "title",
+    "separator",
+    "os",
+    "kernel",
+    "uptime",
+    "packages",
+    "shell",
+    "de",
+    "wm",
+    {
+      "type": "theme",
+      "key": "Theme"
+    },
+    {
+      "type": "icons",
+      "key": "Icons"
+    },
+    "terminal",
+    "cpu",
+    "gpu",
+    "memory",
+    "colors"
+  ]
+}

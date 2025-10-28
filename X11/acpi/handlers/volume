@@ -1,0 +1,5 @@
+#!/bin/sh
+case $1 in
+  -) runuser - kokopi -c "pamixer -d 5";;
+  +) runuser - kokopi -c "pamixer -i 5";;
+esac

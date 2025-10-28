@@ -1,0 +1,129 @@
+configuration {
+  font: "Geist 12";
+  hover-select: true;
+  me-select-entry: "MousePrimary";
+  me-accept-entry: "!MousePrimary";
+  click-to-exit: true;
+}
+
+@theme "~/.config/rofi/theme.rasi"
+
+// Main //
+window {
+    width: 26em;
+    height: 15.8em;
+    fullscreen: false;
+    enabled: true;
+    cursor: "default";
+    spacing: 0em;
+    opacity: 0;
+    background-color: transparent;
+    extend: false;
+}
+
+mainbox {
+    enabled: true;
+    spacing: 0em;
+    orientation: vertical;
+    children: [ "message", "mainContent" ];
+    border-color: @primary-opa;
+    border: 1px;
+    border-radius: 1em;
+    background-color: transparent;
+}
+// decorative text at top
+message {
+    enabled: true;
+    background-color: @base-200;
+    text-color: @primary;
+    border: none;
+}
+textbox {
+    padding: 12px 1em 12px 0px;
+    font: "Octal Light 18";
+    horizontal-align: 0.0;
+    vertical-align: 0.5;
+}
+mainContent {
+    padding: 1em 0;
+    orientation: horizontal;
+    children: [ "listview", "imageBoxOverlay" ];
+    background-color: @base-200-opa;
+}
+imageBoxOverlay {
+    children: ["imageBox"];
+    margin: 0em 1em 0em 0em;
+    border-radius: 1em;
+    padding: 0.4em;
+    background-image: linear-gradient(135deg,#B575E6,#EBD488,#9084E8);
+}
+imageBox {
+    enabled: true;
+    background-image: url("~/.config/rofi/images/sg/15.jpg", width);
+    border-radius: 1em;
+}
+
+// Lists //
+listview {
+    enabled: true;
+    spacing: 0.6em;
+    padding: 0em 1em;
+    columns: 1;
+    lines: 3;
+    cycle: true;
+    dynamic: true;
+    scrollbar: false;
+    layout: vertical;
+    reverse: false;
+    expand: true;
+    fixed-height: true;
+    fixed-columns: true;
+    cursor: "default";
+    background-color: transparent;
+}
+
+// Elements //
+element {
+    enabled: true;
+    spacing: 1em;
+    padding: 0.4em 0em 0.4em 2.9em;
+    cursor: pointer;
+    background-color: transparent;
+    text-color: #E6D5E6;
+}
+element selected.normal {
+    border-radius: 0.5em;
+    background-image: linear-gradient(135deg,#d5aed666,#7866C44d,#7A7FDE66);
+    text-color: @secondary;
+    border-color: @primary-opa;
+    border: 1px;
+}
+element-icon {
+    size: 1.5em;
+    cursor: inherit;
+    background-color: transparent;
+    text-color: inherit;
+}
+element-text {
+    vertical-align: 0.5;
+    horizontal-align: 0.0;
+    cursor: inherit;
+    background-color: transparent;
+    text-color: inherit;
+    highlight: bold;
+}
+
+// Error message //
+error-message {
+    text-color: #cdd6f4ff;
+    background-color: #11111be6;
+    text-transform: capitalize;
+    children: [ "textbox" ];
+}
+
+textbox {
+    text-color: inherit;
+    background-color: inherit;
+    vertical-align: 0.5;
+    horizontal-align: 0.5;
+}

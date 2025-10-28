@@ -1,0 +1,52 @@
+# This is the configuration file for Ghostty.
+#
+# This template file has been automatically created at the following
+# path since Ghostty couldn't find any existing config files on your system:
+#
+#   /home/kokopi/.config/ghostty/config
+#
+# The template does not set any default options, since Ghostty ships
+# with sensible defaults for all options. Users should only need to set
+# options that they want to change from the default.
+#
+# Run `ghostty +show-config --default --docs` to view a list of
+# all available config options and their default values.
+#
+# Additionally, each config option is also explained in detail
+# on Ghostty's website, at https://ghostty.org/docs/config.
+
+theme = navarch
+
+font-size = 12.5
+font-family = "Geist Mono"
+window-padding-x = 10
+window-padding-y = 10
+window-padding-color = background
+window-title-font-family = "Geist"
+window-theme = ghostty
+window-inherit-working-directory = true
+window-inherit-font-size = true
+focus-follows-mouse = true
+gtk-tabs-location = bottom
+background = #14111C
+background-opacity = 0.35
+background-blur = true
+foreground = #E6DDD1
+cursor-style = bar
+# # Any line beginning with a # is a comment. It's not possible to put
+# # a comment after a config option, since it would be interpreted as a
+# # part of the value. For example, this will have a value of "#123abc":
+# background = #123abc
+#
+# # Empty values are used to reset config keys to default.
+# key =
+#
+# # Some config options have unique syntaxes for their value,
+# # which is explained in the docs for that config option.
+# # Just for example:
+# resize-overlay-duration = 4s 200ms
+#
+keybind = ctrl+shift+.=move_tab:1
+keybind = ctrl+shift+,=move_tab:-1
+
+app-notifications = no-clipboard-copy

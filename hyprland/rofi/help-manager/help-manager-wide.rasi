@@ -1,0 +1,152 @@
+configuration {
+  hover-select: true;
+  font: "Geist 12";
+  show-icons: true;
+  icon-theme: "Papirus";
+  display-drun: " ";
+}
+
+@theme "~/.config/rofi/theme.rasi"
+
+// Main //
+window {
+    height: 100%;
+    width: 100%;
+    transparency: "real";
+    fullscreen: false;
+    enabled: true;
+    spacing: 0em;
+    padding: 0em;
+    background-color: transparent;
+}
+
+mainbox {
+    enabled: true;
+    spacing: 0em;
+    orientation: horizontal;
+    children: [ "imageBoxOverlay" , "listbox", "rightTab" ];
+    background-color: @base-200-opa;
+    margin: 19% 22.5%;
+    border-color: @primary-opa;
+    border: 1px;
+    border-radius: 1em;
+}
+
+rightTab {
+    background-color: transparent;
+    background-image: linear-gradient(135deg,#B37ADE26,#d5aed6d9);
+    expand: false;
+    width: 3.5em;
+}
+
+imageBoxOverlay {
+    children: ["imageBox"];
+    background-color: rgba(0,0,0,0.9);
+    margin: 1.4em 0.8em 1.4em 1.4em;
+    border-radius: 1em;
+    padding: 0.6em;
+    background-image: linear-gradient(135deg,#B37ADE,#f3e2a9,#DE7AB9,#7A7FDE);
+}
+imageBox {
+    enabled: true;
+    background-image: url("~/.config/rofi/images/neco/11.jpg", width);
+    border-radius: 1em;
+}
+// Lists //
+listbox {
+    spacing: 0em;
+    padding: 1.4em 0.8em 1.4em 0em;
+    children: [ "inputbar" , "listview"  ];
+    background-color: transparent;
+}
+// Inputs //
+inputbar {
+    enabled: true;
+    margin: 0.2em 0.8em 0.8em 0.8em;
+    children: [ "prompt", "entry" ];
+    background-color: transparent;
+    border-radius: 0.5em;
+}
+prompt {
+    font: "Geist 14";
+    text-color: #E5C38F;
+    background-color: transparent;
+    padding: 0.8em 0.5em 0em 0.5em;
+}
+entry {
+    font: "Fira Code Retina 11";
+    text-color: #f5e0dcff;
+    background-color: #1E1B21;
+    background-image: linear-gradient(135deg,#2E2A33,#1E1B21);
+    border-radius: 0.5em;
+    border-color: @secondary;
+    placeholder: "Search...";
+    placeholder-color: #BF9FD875;
+    border: 1px;
+    padding: 0.7em 0.9em 0.7em 0.7em;
+    enabled: true;
+}
+listview {
+    enabled: true;
+    spacing: 0.6em;
+    padding: 0em 0em;
+    columns: 1;
+    lines: 8;
+    cycle: true;
+    dynamic: true;
+    scrollbar: false;
+    layout: vertical;
+    reverse: false;
+    expand: true;
+    fixed-height: false;
+    fixed-columns: true;
+    cursor: "default";
+    background-color: transparent;
+}
+
+
+// Elements //
+element {
+    enabled: true;
+    spacing: 1em;
+    padding: 0.4em 0.5em 0.4em 0.4em;
+    cursor: pointer;
+    background-color: transparent;
+    text-color: #E6D5E6;
+}
+element selected.normal {
+    border-radius: 0.5em;
+    background-image: linear-gradient(135deg,#d5aed666,#7866C44d,#7A7FDE66);
+    text-color: @secondary;
+    border-color: @primary-opa;
+    border: 1px;
+}
+element-icon {
+    size: 0em;
+    cursor: inherit;
+    background-color: transparent;
+    text-color: inherit;
+}
+element-text {
+    vertical-align: 0.5;
+    horizontal-align: 0.0;
+    cursor: inherit;
+    background-color: transparent;
+    text-color: inherit;
+    highlight: bold;
+}
+
+// Error message //
+error-message {
+    text-color: #cdd6f4ff;
+    background-color: #11111be6;
+    text-transform: capitalize;
+    children: [ "textbox" ];
+}
+
+textbox {
+    text-color: inherit;
+    background-color: inherit;
+    vertical-align: 0.5;
+    horizontal-align: 0.5;
+}

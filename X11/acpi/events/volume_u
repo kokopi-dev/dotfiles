@@ -1,0 +1,2 @@
+event=button/volumeup.*
+action=/etc/acpi/handlers/volume +

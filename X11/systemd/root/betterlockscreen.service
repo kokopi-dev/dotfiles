@@ -1,0 +1,15 @@
+[Unit]
+Description=Lockscreen
+Before=sleep.target
+
+[Service]
+Type=simple
+User=kokopi
+Environment=DISPLAY=:0
+ExecStart=/bin/betterlockscreen -l
+ExecStartPost=/bin/sleep 1
+
+[Install]
+WantedBy=sleep.target
+WantedBy=suspend.target
+WantedBy=hibernate.target

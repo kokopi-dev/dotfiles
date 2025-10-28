@@ -1,0 +1,124 @@
+# USE AS REFERENCE, DONT RUN
+
+# SSD maintenance
+sudo systemctl enable fstrim.timer
+sudo systemctl start fstrim.timer
+
+# needed packages after installing arch
+# make sure your'e not root when running
+sudo pacman -S git firefox xorg-server xorg-xinput xorg-xinit xorg-xset xorg-xsetroot neofetch feh rofi pass rsync bat ripgrep fd polybar man-db xclip flameshot peek screenkey tumbler thunar unzip polkit openssh
+
+# https://wiki.archlinux.org/title/backlight
+# intel screen brightness control
+sudo pacman -S xorg-xbacklight
+
+# fn keys, check dotfiles/acpid
+sudo pacman -S acpid
+sudo systemctl start acpid
+sudo systemctl enable acpid
+
+# xrandr GUI
+sudo pacman -S arandr
+
+# audio
+## i think sof-firmware is required for asus zenbook UX325E
+## audio should just work after installing
+## run alsamixer to change volume in terminal
+sudo pacman -S pulseaudio pulseaudio-bluetooth pulseaudio-alsa sof-firmware
+
+#audio GUI
+sudo pacman -S pavucontrol
+
+# bluetooth
+## bluetooth audio should automatically switch sinks
+## blueman is the GUI, rofi or blueman-manager in terminal
+sudo pacman -S bluez bluez-utils blueman
+sudo systemctl start bluetooth.service
+sudo systemctl enable bluetooth.service
+
+# dev stuff
+sudo pacman -S neovim kitty npm rust
+## python
+sudo pacman -S tk
+curl https://pyenv.run | bash
+
+# japanese fonts
+sudo pacman -S adobe-source-han-sans-jp-fonts adobe-source-han-serif-jp-fonts otf-ipafont 
+
+# japanese input
+## https://wiki.archlinux.org/title/Input_Japanese_using_ibus
+## check docs for setting up the systemd services
+## user systemctl control: systemctl --user enable ibus.service
+## ibus-setup will need to use the system python
+## run: PYTHON=/usr/bin/python ibus-setup
+## clicking the keyboard icon on current polybar will open it
+## PC will need to reboot after setting up
+sudo pacman -S ibus-anthy
+
+# fonts and symbols for nvim
+sudo pacman -S ttf-nerd-fonts-symbols ttf-fira-code
+# emojis
+sudo pacman -S noto-fonts-emoji
+# cache fonts
+fc-cache
+
+yay -S picom-git
+
+sudo pacman -S bspwm xdo sxhkd
+
+# check https://wiki.archlinux.org/title/Xorg : driver installation
+## amd
+sudo pacman -S xf86-video-amdgpu mesa vulkan-radeon
+## intel
+sudo pacman -S xf86-video-intel mesa vulkan-intel
+
+# installing yay
+sudo git clone https://aur.archlinux.org/yay.git /opt
+sudo chown -R username:username /opt/yay
+cd /opt/yay;makepkg -si
+
+# after setting up X
+
+# https://wiki.archlinux.org/title/Desktop_notifications
+## setup the service in /usr/share/dbus-1/services
+sudo pacman -S notification-daemon
+
+## test with exa -la, set this in bashrc alias for ll and stuff
+sudo pacman -S exa
+sudo pacman -S starship
+
+# database
+sudo pacman -S postgresql dbeaver
+
+# gtk3.0 theme
+# https://github.com/phisch/phinger-cursors
+# gtk themes are in /usr/share/themes
+# gtk cursor themes are in /usr/share/icons
+# systemwide cursor settings are in /usr/share/icons/default/index.theme
+yay -S juno-ocean-gtk-theme-git phinger-cursors
+
+# lockscreen
+# https://github.com/betterlockscreen/betterlockscreen
+yay -S betterlockscreen
+
+# bash auto complete
+# https://github.com/scop/bash-completion
+sudo pacman -S bash-completion
+
+# fzf, ctrl+t in term
+git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+~/.fzf/install
+
+# bun
+curl -fsSL https://bun.sh/install | bash
+
+#hugo latest extended
+sudo pacman -S hugo
+
+# bazecor
+# install bazecor
+# chmod u+x Bazecor...
+# ./Bazecor... --appimage-extract
+# sudo cp -r usr/* /usr
+# move the icon into applications folder
+# move Bazecor.Desktop to .local/share/applications

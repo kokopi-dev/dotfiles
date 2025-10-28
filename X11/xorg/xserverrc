@@ -1,0 +1,4 @@
+#!/bin/sh
+# logging
+# exec /usr/bin/Xorg -nolisten tcp "$@" vt$XDG_VTNR > /home/kokopi/xorg_log.txt 2>&1
+exec /usr/bin/Xorg -nolisten tcp "$@" vt$XDG_VTNR

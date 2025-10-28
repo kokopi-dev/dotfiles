@@ -1,0 +1,47 @@
+background            	#060813
+foreground            	#F3F3F3
+cursor                	#3DE1CC
+
+#: The foreground for text selected with the mouse. A value of none
+#: means to leave the color unchanged.
+selection_foreground  	#323232
+
+#: How much to dim text that has the DIM/FAINT attribute set. One
+#: means no dimming and zero means fully dimmed (i.e. invisible).
+selection_background  	#F5A9E6
+
+# black
+color0                	#353535
+color8                	#535353
+
+# red
+color1                  #C44A6B
+color9                	#D06A85
+
+# green
+color2                	#3FA48E
+color10               	#82DCC0
+
+# yellow
+color3                	#FFBB53
+color11               	#D3B57B
+
+# blue
+color4                	#545EC0
+color12               	#6F77D3
+
+# magenta
+color5                	#C852B7
+color13               	#C763BA
+
+# cyan
+color6                	#62D8EC
+color14               	#A2E7F2
+
+# white
+color7                	#E9E9E9
+color15               	#F5F5F5
+active_tab_foreground   #ffffff
+active_tab_background   #535353
+inactive_tab_foreground #ffffff
+inactive_tab_background #353535

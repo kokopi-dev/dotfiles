@@ -1,0 +1,38 @@
+#!/bin/bash
+# Lock on suspend script
+# Save as /usr/local/bin/lock-on-suspend
+
+# Get the user who is logged in to X
+USER=$(who | grep '(:0)' | awk '{print $1}' | head -n1)
+
+# If no user found, try alternative method
+if [[ -z "$USER" ]]; then
+    USER=$(ps aux | grep -E "(xinit|startx)" | grep -v grep | awk '{print $1}' | head -n1)
+fi
+
+# Exit if no user found
+if [[ -z "$USER" ]]; then
+    echo "No X user found"
+    exit 0
+fi
+
+# Get user's home directory
+USER_HOME=$(getent passwd "$USER" | cut -d: -f6)
+
+# Set environment variables for the user's X session
+export DISPLAY=:0
+export XAUTHORITY="$USER_HOME/.Xauthority"
+
+# Path to your lock script (adjust this to your actual lock script path)
+LOCK_SCRIPT="$USER_HOME/.local/bin/i3lock-main"
+
+# Lock as the user
+if [[ -f "$LOCK_SCRIPT" ]]; then
+    sudo -u "$USER" "$LOCK_SCRIPT" &
+else
+    # Fallback to basic i3lock
+    sudo -u "$USER" i3lock --color=1a1a1a --clock --indicator &
+fi
+
+# Give lock time to start
+sleep 1

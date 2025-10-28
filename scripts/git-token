@@ -1,0 +1,30 @@
+#!/bin/bash
+
+# Simple script to inject token:name into existing git remote URL
+# Usage: git-token <n> <token>
+
+[ $# -ne 2 ] && { echo "Usage: git-token <username> <token>"; exit 1; }
+
+NAME="$1"
+TOKEN="$2"
+
+REMOTE=$(git remote get-url origin 2>/dev/null) || { echo "No origin remote found"; exit 1; }
+
+# if ssh convert, else normal
+if [[ $REMOTE =~ ^git@([^:]+):(.+)$ ]]; then
+    # SSH format: git@host:path -> https://token:name@host/path
+    HOST="${BASH_REMATCH[1]}"
+    PATH="${BASH_REMATCH[2]}"
+    NEW_URL="https://${NAME}:${TOKEN}@${HOST}/${PATH}"
+elif [[ $REMOTE =~ ^https://(.+)$ ]]; then
+    # HTTPS format: https://rest -> https://token:name@rest
+    NEW_URL="https://${NAME}:${TOKEN}@${BASH_REMATCH[1]}"
+else
+    echo "Unsupported remote format: $REMOTE"
+    exit 1
+fi
+
+# Set new remote
+git remote set-url origin "$NEW_URL"
+
+echo "Remote updated: $NEW_URL"

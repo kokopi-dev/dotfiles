@@ -1,0 +1,112 @@
+{
+  "layer": "top",
+  "position": "top",
+  "margin-top": 12,
+  "margin-left": 15,
+  "margin-right": 15,
+  "spacing": 12,
+  "modules-left": ["clock#date", "hyprland/workspaces", "custom/settings", "custom/configs", "custom/discord"],
+  "modules-right": ["custom/keyboard", "wireplumber", "network", "custom/gpu", "cpu", "memory", "battery", "custom/power"],
+  "modules-center": ["clock#time"],
+
+  "custom/gpu": {
+    "exec": "cat /sys/class/drm/card*/device/gpu_busy_percent 2>/dev/null | head -1",
+    "format-icons": ["<span color='#BCB9EB'>󰘚</span>"],
+    "format": "{}% {icon}",
+    "interval": 8
+  },
+  "custom/keyboard": {
+    "signal": 8,
+    "format-icons": ["<span color='#BCB9EB'>⌨</span>"],
+    "format": "{} {icon}",
+    "exec": "~/.config/waybar/scripts/fcitx5-status.sh"
+  },
+  "custom/configs": {
+    "format-icons": ["<span color='#BCB9EB'>󰈙</span>"],
+    "format": "{icon}",
+    "tooltip": true,
+    "tooltip-format": "Config list",
+    "on-click": "~/.local/bin/rofi-config-manager.sh"
+  },
+  "custom/settings": {
+    "format-icons": ["<span color='#BCB9EB'></span>"],
+    "format": "{icon}",
+    "tooltip": true,
+    "tooltip-format": "Control panel",
+    "on-click": "~/.local/bin/rofi-settings-manager.sh"
+  },
+  "custom/discord": {
+    "format-icons": ["<span color='#BCB9EB'></span>"],
+    "format": "{icon}",
+    "tooltip": false,
+    "on-click": "discord --enable-features=UseOzonePlatform --ozone-platform=wayland"
+  },
+  "hyprland/workspaces": {
+    "format": "{icon}",
+    "format-icons": {
+        "active": "",
+        "default": "",
+        "urgent": ""
+    },
+    "on-click": "activate"
+  },
+  "cpu": {
+    "format-icons": ["<span color='#BCB9EB'></span>"],
+    "format": "{usage}% {icon}",
+    "tooltip": false
+  },
+  "memory": {
+    "format-icons": ["<span color='#BCB9EB'></span>"],
+    "format": "{}% {icon}"
+  },
+  "clock#date": {
+    "format": "{:%m/%d}"
+  },
+  "clock#time": {
+    "format": "{:%H:%M}"
+  },
+  "custom/power": {
+    "format-icons": ["<span color='#C97F87'></span>"],
+    "format": "{icon}",
+    "tooltip": false,
+    "on-click": "~/.local/bin/rofi-power-manager.sh"
+  },
+
+  "network": {
+    "max-length": 10,
+    "format-wifi": "{essid}  <span color='#BCB9EB'></span>",
+    "format-ethernet": "{ipaddr}/{cidr} ",
+    "tooltip-format": "{ifname} via {gwaddr} ",
+    "format-linked": "{ifname} (No IP) ",
+    "format-disconnected": "Disconnected ⚠",
+    "on-click": "ghostty -e nmtui & disown"
+    // "format-alt": "{ifname}: {ipaddr}/{cidr}",
+  },
+  "wireplumber": {
+    "format": "{volume}% <span color='#BCB9EB'>{icon}</span>",
+    "format-icons": {
+        "default": [
+            "",
+            "",
+            ""
+        ]
+    },
+    "format-muted": "<span color='#BCB9EB'></span>",
+    "on-click": "pavucontrol"
+  },
+  "battery": {
+    "states": {
+      // "good": 95,
+      "warning": 30,
+      "critical": 15
+    },
+    "format": "{capacity}% {icon}",
+    "format-full": "{capacity}% {icon}",
+    "format-charging": "{capacity}% 󰂄",
+    "format-alt": "{time} {icon}",
+    "format-icons": ["<span color='#BCB9EB'></span>", "<span color='#BCB9EB'></span>", "<span color='#BCB9EB'></span>", "<span color='#BCB9EB'></span>", "<span color='#BCB9EB'></span>"]
+    // "format-good": "", // An empty format will hide the module
+    // "format-full": "",
+    // "format-plugged": "{capacity}% ",
+  }
+}

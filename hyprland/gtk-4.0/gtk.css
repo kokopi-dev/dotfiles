@@ -1,0 +1,61 @@
+@define-color cover_bg rgba(27, 22, 38, 0.9);
+@define-color hl_text_color #e0cd93;
+* {
+  color: #ddced8;
+}
+tab label {
+  color: @hl_text_color;
+}
+slider {
+  box-shadow: inset 0 0 0 2px @hl_text_color;
+}
+button.toggle:checked:not(:hover):not(:focus):not(.flat),
+button.toggle:checked:not(:hover):not(:focus):not(.flat) label {
+  background-color: #8aade0;
+  color: @cover_bg;
+}
+
+combobox button:active, combobox button:checked {
+  background: #8aade0;
+}
+combobox button:active cellview, combobox button:checked cellview {
+  color: @cover_bg;
+}
+
+window {
+  background: @cover_bg;
+}
+header {
+  background: @cover_bg;
+}
+scrolledwindow {
+  background: linear-gradient(
+    135deg,
+    rgba(35, 34, 56, 0.6),
+    rgba(43, 26, 42, 0.6),
+    rgba(33, 28, 46, 0.6)
+  );
+  color: #ddced8;
+}
+
+/* ghostty */
+.terminal-window box notebook header {
+  background-color: #1a1b26;
+  margin: 2px;
+}
+.terminal-window box notebook header tab {
+  font-family: "Octal";
+  background-color: #1a1b26;
+  color: #e6ddd1;
+  padding: 0.5px 8px;
+  font-size: 14px;
+}
+
+.terminal-window box notebook header tab:hover {
+  background-color: #24283b;
+}
+
+.terminal-window box notebook header tab:checked {
+  color: #bf9fd8;
+  background-color: #414868;
+}
