@@ -1,3 +1,7 @@
+# ⚠️ This is a public mirror
+
+Main repo is self hosted on gitea
+
 # Dotfiles
 
 This is a work in progress, check back for updates. Might look into making a changelog.
