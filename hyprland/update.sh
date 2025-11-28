@@ -26,3 +26,4 @@ cp -r ~/.config/gtk-3.0/* ./gtk-3.0
 
 cp -r ~/.config/gtk-4.0/* ./gtk-4.0
 
+cp ~/.config/starship.toml .
