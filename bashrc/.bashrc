@@ -27,3 +27,5 @@ function gcom() {
     GITMESSAGE="$*"
     git commit -m "$GITMESSAGE"
 }
+
+export FZF_CTRL_T_COMMAND="fd --type f --type d --hidden --follow --exclude .git --exclude venv --exclude node_modules --exclude .cache --exclude cache --exclude __pycache__ --exclude pkg --exclude .vim --search-path ."
