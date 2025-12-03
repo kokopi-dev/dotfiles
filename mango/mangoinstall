@@ -1,5 +1,5 @@
 # general packages
-sudo pacman -S swaybg wl-clipboard wl-clip-persist cliphist slurp grim satty mako neovim firefox ghostty fastfetch xdg-desktop-portal-wlr libnotify unzip bat rsync exa ripgrep bash-completion jq otf-font-awesome thunar
+sudo pacman -S swaybg wl-clipboard wl-clip-persist cliphist slurp grim satty mako neovim firefox ghostty fastfetch xdg-desktop-portal-wlr xdg-desktop-portal-gtk libnotify unzip bat rsync exa ripgrep bash-completion jq otf-font-awesome thunar less fd mpv btop
 
 # fix locale
 # double check /etc/locale.gen for en_US.UTF-8
@@ -60,10 +60,13 @@ yay -S gtk-engine-murrine
 # fonts
 # add to ~/.local/share/fonts/*.ttf
 # https://github.com/vercel/geist-font/releases
+yay -S ttf-nerd-fonts-symbols
 fc-cache -fv
 
 # monitor management
+# use wlr-randr to set kanshi settings when getting monitor name
 yay -S wdisplays wlr-randr
+sudo pacman -S kanshi
 
 # bluetooth
 sudo pacman -S bluez bluez-utils blueman pipewire-bluetooth
@@ -77,3 +80,44 @@ sudo systemctl enable --now bluetooth.service
 sudo pacman -S swww
 # if pyenv installed: PATH="/usr/bin:$PATH" yay -S waypaper
 yay -S waypaper
+
+# power/state management
+yay -S wlogout
+
+# lock screen
+sudo pacman -S swayidle
+yay -S swaylock-effects-git
+#  create dir and this file: /etc/systemd/logind.conf.d/laptop-lid.conf
+#  add this:
+# [Login]
+# HandleLidSwitch=hibernate
+# HandleLidSwitchExternalPower=hibernate
+# reboot pc
+
+
+# icons
+# https://www.gnome-look.org/p/1715570
+# files -> catppuccin-mocha-alt2
+# move to ~/.local/share/icons
+# gtk-update-icon-cache ~/.local/share/icons/catppuccin-mocha-icons
+
+
+# terminal fzf
+sudo pacman -S fzf
+# bashrc
+# eval "$(fzf --bash)" 
+
+# screensharing
+# first packages should contain xdg wlr and gtk for screensharing
+# validate its running with these commands:
+# systemctl --user status xdg-desktop-portal-wlr
+# journalctl --user -u xdg-desktop-portal-wlr -f
+# next add this to: ~/.config/xdg-desktop-portal/portals.conf
+[preferred]
+default=gtk
+org.freedesktop.impl.portal.ScreenCast=wlr
+org.freedesktop.impl.portal.Screenshot=wlr
+# restart
+
+# waybar debug
+waybar -l debug

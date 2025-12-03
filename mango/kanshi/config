@@ -1,0 +1,17 @@
+output eDP-1 {
+    mode 2256x1504
+    scale 1.250000
+}
+profile laptop {
+    output eDP-1 enable position 0,0
+}
+
+profile home {
+    output "ASUSTek COMPUTER INC VG30VQL1A *" {
+        enable
+        mode 2560x1080
+        scale 1
+        position 0,0
+    }
+    output eDP-1 enable position 2560,0
+}

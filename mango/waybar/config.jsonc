@@ -1,0 +1,71 @@
+{
+  "layer": "top",
+  "position": "top",
+  "width": "auto",
+  "height": 36,
+  "modules-left": ["ext/workspaces"],
+  "modules-center": ["clock"],
+  "modules-right": ["bluetooth", "wireplumber", "network", "cpu", "memory", "battery", "custom/power"],
+
+  "custom/power": {
+    "format-icons": ["<span color='#e2d0a3'></span>"],
+    "format": "{icon}",
+    "tooltip": false,
+    "on-click": "~/.local/bin/rofi-power-manager.sh"
+  },
+  "ext/workspaces": {
+    "disable-scroll": true,
+    "all-outputs": false,
+    "on-click": "activate",
+    "format": "{name}"
+  },
+  "cpu": {
+    "format-icons": ["<span color='#8aade0'></span>"],
+    "format": "{usage}% {icon}",
+    "tooltip": false
+  },
+  "memory": {
+    "format-icons": ["<span color='#8aade0'></span>"],
+    "format": "{}% {icon}"
+  },
+  "network": {
+    "max-length": 10,
+    "format-wifi": "{essid}  <span color='#8aade0'></span>",
+    "format-ethernet": "{ipaddr}/{cidr} ",
+    "tooltip-format": "{ifname} via {gwaddr} ",
+    "format-linked": "{ifname} (No IP) ",
+    "format-disconnected": "Disconnected ⚠",
+    "on-click": "ghostty -e nmtui & disown"
+    // "format-alt": "{ifname}: {ipaddr}/{cidr}",
+  },
+  "clock": {
+    "format": "{:%b %d - %H:%M}",
+    "tooltip": false
+  },
+  "bluetooth": {
+    "format": "",
+    "format-disabled": "<span color='#db9a9a'>󰂲</span>",
+    "tooltip": false,
+    "on-click": "blueman-manager"
+  },
+  "wireplumber": {
+    "format": "{volume}% <span color='#8aade0'>{icon}</span>",
+    "format-icons": {
+      "default": ["", "", ""]
+    },
+    "format-muted": "<span color='#8aade0'></span>",
+    "on-click": "pavucontrol"
+  },
+  "battery": {
+    "states": {
+      // "good": 95,
+      "warning": 30,
+      "critical": 15
+    },
+    "format": "{capacity}% {icon}",
+    "format-full": "{capacity}% {icon}",
+    "format-charging": "{capacity}% ",
+    "format-alt": "{time} {icon}",
+    "format-icons": ["<span color='#8aade0'></span>", "<span color='#8aade0'></span>", "<span color='#8aade0'></span>", "<span color='#8aade0'></span>", "<span color='#8aade0'></span>"]
+  }
+}
