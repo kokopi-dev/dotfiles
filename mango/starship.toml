@@ -1,0 +1,74 @@
+add_newline = false
+
+format = """
+[╭─$username$hostname$directory$git_branch$git_status](5)
+[╰──➤](5) """
+
+[character]
+vicmd_symbol = "[V](bold 2) "
+# format = """
+# [┌──────────────────────────────────────────────](fg:#CC59B0)
+# [└─>](fg:#CC59B0) """
+
+[username]
+style_root = "white"
+format = "[$user](5)[@](bold 3)"
+disabled = false
+show_always = true
+
+[hostname]
+ssh_only = false
+format =  "[$hostname](bold 7) "
+disabled = false
+
+[directory]
+read_only = ""
+format = "[](blue)  [$path](3)"
+read_only_style= "bold white"
+truncation_length = 5
+truncate_to_repo = false
+
+[docker_context]
+format = "via [🐋 $context](blue bold)"
+
+[cmd_duration]
+disabled = true
+
+[aws]
+format = "on [$symbol$profile]($style) "
+style = "bold cyan"
+symbol = "🅰 "
+
+[aws.region_aliases]
+us-east-1 = "est-1"
+
+# Git
+[git_branch]
+format = " [$symbol$branch]($style) "
+style = "fg:white bg:black"
+
+[git_status]
+format = '([$all_status$ahead_behind](1))'
+conflicted = "󱐋"
+ahead = "⇡${count}"
+behind = "⇣${count}"
+diverged = "⇕⇡${ahead_count}⇣${behind_count}"
+up_to_date = ""
+untracked = "?${count}"
+stashed = "$${count}"
+modified = "!${count}"
+staged = "+${count}"
+renamed = "»${count}"
+deleted = "✘${count}"
+
+# Language Environments
+[package]
+style = "bold fg:#5E5E5E"
+
+[python]
+style = "bold fg:#5E5E5E"
+symbol = "[](bold yellow) "
+
+[nodejs]
+style = "bold fg:#5E5E5E"
+symbol = "[⬢](bold green) "
