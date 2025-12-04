@@ -7,6 +7,7 @@ cp ~/.config/user-dirs.conf .
 cp ~/.config/starship.toml .
 cp -r ~/.config/waypaper/* ./waypaper
 cp -r ~/.config/fastfetch/* ./fastfetch
+cp -r ~/.config/mako/* ./mako
 rsync -av ~/.config/fontconfig/ ./fontconfig
 rsync -av ~/.config/btop/ ./btop
 

@@ -9,7 +9,7 @@ BLUETOOTH="󰂯   Bluetooth"
 NETWORK="󰲝   Network"
 NIGHTLIGHT="   Night Light"
 
-chosen=$(echo -e "$MONITOR\n$SOUND\n$BLUETOOTH\n$NETWORK\n$NIGHTLIGHT" | rofi -mesg " Settings" -dmenu -p "Action:" -config ~/.config/rofi/settings-manager/settings-manager.rasi -monitor "$ROFI_MONITOR")
+chosen=$(echo -e "$MONITOR\n$WALLPAPER\n$SOUND\n$BLUETOOTH\n$NETWORK\n$NIGHTLIGHT" | rofi -mesg " Settings" -dmenu -p "Action:" -config ~/.config/rofi/settings-manager/settings-manager.rasi -monitor "$ROFI_MONITOR")
 
 case $chosen in
     "$MONITOR")
