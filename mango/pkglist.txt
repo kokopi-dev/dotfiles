@@ -9,6 +9,7 @@ bluez
 bluez-utils
 btop
 cliphist
+dbeaver
 efibootmgr
 eza
 fastfetch
@@ -78,4 +79,3 @@ xdg-desktop-portal-gtk
 xdg-desktop-portal-wlr
 xorg-xwayland
 yay
-yay-debug
