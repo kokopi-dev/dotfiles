@@ -51,7 +51,7 @@ imageBoxOverlay {
 }
 imageBox {
     enabled: true;
-    background-image: url("~/.config/rofi/images/neco/31.jpg", width);
+    background-image: url("~/.config/rofi/images/neco/14.jpg", width);
     border-radius: 1em;
 }
 // Lists //
