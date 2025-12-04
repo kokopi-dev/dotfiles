@@ -54,7 +54,7 @@ case $chosen in
         ghostty -e nvim ~/.config/mango/env.conf & disown
         ;;
     "$MANGO_EXEC")
-        ghostty -e "nvim ~/.config/mango/exec.conf" & disown
+        ghostty -e nvim ~/.config/mango/exec.conf & disown
         ;;
     "$NVIM")
         ghostty -e nvim ~/.config/nvim/init.lua & disown
