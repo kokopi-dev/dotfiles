@@ -1,0 +1,29 @@
+Ldr + l	          →   Refresh LSP
+Ctl + f	          →   Scroll Up Cmp
+Ctl + b	          →   Scroll Down Cmp
+]d	              →   Next Diagnostic
+[d	              →   Prev Diagnostic
+Ldr + s	          →   Search Replace Current
+Ldr + S           →   Search Replace Global
+Ldr + F           →   Format Code
+Ldr + x           →   Clear Diagnostics
+Ldr + cc          →   Comment/Uncomment
+Ldr + xx          →   Toggle/Show Errors/Warnings
+Ctrl + f          →   Find Search File
+Ldr + fg          →   Find Live Grep Search
+Ldr + ca          →   Show Code Actions
+K                 →   Peek Signature
+gd                →   Go To Definition
+gr                →   Find References
+Ctrl + l          →   Clear Highlights
+Alt + Arrows      →   Navigate/Switch Panels
+Alt + b           →   Navigate/Jump Back Buf
+Alt + n           →   Navigate/Jump Next Buf
+Alt + c           →   Clear Jumps/Buf
+Alt + q           →   Clear/Quit Current Jump/Buf
+Ctrl + Tab        →   Add File To Tab
+Ldr + E           →   Open Directory/netrw
+(netrw) Ldr + ER  →   Close netrw
+(netrw) Ldr + d   →   Duplicate file
+(netrw) Ldr + sw  →   Set Current Root Dir
+Ldr + e{,<,(,",'  →   Wrap Word With Wrapper

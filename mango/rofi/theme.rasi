@@ -1,0 +1,16 @@
+* {
+    base-300: #000000;
+
+    base-100:       #393342;
+    base-200:       #211C2E;
+    base-200-opa:   #3D3445a6;
+    neutral:        #BAB6A9;
+    neutral-content:#5C543E;
+    primary:        #d5aed6;
+    primary-opa:    #d5aed699;
+    secondary:      #f3e2a9;
+    accent:         #7866C4;
+
+    success:        #a3be8c;
+    error:          #C97F87;
+}

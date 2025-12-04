@@ -15,6 +15,7 @@
   },
   "ext/workspaces": {
     "disable-scroll": true,
+    "ignore-hidden": true,
     "all-outputs": false,
     "on-click": "activate",
     "format": "{name}"

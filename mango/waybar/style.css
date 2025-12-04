@@ -4,7 +4,7 @@
 }
 
 window#waybar {
-    background: rgba(33, 28, 46, 0.7);
+    background: rgba(33, 28, 46, 0.6);
     color: rgb(205, 214, 244);
 }
 window#waybar > box.horizontal:dir(ltr) {
