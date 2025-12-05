@@ -19,13 +19,14 @@ ROFI_SETT="   Setting"
 ROFI_CONF="   Config"
 ROFI_POW="   Power"
 MAKO="   Mako"
+KANSHI="󰍺   Kanshi"
 
 if [[ "$1" == "mango" ]]; then
     chosen=$(echo -e "$MANGO_CONF\n$MANGO_START\n$MANGO_BIND\n$MANGO_RULES\n$MANGO_ENV\n$MANGO_EXEC\n$BACK" | rofi -mesg "󰨇 Mango" -dmenu -p "Action:" -config ~/.config/rofi/config-manager/config-manager.rasi)
 elif [[ "$1" == "rofi" ]]; then
     chosen=$(echo -e "$ROFI_APP\n$ROFI_SETT\n$ROFI_CONF\n$ROFI_POW\n$BACK" | rofi -mesg " Rofi" -dmenu -p "Action:" -config ~/.config/rofi/config-manager/config-manager.rasi)
 else
-    chosen=$(echo -e "$MANGO\n$NVIM\n$WAYBAR\n$GHOSTTY\n$ROFI\n$MAKO" | rofi -mesg " Configs" -dmenu -p "Action:" -config ~/.config/rofi/config-manager/config-manager.rasi)
+    chosen=$(echo -e "$MANGO\n$NVIM\n$WAYBAR\n$GHOSTTY\n$ROFI\n$KANSHI\n$MAKO" | rofi -mesg " Configs" -dmenu -p "Action:" -config ~/.config/rofi/config-manager/config-manager.rasi)
 fi
 
 case $chosen in
@@ -86,5 +87,8 @@ case $chosen in
     "$ROFI_POW")
         ghostty -e nvim ~/.config/rofi/power-manager/power-manager.rasi & disown
         ghostty -e nvim ~/.config/rofi/power-manager/rofi-power-manager.sh & disown
+        ;;
+    "$KANSHI")
+        ghostty -e nvim ~/.config/kanshi/config & disown
         ;;
 esac

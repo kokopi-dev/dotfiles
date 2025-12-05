@@ -84,9 +84,6 @@ sudo pacman -S swww
 # if pyenv installed: PATH="/usr/bin:$PATH" yay -S waypaper-git
 yay -S waypaper-git
 
-# power/state management
-yay -S wlogout
-
 # lock screen
 sudo pacman -S swayidle
 yay -S swaylock-effects-git
