@@ -117,8 +117,11 @@ ln -s ../real_icons/apps/file-manager.svg org.xfce.thunar.svg
 ln -s ../real_icons/apps/gnome-monitor.svg btop.svg
 ln -s ../real_icons/apps/bash.svg com.mitchellh.ghostty.svg
 ln -s ../real_icons/apps/preferences-sound.svg org.pulseaudio.pavucontrol.svg
+ln -s ../real_icons/devices/drive-multidisk.svg dbeaver.svg
 
-# change color: find ~/.icons/ACYLS/scalable/apps -name "*.svg" -exec sed -i 's/#A0A0A0/#dfced9/g' {} \;
+# change color:
+# find ~/.icons/ACYLS/scalable/real_icons/devices -name "*.svg" -exec sed -i 's/#A0A0A0/#dfced9/g' {} \;
+# find ~/.icons/ACYLS/scalable/real_icons/apps -name "*.svg" -exec sed -i 's/#A0A0A0/#dfced9/g' {} \;
 # #old_color/#new_color
 
 # terminal fzf
