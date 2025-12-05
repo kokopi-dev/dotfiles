@@ -42,6 +42,13 @@ window#waybar > box.horizontal:dir(ltr) {
     border-radius: 10px;
 }
 
+tooltip {
+    border: 1px solid #d093d1;
+}
+tooltip label {
+    padding: 10px;
+}
+
 label#wireplumber,
 label#bluetooth,
 label#network,

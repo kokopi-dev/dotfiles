@@ -41,7 +41,18 @@
   },
   "clock": {
     "format": "{:%b %d - %H:%M}",
-    "tooltip": false
+    "tooltip-format": "<span size='11pt' font='Geist Mono'>{calendar}</span>",
+    "calendar": {
+        "mode": "month",
+        "on-scroll" : 1,
+        "format": {
+            "today": "<span color='#e0cd93' background='#594d67'><b>{}</b></span>"
+        }
+    },
+    "actions": {
+        "on-scroll-up": "shift_down",
+        "on-scroll-down": "shift_up"
+    }
   },
   "bluetooth": {
     "format": "",
