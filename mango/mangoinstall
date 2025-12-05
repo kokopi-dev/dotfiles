@@ -81,8 +81,8 @@ sudo systemctl enable --now bluetooth.service
 
 # wallpapers
 sudo pacman -S swww
-# if pyenv installed: PATH="/usr/bin:$PATH" yay -S waypaper
-yay -S waypaper
+# if pyenv installed: PATH="/usr/bin:$PATH" yay -S waypaper-git
+yay -S waypaper-git
 
 # power/state management
 yay -S wlogout
@@ -105,7 +105,6 @@ yay -S swaylock-effects-git
 # gtk-update-icon-cache ~/.local/share/icons/catppuccin-mocha-icons
 #
 # rofi icons new:
-sudo pacman -S python-lxml python-gobject gtk3
 git clone https://github.com/worron/ACYLS.git ~/.icons/ACYLS
 
 # script this later
@@ -118,6 +117,9 @@ ln -s ../real_icons/apps/file-manager.svg org.xfce.thunar.svg
 ln -s ../real_icons/apps/gnome-monitor.svg btop.svg
 ln -s ../real_icons/apps/bash.svg com.mitchellh.ghostty.svg
 ln -s ../real_icons/apps/preferences-sound.svg org.pulseaudio.pavucontrol.svg
+
+# change color: find ~/.icons/ACYLS/scalable/apps -name "*.svg" -exec sed -i 's/#A0A0A0/#dfced9/g' {} \;
+# #old_color/#new_color
 
 # terminal fzf
 sudo pacman -S fzf
