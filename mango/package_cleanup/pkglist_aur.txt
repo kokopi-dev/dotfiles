@@ -1,9 +1,0 @@
-fnm
-gtk-engine-murrine
-mangowc-git
-swaylock-effects-git
-waypaper
-wdisplays
-wl-screenrec
-yay
-yay-debug
