@@ -2,12 +2,8 @@
 set +e
 
 swww-daemon & disown
-while ! swww query &>/dev/null; do
-    sleep 0.1
-done
-swww clear 000000
-sleep 0.1
-swww img ~/pictures/flower.jpg --transition-type fade --transition-duration 1 &
+
+init-wallpapers
 
 export WAYLAND_DISPLAY=${WAYLAND_DISPLAY:-wayland-1}
 export XDG_CURRENT_DESKTOP=wlroots

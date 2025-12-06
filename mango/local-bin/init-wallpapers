@@ -1,0 +1,33 @@
+#!/bin/bash
+### wallpaper names:
+## standard-1.png
+## wide-1.png
+while ! swww query &>/dev/null; do
+    sleep 0.1
+done
+swww clear 000000
+sleep 0.1
+
+output=$(wlr-randr)
+
+monitor_count=$(echo "$output" | grep -c "Enabled: yes")
+
+# init standard
+swww img ~/pictures/bgs/standard-1.png --transition-type fade --transition-duration 1 --outputs "eDP-1" & disown
+
+# framework laptop will only ever have 1 external plugged in (for now)
+if [ "$monitor_count" -gt 1 ]; then
+    # external monitor detected
+    external_monitor=$(echo "$output" | grep -E "^[A-Za-z0-9]+-[0-9]+" | awk '{print $1}' | grep -v "eDP-1")
+    resolution=$(echo "$output" | sed -n "/^${external_monitor} /,/^[A-Za-z0-9]*-[0-9]/p" | grep "current" | grep -oE '[0-9]+x[0-9]+' | head -1)
+    echo $resolution
+    echo $external_monitor
+    if [ -n "$resolution" ]; then
+        if [ "$resolution" = "1920x1080" ]; then
+            swww img ~/pictures/bgs/standard-1.png --transition-type fade --transition-duration 1 --outputs "$external_monitor" & disown
+        else
+            echo "Monitor type: Non-standard (not 1920x1080)"
+            swww img ~/pictures/bgs/wide-1.png --transition-type fade --transition-duration 1 --outputs "$external_monitor" & disown
+        fi
+    fi
+fi
