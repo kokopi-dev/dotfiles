@@ -1,0 +1,86 @@
+* {
+    font-family: "Geist", sans-serif;
+    min-height: 0;
+}
+
+window#waybar {
+    background: rgba(33, 28, 46, 0.6);
+    color: rgb(205, 214, 244);
+}
+window#waybar > box.horizontal:dir(ltr) {
+  margin-top: 6px;
+  margin-bottom: 6px;
+  margin-left: 12px;
+  margin-right: 16px;
+}
+
+#workspaces button {
+    font-family: "Octal", monospace;
+    font-weight: bold;
+    font-size: 12px;
+    padding: 0 6px;
+    margin: 0 3px;
+    background:rgba(137, 180, 250, 0.15);
+    color: rgba(208, 181, 210, 0.65);
+    border: none;
+}
+
+#workspaces button.focused,
+#workspaces button.active {
+    color: rgb(30, 30, 46);
+    background: rgb(180, 190, 254);
+    padding: 0 12px;
+}
+#workspaces button.focused:hover,
+#workspaces button.active:hover {
+    background: rgba(180, 190, 254, 0.75);
+}
+
+#workspaces button:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+#clock {
+    padding: 0 15px;
+    background: rgba(137, 180, 250, 0.15);
+    border-radius: 10px;
+}
+
+tooltip {
+    border: 1px solid #d093d1;
+    background: #3d3555;
+}
+tooltip label {
+    padding: 10px;
+}
+
+label#wireplumber,
+label#bluetooth,
+label#network,
+label#battery,
+label#cpu,
+label#custom-power,
+label#custom-usb,
+label#memory {
+  padding: 0 9px;
+  border-radius: 10px;
+  margin: 0 3px;
+}
+
+label#custom-power {
+  margin-right: 0;
+  padding-right: 0;
+}
+
+label#wireplumber,
+label#bluetooth,
+label#custom-usb,
+label#network {
+  background:rgba(137, 180, 250, 0.15);
+}
+
+label#battery,
+label#cpu,
+label#memory {
+  background: rgba(208, 181, 210, 0.15);
+}
