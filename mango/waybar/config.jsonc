@@ -44,12 +44,14 @@
     "tooltip-format": "<span size='11pt' font='Geist Mono'>{calendar}</span>",
     "calendar": {
         "mode": "month",
+        "mode-mon-col": 4,
         "on-scroll" : 1,
         "format": {
-            "today": "<span color='#e0cd93' background='#594d67'><b>{}</b></span>"
+            "today": "<span color='#3d3555' background='#a5c5a5'><b>{}</b></span>"
         }
     },
     "actions": {
+        "on-click-right": "mode",
         "on-scroll-up": "shift_down",
         "on-scroll-down": "shift_up"
     }

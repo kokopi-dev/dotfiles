@@ -28,8 +28,12 @@ window#waybar > box.horizontal:dir(ltr) {
 #workspaces button.focused,
 #workspaces button.active {
     color: rgb(30, 30, 46);
-    background:rgb(180, 190, 254);
+    background: rgb(180, 190, 254);
     padding: 0 12px;
+}
+#workspaces button.focused:hover,
+#workspaces button.active:hover {
+    background: rgba(180, 190, 254, 0.75);
 }
 
 #workspaces button:hover {
@@ -44,6 +48,7 @@ window#waybar > box.horizontal:dir(ltr) {
 
 tooltip {
     border: 1px solid #d093d1;
+    background: #3d3555;
 }
 tooltip label {
     padding: 10px;
