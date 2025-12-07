@@ -1,0 +1,20 @@
+#
+# ~/.bash_profile
+#
+
+[[ -f ~/.bashrc ]] && . ~/.bashrc
+
+# env
+export GTK_THEME=tokyonight-dark
+export XCURSOR_THEME=catppuccin-mocha-dark-cursors
+
+# bspwm
+# exec startx
+
+# hyprland
+# exec Hyprland
+
+# mangowc
+if [ -z "$DISPLAY" ] && [ "$XDG_VTNR" -eq 1 ]; then
+	exec mango
+fi

@@ -3,9 +3,17 @@
 Main repo is self hosted on gitea
 
 # Dotfiles
+A lot of custom stuff, use as reference.
 
-This is a work in progress, check back for updates. Might look into making a changelog.
-Each folder should have a README of some tips.
+## Mangowc Setup (2025) (mango/)
+- Shell: bash
+- WM: mangowc
+- Terminal: ghostty
+- Editor: neovim
+- File Explorer: thunar
+- Menus: rofi
+- Statusbar: waybar
+- Password Manager: pass (syncpass)
 
 ## Hyprland Setup (2025) (hyprland/)
 - Shell: bash

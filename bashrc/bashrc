@@ -1,0 +1,58 @@
+#
+# ~/.bashrc
+#
+
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+# navigation
+PS1='[\u@\h \W]\$ '
+alias ls='ls --color=auto'
+alias ll="ls -l"
+alias ..="cd .."
+alias ll='exa -lg --icons'
+alias lll='exa -lga'
+alias cat='bat --style=header,grid'
+
+# git
+alias gadd='git add'
+alias gdiff='git diff'
+alias mpush='git push origin master'
+alias gstat='git status'
+function gcom() {
+    GITMESSAGE="$*"
+    git commit -m "$GITMESSAGE"
+}
+
+# utility
+alias grep='grep --color=auto'
+alias v="nvim"
+alias ziptar="tar -zcvf"
+alias unziptar="tar -xvzf"
+alias ux='chmod u+x'
+alias mkdir='mkdir -p'
+alias diff='difft'
+function filesize() {
+  du -sh "$1"
+}
+
+# custom binaries
+export PATH="$PATH:$HOME/.local/bin"
+
+# version managers/language binaries
+export PATH="$HOME/go/bin:$PATH" # golang
+export PATH="$HOME/.bun/bin:$PATH" # bun js
+eval "$(fnm env --use-on-cd)" # node
+## python
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init - bash)"
+
+# misc
+eval "$(starship init bash)"
+
+bind 'TAB:menu-complete'
+bind 'set show-all-if-ambiguous on'
+
+eval "$(fzf --bash)"
+export FZF_CTRL_T_COMMAND="fd --type f --type d --hidden --follow --search-path ."
