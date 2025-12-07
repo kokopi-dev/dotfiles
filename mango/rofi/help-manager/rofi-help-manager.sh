@@ -34,9 +34,16 @@ case $chosen in
         echo "Creating firefox profile"
         mkdir -p /tmp/firefox-dev
         firefox -CreateProfile "dev-profile /tmp/firefox-dev"
+        cat >> /tmp/firefox-dev/prefs.js << EOF
+user_pref("browser.download.dir", "~/downloads");
+user_pref("browser.download.folderList", 2);
+EOF
     fi
 
     firefox -P dev-profile -private-window https://devhints.io/bash &
     ;;
 esac
-post_rofi &
+
+if [[ "$HOSTNAME" == "astra" ]]; then
+    post_rofi &
+fi

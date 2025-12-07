@@ -32,4 +32,6 @@ case $chosen in
         ;;
 esac
 
-post_rofi &
+if [[ "$HOSTNAME" == "astra" ]]; then
+    post_rofi &
+fi

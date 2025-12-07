@@ -2,6 +2,19 @@
 # ln -s ~/.config/rofi/config-manager/rofi-config-manager.sh ~/.local/bin/rofi-config-manager.sh
 THEME_FILE=~/.config/rofi/config-manager/config-manager.rasi
 
+post_rofi() {
+    local image_dir="$HOME/.config/rofi/images/sg"
+    local current_image=$(grep "background-image: url" "$THEME_FILE" | cut -d'"' -f2)
+    local new_image=$(find "$image_dir" -type f | sort -R | head -n 1 | sed "s|^$HOME|~|")
+    while true; do
+        if [[ "$new_image" != "$current_image" ]]; then
+            sed -i 's|url("[^"]*"|url("'"$new_image"'"|' "$THEME_FILE"
+            break
+        fi
+        new_image=$(find "$image_dir" -type f | sort -R | head -n 1 | sed "s|^$HOME|~|")
+    done
+}
+
 MANGO="   Mango"
 BACK="   Back"
 MANGO_CONF="   Config"
@@ -18,13 +31,14 @@ ROFI_APP="   App"
 ROFI_SETT="   Setting"
 ROFI_CONF="   Config"
 ROFI_POW="   Power"
+ROFI_HELP="   Help"
 MAKO="   Mako"
 KANSHI="󰍺   Kanshi"
 
 if [[ "$1" == "mango" ]]; then
     chosen=$(echo -e "$MANGO_CONF\n$MANGO_START\n$MANGO_BIND\n$MANGO_RULES\n$MANGO_ENV\n$MANGO_EXEC\n$BACK" | rofi -mesg "󰨇 Mango" -dmenu -p "Action:" -config ~/.config/rofi/config-manager/config-manager.rasi)
 elif [[ "$1" == "rofi" ]]; then
-    chosen=$(echo -e "$ROFI_APP\n$ROFI_SETT\n$ROFI_CONF\n$ROFI_POW\n$BACK" | rofi -mesg " Rofi" -dmenu -p "Action:" -config ~/.config/rofi/config-manager/config-manager.rasi)
+    chosen=$(echo -e "$ROFI_APP\n$ROFI_SETT\n$ROFI_CONF\n$ROFI_POW\n$ROFI_HELP\n$BACK" | rofi -mesg " Rofi" -dmenu -p "Action:" -config ~/.config/rofi/config-manager/config-manager.rasi)
 else
     chosen=$(echo -e "$MANGO\n$NVIM\n$WAYBAR\n$GHOSTTY\n$ROFI\n$KANSHI\n$MAKO" | rofi -mesg " Configs" -dmenu -p "Action:" -config ~/.config/rofi/config-manager/config-manager.rasi)
 fi
@@ -88,7 +102,15 @@ case $chosen in
         ghostty -e nvim ~/.config/rofi/power-manager/power-manager.rasi & disown
         ghostty -e nvim ~/.config/rofi/power-manager/rofi-power-manager.sh & disown
         ;;
+    "$ROFI_HELP")
+        ghostty -e nvim ~/.config/rofi/help-manager/help-manager.rasi & disown
+        ghostty -e nvim ~/.config/rofi/help-manager/rofi-help-manager.sh & disown
+        ;;
     "$KANSHI")
         ghostty -e nvim ~/.config/kanshi/config & disown
         ;;
 esac
+
+if [[ "$HOSTNAME" == "astra" ]]; then
+    post_rofi &
+fi
