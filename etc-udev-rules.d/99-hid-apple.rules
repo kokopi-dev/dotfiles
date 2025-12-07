@@ -1,0 +1,1 @@
+ACTION=="add", SUBSYSTEM=="hid", DRIVER=="apple", RUN+="/bin/sh -c 'echo 2 > /sys/module/hid_apple/parameters/fnmode'"
