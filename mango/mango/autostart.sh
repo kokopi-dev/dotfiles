@@ -17,6 +17,7 @@ wl-clip-persist --clipboard regular --reconnect-tries 0 &
 wl-paste --type text --watch cliphist store &
 
 gsettings set org.gnome.desktop.interface gtk-theme 'tokyonight-dark'
+gsettings set org.gnome.desktop.interface cursor-theme 'catppuccin-mocha-dark-cursors'
 gsettings set org.gnome.desktop.interface icon-theme 'catppuccin-mocha'
 gsettings set org.gnome.desktop.interface font-name 'Geist 11'
 
