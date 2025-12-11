@@ -27,7 +27,13 @@ function gcom() {
 # utility
 alias grep='grep --color=auto'
 alias v="nvim"
-alias ziptar="tar -zcvf"
+function ziptar() {
+    if [ $# -lt 2 ]; then
+        echo "Usage: ziptar <archive.tar.gz> <files...>"
+        return 1
+    fi
+    tar -zcvf "$@"
+}
 alias unziptar="tar -xvzf"
 alias ux='chmod u+x'
 alias mkdir='mkdir -p'
