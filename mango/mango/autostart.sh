@@ -1,7 +1,7 @@
 #!/bin/bash
 set +e
 
-swww-daemon & disown
+awww-daemon & disown
 
 init-wallpapers
 

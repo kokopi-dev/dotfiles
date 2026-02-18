@@ -1,6 +1,9 @@
 # general packages
 sudo pacman -S swaybg wl-clipboard wl-clip-persist cliphist slurp grim satty mako neovim firefox ghostty fastfetch xdg-desktop-portal-wlr xdg-desktop-portal-gtk libnotify unzip bat rsync exa ripgrep bash-completion jq otf-font-awesome thunar tumbler less fd mpv btop rofi difftastic udiskie
 
+# sony raw image thumbnail
+yay -S raw-thumbnailer
+
 # screenrecording
 yay -S wl-screenrec
 
@@ -80,7 +83,7 @@ sudo systemctl enable --now bluetooth.service
 # not enabled: sudo modprobe btusb
 
 # wallpapers
-sudo pacman -S swww
+yay -S awww
 # if pyenv installed: PATH="/usr/bin:$PATH" yay -S waypaper-git
 yay -S waypaper-git
 
