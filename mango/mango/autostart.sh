@@ -5,13 +5,12 @@ awww-daemon & disown
 
 init-wallpapers
 
-export WAYLAND_DISPLAY=${WAYLAND_DISPLAY:-wayland-1}
-export XDG_CURRENT_DESKTOP=wlroots
-
-dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=wlroots
-/usr/lib/xdg-desktop-portal &
+# dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=wlroots
+# /usr/lib/xdg-desktop-portal &
 
 export DISPLAY=:0
+export WAYLAND_DISPLAY=${WAYLAND_DISPLAY:-wayland-1}
+export XDG_CURRENT_DESKTOP=wlroots
 
 wl-clip-persist --clipboard regular --reconnect-tries 0 &
 wl-paste --type text --watch cliphist store &
