@@ -161,6 +161,9 @@ require("lazy").setup({
     -- syntax highlighter and stuff
     {
         "nvim-treesitter/nvim-treesitter",
+        dependencies = {
+            'nvim-treesitter/nvim-treesitter-refactor',
+        },
         build = ":TSUpdate",
         config = function()
             local configs = require("nvim-treesitter.configs")
@@ -183,6 +186,19 @@ require("lazy").setup({
                 sync_install = false,
                 highlight = { enable = true },
                 indent = { enable = true },
+                refactor = {
+                    smart_rename = {
+                        enable = true,
+                        keymaps = {
+                            smart_rename = '<leader>lr', -- "local rename"
+                        },
+                    },
+                    -- optional: highlights the block scope of the symbol under cursor
+                    highlight_definitions = {
+                        enable = true,
+                        clear_on_cursor_move = true,
+                    },
+                },
             })
         end,
     },
@@ -336,6 +352,13 @@ require("lazy").setup({
             },
         },
         ---@type oklch.Opts
+        opts = {},
+    },
+    -- markdown render
+    {
+        "MeanderingProgrammer/render-markdown.nvim",
+        dependencies = { "nvim-treesitter/nvim-treesitter" },
+        ft = { "markdown" },
         opts = {},
     },
 })
@@ -526,6 +549,12 @@ vim.lsp.config('lua_ls', {
     },
 })
 vim.lsp.enable('lua_ls')
+
+-- rust
+vim.lsp.config('rust_analyzer', {
+    capabilities = capabilities,
+})
+vim.lsp.enable('rust_analyzer')
 
 local has_words_before = function()
     unpack = unpack or table.unpack
@@ -808,6 +837,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
         vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts)
         vim.keymap.set("n", "gd", custom_go_to_definition, opts)
         vim.keymap.set("n", "gr", require('telescope.builtin').lsp_references, opts)
+        -- full project-wide rename (LSP-aware, cross-file)
+        vim.keymap.set('n', '<leader>ar', vim.lsp.buf.rename,
+            vim.tbl_extend('force', opts, { desc = 'LSP: Rename all references' }))
     end,
 })
 -- end lsp stuff
