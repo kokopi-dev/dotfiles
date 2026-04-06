@@ -20,3 +20,4 @@ Alt + (0-9)             →  Move Window To Workspace#
 Alt + a                 →  Toggle Maximize Window
 Alt + f                 →  Toggle Fullscreen Window
 Alt + tab               →  Toggle Overview Mode
+mpv                     →  Media/Image/Video Player
