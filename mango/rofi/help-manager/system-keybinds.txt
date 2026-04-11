@@ -20,4 +20,7 @@ Alt + (0-9)             →  Move Window To Workspace#
 Alt + a                 →  Toggle Maximize Window
 Alt + f                 →  Toggle Fullscreen Window
 Alt + tab               →  Toggle Overview Mode
-mpv                     →  Media/Image/Video Player
+mpv                     →  Media/Image/Video Viewer
+thunar                  →  File Manager/Explorer
+presenterm              →  Terminal Slideshow
+scripts-organizer       →  Custom scripts helper
