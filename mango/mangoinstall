@@ -92,7 +92,12 @@ yay -S waypaper-git
 
 # lock screen
 sudo pacman -S swayidle
-yay -S swaylock-effects-git
+yay -S quickshell-git qt6-declarative qt6-5compat qt6-multimedia qt6-multimedia-ffmpeg
+git clone https://github.com/Darkkal44/qylock.git
+cd qylock
+chmod +x quickshell.sh
+./quickshell.sh
+
 #  create dir and this file: /etc/systemd/logind.conf.d/laptop-lid.conf
 #  add this:
 # [Login]
