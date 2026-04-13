@@ -61,10 +61,11 @@ function M.setup_keymaps()
 	vim.keymap.set("n", "<C-f>", function()
 		with_telescope(function(builtin)
 			if not pcall(builtin.git_files, { show_untracked = true }) then
-				vim.notify("Not a git project. Try running git init in root.", vim.log.levels.WARN)
+				vim.notify("No git repo detected. Falling back to find_files in current cwd.", vim.log.levels.INFO)
+				builtin.find_files({ cwd = vim.fn.getcwd() })
 			end
 		end)
-	end, { desc = "Git files" })
+	end, { desc = "Git files (fallback to cwd files)" })
 end
 
 return M
