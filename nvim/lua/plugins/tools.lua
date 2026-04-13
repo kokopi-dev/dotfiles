@@ -10,6 +10,8 @@ local function with_trouble(fn)
 	fn()
 end
 
+-- grug guide
+-- navigate splits: <C+w><Left> or <Right>
 local function with_grug(fn)
 	lazy.load_once("grug-far", pack.registry({ "grug-far.nvim" }), function()
 		require("grug-far").setup({})
@@ -48,9 +50,9 @@ function M.setup()
 		end)
 	end, { desc = "Search/replace current file" })
 
-	vim.keymap.set("v", "<leader>s", function()
-		with_grug(function()
-			vim.cmd("'<,'>GrugFarWithin")
+	vim.keymap.set("x", "<leader>s", function()
+		with_grug(function(grug)
+			grug.open({ visualSelectionUsage = "operate-within-range" })
 		end)
 	end, { desc = "Search/replace in selection" })
 end

@@ -1,4 +1,5 @@
 vim.g.mapleader = " "
+vim.g.maplocalleader = " "
 
 vim.opt.timeoutlen = 350
 vim.opt.updatetime = 50
