@@ -31,11 +31,11 @@ M.map = {
 function M.by_names(names)
 	local out = {}
 	for _, name in ipairs(names) do
-		local spec = M.map[name]
-		if not spec then
-			error("Unknown plugin spec: " .. tostring(name))
+		local entry = M.map[name]
+		if not entry then
+			error("Unknown plugin registry entry: " .. tostring(name))
 		end
-		table.insert(out, spec)
+		table.insert(out, entry)
 	end
 	return out
 end

@@ -6,9 +6,6 @@ function M.registry(names)
 	return registry.by_names(names)
 end
 
--- Backward-compatible alias
-M.specs = M.registry
-
 function M.add(names, opts)
 	vim.pack.add(M.registry(names), opts)
 end
@@ -23,8 +20,8 @@ function M.setup()
 	vim.api.nvim_create_autocmd("PackChanged", {
 		group = group,
 		callback = function(ev)
-			local name, kind = ev.data.spec.name, ev.data.kind
-			if name == "nvim-treesitter" and kind == "update" then
+			local plugin_name, kind = ev.data.spec.name, ev.data.kind
+			if plugin_name == "nvim-treesitter" and kind == "update" then
 				if not ev.data.active then
 					vim.cmd.packadd("nvim-treesitter")
 				end
@@ -64,11 +61,11 @@ function M.setup()
 
 	vim.api.nvim_create_user_command("PackClean", function()
 		local stale = vim.iter(vim.pack.get())
-			:filter(function(p)
-				return not p.active
+			:filter(function(plugin)
+				return not plugin.active
 			end)
-			:map(function(p)
-				return p.spec.name
+			:map(function(plugin)
+				return plugin.spec.name
 			end)
 			:totable()
 
