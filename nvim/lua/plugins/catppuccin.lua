@@ -30,7 +30,7 @@ local function apply_theme_overrides()
 end
 
 function M.setup()
-	pack.add({ "catppuccin", "nvim-web-devicons" })
+	pack.add({ "catppuccin" })
 
 	local theme_group = vim.api.nvim_create_augroup("UserThemeTweaks", { clear = true })
 	vim.api.nvim_create_autocmd("ColorScheme", {

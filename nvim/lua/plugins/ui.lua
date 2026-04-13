@@ -3,7 +3,7 @@ local M = {}
 local pack = require("utils.pack")
 
 function M.setup()
-	pack.add({ "indent-blankline.nvim", "lualine.nvim", "bufferline.nvim" })
+	pack.add({ "nvim-web-devicons", "indent-blankline.nvim", "lualine.nvim", "bufferline.nvim" })
 
 	require("ibl").setup({
 		indent = { char = "▏" },

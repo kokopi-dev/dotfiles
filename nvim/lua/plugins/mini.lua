@@ -9,12 +9,6 @@ function M.setup()
 		options = {
 			custom_commentstring = function()
 				local ft = vim.bo.filetype
-				if ft == "typescriptreact" then
-					return "{/* %s */}"
-				end
-				if ft == "htmldjango" then
-					return "{# %s #}"
-				end
 				if ft == "templ" then
 					return "// %s"
 				end

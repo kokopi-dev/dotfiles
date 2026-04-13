@@ -1,25 +1,8 @@
 local M = {}
 
 local pack = require("utils.pack")
-
-local tools = {
-	{ kind = "lsp", lsp = "lua_ls", mason = "lua-language-server" },
-	{ kind = "lsp", lsp = "bashls", mason = "bash-language-server" },
-	{ kind = "lsp", lsp = "astro", mason = "astro-language-server" },
-	{ kind = "lsp", lsp = "tailwindcss", mason = "tailwindcss-language-server" },
-	{ kind = "lsp", lsp = "ts_ls", mason = "typescript-language-server" },
-	{ kind = "lsp", lsp = "html", mason = "html-lsp" },
-	{ kind = "lsp", lsp = "pyright", mason = "pyright" },
-	{ kind = "lsp", lsp = "templ", mason = "templ" },
-	{ kind = "lsp", lsp = "gopls", mason = "gopls" },
-	{ kind = "lsp", lsp = "emmet_ls", mason = "emmet-language-server" },
-	{ kind = "lsp", lsp = "rust_analyzer", mason = "rust-analyzer" },
-	{ kind = "formatter", mason = "stylua", ft = { "lua" } },
-	{ kind = "formatter", mason = "shfmt", ft = { "sh", "bash" } },
-	{ kind = "formatter", mason = "isort", ft = { "python" } },
-	{ kind = "formatter", mason = "black", ft = { "python" } },
-	{ kind = "formatter", mason = "prettierd", ft = { "javascript", "typescript", "astro", "html", "css", "json", "jsonc" } },
-}
+local mason_utils = require("utils.mason")
+local lsp_tools = require("plugins.lsp_tools")
 
 function M.setup()
 	pack.add({ "mason", "nvim-lspconfig", "conform" })
@@ -42,7 +25,16 @@ function M.setup()
 				},
 			},
 		},
-		filetypes = { "htmldjango", "templ", "html", "css", "javascript", "typescript", "jsx", "tsx" },
+		filetypes = {
+			"htmldjango",
+			"templ",
+			"html",
+			"css",
+			"javascript",
+			"typescript",
+			"javascriptreact",
+			"typescriptreact",
+		},
 	})
 	vim.lsp.config("html", { filetypes = { "html", "htmldjango", "templ" } })
 	vim.lsp.config("lua_ls", {
@@ -56,58 +48,17 @@ function M.setup()
 		},
 	})
 
-	local lsp_names = {}
-	for _, t in ipairs(tools) do
-		if t.kind == "lsp" then
-			table.insert(lsp_names, t.lsp)
-		end
-	end
-	vim.lsp.enable(lsp_names)
+	vim.lsp.enable(lsp_tools.lsp_names())
 
 	require("conform").setup({
-		formatters_by_ft = {
-			lua = { "stylua" },
-			sh = { "shfmt" },
-			bash = { "shfmt" },
-			python = { "isort", "black" },
-			javascript = { "prettierd" },
-			typescript = { "prettierd" },
-			astro = { "prettierd" },
-			html = { "prettierd" },
-			css = { "prettierd" },
-			json = { "prettierd" },
-			jsonc = { "prettierd" },
-		},
+		formatters_by_ft = lsp_tools.formatters_by_ft(),
 	})
 
 	vim.keymap.set("n", "<leader>F", function()
 		require("conform").format({ async = true, lsp_fallback = true })
 	end, { desc = "Format buffer" })
 
-	vim.api.nvim_create_user_command("MasonInstallDefaults", function()
-		local registry = require("mason-registry")
-		registry.refresh(function()
-			local seen, to_install = {}, {}
-			for _, t in ipairs(tools) do
-				if t.mason and not seen[t.mason] then
-					seen[t.mason] = true
-					local ok, pkg = pcall(registry.get_package, t.mason)
-					if ok and not pkg:is_installed() then
-						table.insert(to_install, pkg)
-					end
-				end
-			end
-
-			if #to_install == 0 then
-				vim.notify("MasonInstallDefaults: all tools already installed", vim.log.levels.INFO)
-				return
-			end
-			for _, pkg in ipairs(to_install) do
-				pkg:install()
-			end
-			vim.notify(("MasonInstallDefaults: installing %d tool(s)"):format(#to_install), vim.log.levels.INFO)
-		end)
-	end, { desc = "Install missing Mason tools from `tools` table" })
+	mason_utils.setup_install_defaults_command(lsp_tools.tools)
 
 	vim.diagnostic.config({ virtual_text = false })
 
