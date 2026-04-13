@@ -1,4 +1,5 @@
 #!/bin/bash
 cp ~/.config/nvim/init.lua ./nvim/init.lua
-cp -r ~/.config/nvim/lua/* ./nvim/lua
-cp -r ~/.config/nvim/templates/* ./nvim/templates
+cp ~/.config/nvim/nvim-pack-lock.json ./nvim/nvim-pack-lock.json
+cp -a ~/.config/nvim/lua/* ./nvim/lua
+cp -a ~/.config/nvim/templates/* ./nvim/templates
