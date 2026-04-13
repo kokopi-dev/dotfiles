@@ -7,6 +7,7 @@ M.tools = {
 	{ kind = "lsp", lsp = "tailwindcss", mason = "tailwindcss-language-server" },
 	{ kind = "lsp", lsp = "ts_ls", mason = "typescript-language-server" },
 	{ kind = "lsp", lsp = "html", mason = "html-lsp" },
+	{ kind = "lsp", lsp = "cssls", mason = "css-lsp" },
 	{ kind = "lsp", lsp = "pyright", mason = "pyright" },
 	{ kind = "lsp", lsp = "templ", mason = "templ" },
 	{ kind = "lsp", lsp = "gopls", mason = "gopls" },

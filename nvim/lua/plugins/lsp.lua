@@ -78,6 +78,9 @@ function M.setup()
 			if client:supports_method("textDocument/definition") then
 				vim.bo[bufnr].tagfunc = "v:lua.vim.lsp.tagfunc"
 			end
+			if client:supports_method("textDocument/documentColor") then
+				vim.lsp.document_color.enable(true, { bufnr = bufnr }, { style = "virtual" })
+			end
 
 			local map = function(mode, lhs, rhs, desc)
 				vim.keymap.set(mode, lhs, rhs, {
