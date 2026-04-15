@@ -1,7 +1,7 @@
 vim.loader.enable()
 
 -- pack hooks/commands should be defined before plugin modules run
-require("utils.pack").setup()
+require("commands.pack").setup()
 
 -- editor settings and non-plugin keymaps
 require("settings.options")

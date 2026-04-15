@@ -1,7 +1,7 @@
 local M = {}
 
 local lazy = require("utils.lazy")
-local pack = require("utils.pack")
+local pack = require("commands.pack")
 
 -- grug guide
 -- navigate splits: <C+w><Left> or <Right>

@@ -1,7 +1,7 @@
 local M = {}
 
 local ui = require("utils.ui")
-local pack = require("utils.pack")
+local pack = require("commands.pack")
 
 function M.setup()
 	pack.add({ "nvim-cmp", "cmp-nvim-lsp", "cmp-buffer", "cmp-path", "luasnip", "cmp_luasnip" })

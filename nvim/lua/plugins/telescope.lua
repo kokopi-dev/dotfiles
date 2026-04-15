@@ -1,7 +1,7 @@
 local M = {}
 
 local lazy = require("utils.lazy")
-local pack = require("utils.pack")
+local pack = require("commands.pack")
 
 local function with_telescope(fn)
 	lazy.load_once("telescope", pack.registry({ "plenary.nvim", "telescope.nvim" }), function()

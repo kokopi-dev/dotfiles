@@ -1,3 +1,4 @@
+-- lazy loading function
 local M = {}
 
 local loaded = {}

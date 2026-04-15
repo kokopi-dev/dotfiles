@@ -1,7 +1,7 @@
 local M = {}
 
 local lazy = require("utils.lazy")
-local pack = require("utils.pack")
+local pack = require("commands.pack")
 
 local function with_trouble(fn)
 	lazy.load_once("trouble", pack.registry({ "trouble.nvim" }), function()

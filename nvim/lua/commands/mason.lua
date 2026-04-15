@@ -1,3 +1,4 @@
+-- custom mason commands
 local M = {}
 
 function M.setup_install_defaults_command(tools)

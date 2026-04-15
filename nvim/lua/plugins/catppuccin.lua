@@ -1,7 +1,7 @@
 local M = {}
 
 local ui = require("utils.ui")
-local pack = require("utils.pack")
+local pack = require("commands.pack")
 
 local function apply_theme_overrides()
 	local transparent_groups = {

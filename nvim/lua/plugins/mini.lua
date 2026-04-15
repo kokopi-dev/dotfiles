@@ -1,6 +1,6 @@
 local M = {}
 
-local pack = require("utils.pack")
+local pack = require("commands.pack")
 
 function M.setup()
 	pack.add({ "mini.nvim" })

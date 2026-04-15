@@ -1,8 +1,8 @@
 local M = {}
 
-local pack = require("utils.pack")
-local mason_utils = require("utils.mason")
-local lsp_tools = require("plugins.lsp_tools")
+local pack = require("commands.pack")
+local mason_utils = require("commands.mason")
+local lsp_tools = require("plugins.lsp-manager")
 
 function M.setup()
 	pack.add({ "mason", "nvim-lspconfig", "conform", "symbol-usage" })
