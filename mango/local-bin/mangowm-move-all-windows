@@ -1,0 +1,130 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if ! command -v mmsg >/dev/null 2>&1; then
+  echo "error: mmsg not found" >&2
+  exit 1
+fi
+
+mode="${1:-all}"
+case "$mode" in
+  all|single) ;;
+  *)
+    echo "usage: $(basename "$0") [single]" >&2
+    exit 2
+    ;;
+esac
+
+mapfile -t outputs < <(mmsg -O | awk 'NF { print $1 }')
+out_count=${#outputs[@]}
+
+if (( out_count == 0 )); then
+  echo "error: no monitors detected" >&2
+  exit 1
+fi
+if (( out_count == 1 )); then
+  echo "info: only one monitor connected, nothing to move"
+  exit 0
+fi
+if (( out_count > 2 )); then
+  echo "error: script supports max 2 monitors, found ${out_count}" >&2
+  exit 2
+fi
+
+active="$(mmsg -g -o | awk '$2=="selmon" && $3=="1" { print $1; exit }')"
+if [[ -z "$active" ]]; then
+  active="${outputs[0]}"
+fi
+
+target=""
+for out in "${outputs[@]}"; do
+  if [[ "$out" != "$active" ]]; then
+    target="$out"
+    break
+  fi
+done
+
+if [[ -z "$target" ]]; then
+  echo "error: failed to determine target monitor" >&2
+  exit 1
+fi
+
+get_active_tag() {
+  local mon="$1"
+  local active_mask
+  active_mask="$(mmsg -g -t | awk -v m="$mon" '$1==m && $2=="tags" && $3 ~ /^[0-9]+$/ && $4 ~ /^[0-9]+$/ { print $4; exit }')"
+  if [[ ! "$active_mask" =~ ^[0-9]+$ ]]; then
+    echo 1
+    return
+  fi
+
+  for tag in {1..9}; do
+    if (( active_mask & (1 << (tag - 1)) )); then
+      echo "$tag"
+      return
+    fi
+  done
+  echo 1
+}
+
+get_tag_clients() {
+  local mon="$1" tag="$2"
+  local n
+  n="$(mmsg -g -t | awk -v m="$mon" -v t="$tag" '$1==m && $2=="tag" && $3==t { print $5; exit }')"
+  if [[ "$n" =~ ^[0-9]+$ ]]; then
+    echo "$n"
+  else
+    echo 0
+  fi
+}
+
+get_total_clients() {
+  local mon="$1"
+  local n
+  n="$(mmsg -g -t | awk -v m="$mon" '$1==m && $2=="clients" { print $3; exit }')"
+  if [[ "$n" =~ ^[0-9]+$ ]]; then
+    echo "$n"
+  else
+    echo 0
+  fi
+}
+
+if [[ "$mode" == "single" ]]; then
+  echo "move-single: active=${active} target=${target}"
+  mmsg -o "$active" -s -d "tagmon,${target},1" >/dev/null
+  echo "move-single: done"
+  exit 0
+fi
+
+target_tag="$(get_active_tag "$target")"
+source_total="$(get_total_clients "$active")"
+
+if (( source_total == 0 )); then
+  echo "info: no windows on active monitor (${active})"
+  exit 0
+fi
+
+echo "move-all: active=${active} target=${target} target_tag=${target_tag} total=${source_total}"
+
+moved=0
+for tag in {1..9}; do
+  while :; do
+    before="$(get_tag_clients "$active" "$tag")"
+    (( before > 0 )) || break
+
+    mmsg -o "$active" -s -t "$tag" >/dev/null
+    mmsg -o "$active" -s -d "tagcrossmon,${target_tag},${target}" >/dev/null
+    mmsg -s -d "focusmon,${active}" >/dev/null || true
+
+    after="$(get_tag_clients "$active" "$tag")"
+    if (( after < before )); then
+      (( moved += (before - after) ))
+    else
+      echo "warn: no progress on tag=${tag}; stopping this tag"
+      break
+    fi
+  done
+done
+
+left="$(get_total_clients "$active")"
+echo "move-all: done moved=${moved} left_on_source=${left} from=${active} to=${target} tag=${target_tag}"
