@@ -2,6 +2,13 @@
 # ln -s ~/.config/rofi/config-manager/rofi-config-manager.sh ~/.local/bin/rofi-config-manager.sh
 THEME_FILE=~/.config/rofi/config-manager/config-manager.rasi
 
+open_in_ghostty_nvim() {
+    local file="$1"
+    local dir
+    dir=$(dirname "$file")
+    ghostty -e bash -lc "cd $(printf '%q' "$dir") && exec nvim $(printf '%q' "$file")" & disown
+}
+
 post_rofi() {
     local image_dir="$HOME/.config/rofi/images/sg"
     local current_image=$(grep "background-image: url" "$THEME_FILE" | cut -d'"' -f2)
@@ -54,60 +61,59 @@ case $chosen in
         bash ~/.config/rofi/config-manager/rofi-config-manager.sh "mango"
         ;;
     "$MANGO_CONF")
-        ghostty -e nvim ~/.config/mango/config.conf & disown
+        open_in_ghostty_nvim ~/.config/mango/config.conf
         ;;
     "$MANGO_START")
-        ghostty -e nvim ~/.config/mango/autostart.sh & disown
+        open_in_ghostty_nvim ~/.config/mango/autostart.sh
         ;;
     "$MANGO_BIND")
-        ghostty -e nvim ~/.config/mango/keybindings.conf & disown
+        open_in_ghostty_nvim ~/.config/mango/keybindings.conf
         ;;
     "$MANGO_RULES")
-        ghostty -e nvim ~/.config/mango/rules.conf & disown
+        open_in_ghostty_nvim ~/.config/mango/rules.conf
         ;;
     "$MANGO_ENV")
-        ghostty -e nvim ~/.config/mango/env.conf & disown
+        open_in_ghostty_nvim ~/.config/mango/env.conf
         ;;
     "$MANGO_EXEC")
-        ghostty -e nvim ~/.config/mango/exec.conf & disown
+        open_in_ghostty_nvim ~/.config/mango/exec.conf
         ;;
     "$NVIM")
-        ghostty -e nvim ~/.config/nvim/init.lua & disown
-        ghostty -e nvim ~/.config/nvim/lua/settings.lua & disown
+        open_in_ghostty_nvim ~/.config/nvim/init.lua
         ;;
     "$WAYBAR")
-        ghostty -e nvim ~/.config/waybar/config.jsonc & disown
-        ghostty -e nvim ~/.config/waybar/style.css & disown
+        open_in_ghostty_nvim ~/.config/waybar/config.jsonc
+        open_in_ghostty_nvim ~/.config/waybar/style.css
         ;;
     "$GHOSTTY")
-        ghostty -e nvim ~/.config/ghostty/config & disown
-        ghostty -e nvim ~/.config/ghostty/themes/navarch & disown
+        open_in_ghostty_nvim ~/.config/ghostty/config
+        open_in_ghostty_nvim ~/.config/ghostty/themes/navarch
         ;;
     "$MAKO")
-        ghostty -e nvim ~/.config/mako/config & disown
+        open_in_ghostty_nvim ~/.config/mako/config
         ;;
     "$ROFI_APP")
-        ghostty -e nvim ~/.config/rofi/app-manager/app-manager.rasi & disown
-        ghostty -e nvim ~/.config/rofi/app-manager/rofi-app-manager.sh & disown
+        open_in_ghostty_nvim ~/.config/rofi/app-manager/app-manager.rasi
+        open_in_ghostty_nvim ~/.config/rofi/app-manager/rofi-app-manager.sh
         ;;
     "$ROFI_SETT")
-        ghostty -e nvim ~/.config/rofi/settings-manager/settings-manager.rasi & disown
-        ghostty -e nvim ~/.config/rofi/settings-manager/rofi-settings-manager.sh & disown
+        open_in_ghostty_nvim ~/.config/rofi/settings-manager/settings-manager.rasi
+        open_in_ghostty_nvim ~/.config/rofi/settings-manager/rofi-settings-manager.sh
         ;;
     "$ROFI_CONF")
-        ghostty -e nvim ~/.config/rofi/config-manager/config-manager.rasi & disown
-        ghostty -e nvim ~/.config/rofi/config-manager/rofi-config-manager.sh & disown
+        open_in_ghostty_nvim ~/.config/rofi/config-manager/config-manager.rasi
+        open_in_ghostty_nvim ~/.config/rofi/config-manager/rofi-config-manager.sh
         ;;
     "$ROFI_POW")
-        ghostty -e nvim ~/.config/rofi/power-manager/power-manager.rasi & disown
-        ghostty -e nvim ~/.config/rofi/power-manager/rofi-power-manager.sh & disown
+        open_in_ghostty_nvim ~/.config/rofi/power-manager/power-manager.rasi
+        open_in_ghostty_nvim ~/.config/rofi/power-manager/rofi-power-manager.sh
         ;;
     "$ROFI_HELP")
-        ghostty -e nvim ~/.config/rofi/help-manager/help-manager.rasi & disown
-        ghostty -e nvim ~/.config/rofi/help-manager/rofi-help-manager.sh & disown
+        open_in_ghostty_nvim ~/.config/rofi/help-manager/help-manager.rasi
+        open_in_ghostty_nvim ~/.config/rofi/help-manager/rofi-help-manager.sh
         ;;
     "$KANSHI")
-        ghostty -e nvim ~/.config/kanshi/config & disown
+        open_in_ghostty_nvim ~/.config/kanshi/config
         ;;
 esac
 

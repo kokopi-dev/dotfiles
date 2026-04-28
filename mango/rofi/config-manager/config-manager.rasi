@@ -59,7 +59,7 @@ imageBoxOverlay {
 }
 imageBox {
     enabled: true;
-    background-image: url("~/.config/rofi/images/oc/oc-2.png", width);
+    background-image: url("~/.config/rofi/images/sg/5.jpg", width);
     border-radius: 1em;
 }
 
