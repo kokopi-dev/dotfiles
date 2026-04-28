@@ -20,6 +20,8 @@ Alt + (0-9)             →  Move Window To Workspace#
 Alt + a                 →  Toggle Maximize Window
 Alt + f                 →  Toggle Fullscreen Window
 Alt + tab               →  Toggle Overview Mode
+Alt + Shift + m         →  Move All Win To Other Monitor
+Alt + Shift + s         →  Move Win To Other Monitor
 mpv                     →  Media/Image/Video Viewer
 thunar                  →  File Manager/Explorer
 presenterm              →  Terminal Slideshow
