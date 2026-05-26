@@ -3,12 +3,6 @@ vim.keymap.set("n", "<leader>E", "<cmd>Ex<CR>", { desc = "Open netrw" })
 vim.keymap.set("n", "<leader>ER", "<cmd>bw<CR>", { desc = "Close buffer" })
 vim.keymap.set("n", "<leader>sr", ":cd %:p:h<CR>", { desc = "Set cwd to file dir" })
 
--- split navigation
-vim.keymap.set("n", "<A-Left>", "<C-w>h")
-vim.keymap.set("n", "<A-Down>", "<C-w>j")
-vim.keymap.set("n", "<A-Up>", "<C-w>k")
-vim.keymap.set("n", "<A-Right>", "<C-w>l")
-
 -- netrw duplicate helper (<leader>d)
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "netrw",
@@ -25,6 +19,12 @@ vim.api.nvim_create_autocmd("FileType", {
 		end, { buffer = true, desc = "Duplicate file in netrw" })
 	end,
 })
+
+-- split navigation
+vim.keymap.set("n", "<A-Left>", "<C-w>h")
+vim.keymap.set("n", "<A-Down>", "<C-w>j")
+vim.keymap.set("n", "<A-Up>", "<C-w>k")
+vim.keymap.set("n", "<A-Right>", "<C-w>l")
 
 -- buffer history (per-tab)
 local hist_by_tab = {}
@@ -163,3 +163,13 @@ vim.keymap.set("n", "<leader>x", function()
 		end
 	end
 end, { desc = "Close floating windows" })
+
+-- Map Ctrl + Left Click to open the link under the cursor
+vim.keymap.set("n", "<C-LeftMouse>", function()
+  -- Get the word/URL under the mouse click
+  local cursor_pos = vim.fn.getmousepos()
+  vim.api.nvim_win_set_cursor(cursor_pos.winid, {cursor_pos.line, cursor_pos.column - 1})
+  
+  -- Trigger the native open function
+  vim.ui.open(vim.fn.expand("<cfile>"))
+end, { desc = "Open link under cursor with Ctrl+Click" })

@@ -62,6 +62,31 @@ function M.setup()
 
 	vim.diagnostic.config({ virtual_text = false })
 
+	local function pause_diagnostic_float_until_move(bufnr)
+		vim.b[bufnr].pause_diagnostic_float = true
+		vim.api.nvim_create_autocmd({ "CursorMoved", "InsertEnter", "BufLeave" }, {
+			buffer = bufnr,
+			once = true,
+			callback = function()
+				vim.b[bufnr].pause_diagnostic_float = false
+			end,
+		})
+	end
+
+	local diag_float_group = vim.api.nvim_create_augroup("UserDiagnosticFloat", { clear = true })
+	vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+		group = diag_float_group,
+		callback = function(ev)
+			if vim.b[ev.buf].pause_diagnostic_float then
+				return
+			end
+			vim.diagnostic.open_float(nil, {
+				focusable = false,
+				scope = "line",
+			})
+		end,
+	})
+
 	local function text_format(symbol)
 		local fragments = {}
 
@@ -118,7 +143,10 @@ function M.setup()
 			end
 
 			map("n", "gD", vim.lsp.buf.declaration, "LSP declaration")
-			map("n", "K", vim.lsp.buf.hover, "LSP hover")
+			map("n", "K", function()
+				pause_diagnostic_float_until_move(bufnr)
+				vim.lsp.buf.hover()
+			end, "LSP hover")
 			map("n", "gi", vim.lsp.buf.implementation, "LSP implementation")
 			map("n", "<C-k>", vim.lsp.buf.signature_help, "LSP signature help")
 			map("n", "<leader>wa", vim.lsp.buf.add_workspace_folder, "LSP add workspace folder")
