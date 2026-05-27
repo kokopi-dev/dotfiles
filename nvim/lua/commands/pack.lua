@@ -52,9 +52,22 @@ function M.setup()
 	end, { desc = "Sync installed plugins to nvim-pack-lock.json" })
 
 	vim.api.nvim_create_user_command("PackClean", function()
+		local configured = M.registry(M.names())
+		local configured_names = {}
+		local configured_srcs = {}
+		for _, spec in ipairs(configured) do
+			configured_names[spec.name] = true
+			if spec.src then
+				configured_srcs[spec.src] = true
+			end
+		end
+
 		local stale = vim.iter(vim.pack.get())
 			:filter(function(plugin)
-				return not plugin.active
+				local spec = plugin.spec
+				local configured_by_name = configured_names[spec.name]
+				local configured_by_src = spec.src and configured_srcs[spec.src]
+				return not configured_by_name and not configured_by_src
 			end)
 			:map(function(plugin)
 				return plugin.spec.name
@@ -75,7 +88,7 @@ function M.setup()
 
 		vim.pack.del(stale)
 		vim.notify("PackClean: removed " .. #stale .. " plugin(s)", vim.log.levels.INFO)
-	end, { desc = "Delete inactive vim.pack plugins from disk" })
+	end, { desc = "Delete unconfigured vim.pack plugins from disk" })
 end
 
 return M

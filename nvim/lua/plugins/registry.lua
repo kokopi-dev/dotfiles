@@ -25,7 +25,7 @@ M.map = {
 	["trouble.nvim"] = { name = "trouble.nvim", src = "https://github.com/folke/trouble.nvim" },
 	["grug-far.nvim"] = { name = "grug-far.nvim", src = "https://github.com/MagicDuck/grug-far.nvim" },
 	["nvim-ts-autotag"] = { name = "nvim-ts-autotag", src = "https://github.com/windwp/nvim-ts-autotag" },
-	["supermaven-nvim"] = { name = "supermaven-nvim", src = "https://github.com/supermaven-inc/supermaven-nvim" },
+	-- ["supermaven-nvim"] = { name = "supermaven-nvim", src = "https://github.com/supermaven-inc/supermaven-nvim" },
 	["symbol-usage"] = { name = "symbol-usage", src = "https://github.com/Wansmer/symbol-usage.nvim" },
 }
 
