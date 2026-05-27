@@ -1,5 +1,7 @@
-Super + ALT + p         →  Copy/Save Screenshot
+Super + ALT + p         →  Copy/Save Region Screenshot
+Super + ALT + Ctrl + p  →  Copy/Save Screen Screenshot
 Super + ALT + v         →  Screen Region Video Capture
+Super + ALT + Ctrl + v  →  Screen Region Screen Capture
 Super + Return          →  Terminal
 Super + e               →  File Manager
 Super + Shft + q        →  Quit Window
@@ -13,9 +15,10 @@ Super + Shft + Arrows   →  Move Windows
 Super + LMB (Drag)      →  Move Window
 Super + RMB (Drag)      →  Resize Window
 Super + , (comma)       →  Toggle Tile Mode
-Super + . (period)      →  Toggle Scroller Mode
+Super + . (period)      →  Toggle Tgmix Mode
+Super + / (slash)       →  Toggle Scroller Mode
 Ctrl + (0-9)            →  Navigate To Workspace#
-Ctrl + Super + L/R Arr  →  Move L/R With Focused Window
+Ctrl + Super + L/R Arr  →  Move L/R Wrkspc w/ Focused Window
 Alt + (0-9)             →  Move Window To Workspace#
 Alt + a                 →  Toggle Maximize Window
 Alt + f                 →  Toggle Fullscreen Window

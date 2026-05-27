@@ -31,7 +31,8 @@ MANGO_RULES="󰇙   Rules"
 MANGO_ENV="   Env"
 MANGO_EXEC="   Exec"
 NVIM="   Neovim"
-WAYBAR="   Waybar"
+# WAYBAR="   Waybar"
+WAYBAR="   DMS"
 GHOSTTY="   Ghostty"
 ROFI="   Rofi"
 ROFI_APP="   App"
@@ -82,8 +83,7 @@ case $chosen in
         open_in_ghostty_nvim ~/.config/nvim/init.lua
         ;;
     "$WAYBAR")
-        open_in_ghostty_nvim ~/.config/waybar/config.jsonc
-        open_in_ghostty_nvim ~/.config/waybar/style.css
+        open_in_ghostty_nvim ~/.config/DankMaterialShell/settings.json
         ;;
     "$GHOSTTY")
         open_in_ghostty_nvim ~/.config/ghostty/config
