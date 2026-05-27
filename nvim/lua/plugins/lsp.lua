@@ -74,10 +74,13 @@ function M.setup()
 	end
 
 	local diag_float_group = vim.api.nvim_create_augroup("UserDiagnosticFloat", { clear = true })
-	vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+	vim.api.nvim_create_autocmd("CursorHold", {
 		group = diag_float_group,
 		callback = function(ev)
 			if vim.b[ev.buf].pause_diagnostic_float then
+				return
+			end
+			if vim.fn.pumvisible() == 1 then
 				return
 			end
 			vim.diagnostic.open_float(nil, {
