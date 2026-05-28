@@ -1,0 +1,35 @@
+{
+  "id": "navarch",
+  "name": "Navarch",
+  "version": "1.0.0",
+  "author": "kokopi",
+  "description": "Rofi-based dark violet-gold theme",
+  "dark": {
+    "background": "#211C2E",
+    "backgroundText": "#BAB6A9",
+
+    "surface": "#211C2E",
+    "surfaceText": "#E8E1D0",
+
+    "surfaceVariant": "#665078",
+    "surfaceVariantText": "#DBD4C1",
+
+    "surfaceContainer": "#1A1523",
+    "surfaceContainerHigh": "#140F1C",
+    "surfaceContainerHighest": "#110D17",
+
+    "outline": "#AFA1C9",
+
+    "primary": "#d5aed6",
+    "primaryText": "#211C2E",
+    "primaryContainer": "#3D3445",
+    "secondary": "#E0D4AB",
+    "surfaceTint": "#7866C4",
+
+    "error": "#C97F87",
+    "warning": "#EBD488",
+    "info": "#7866C4"
+  },
+  "light": {},
+  "sourceDir": "navarch"
+}
