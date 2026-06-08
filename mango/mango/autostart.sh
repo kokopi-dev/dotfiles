@@ -3,7 +3,7 @@ set +e
 
 awww-daemon & disown
 
-init-wallpapers
+# init-wallpapers
 
 # dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=wlroots
 # /usr/lib/xdg-desktop-portal &

@@ -1,4 +1,5 @@
 scripts/.gitremotetoken.json
+dms
 venv/
 .env
 *.pyc
