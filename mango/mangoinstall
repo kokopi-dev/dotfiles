@@ -73,8 +73,6 @@ yay -S ttf-nerd-fonts-symbols
 fc-cache -fv
 
 # monitor management
-# use wlr-randr to set kanshi settings when getting monitor name
-yay -S wdisplays wlr-randr
 sudo pacman -S kanshi
 
 # bluetooth

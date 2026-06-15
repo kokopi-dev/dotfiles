@@ -6,35 +6,108 @@ if ! command -v mmsg >/dev/null 2>&1; then
   exit 1
 fi
 
+if ! command -v jq >/dev/null 2>&1; then
+  echo "error: jq not found; install with: sudo pacman -S jq" >&2
+  exit 1
+fi
+
 mode="${1:-all}"
 case "$mode" in
   all|single) ;;
   *)
-    echo "usage: $(basename "$0") [single]" >&2
+    echo "usage: $(basename "$0") [all|single]" >&2
     exit 2
     ;;
 esac
 
-mapfile -t outputs < <(mmsg -O | awk 'NF { print $1 }')
-out_count=${#outputs[@]}
+get_monitors_json() {
+  local json
+  json="$(mmsg get all-monitors 2>&1)"
+
+  if ! jq -e '.monitors | type == "array"' >/dev/null 2>&1 <<<"$json"; then
+    echo "error: failed to read monitors from mmsg:" >&2
+    echo "$json" >&2
+    exit 1
+  fi
+
+  printf '%s\n' "$json"
+}
+
+get_outputs() {
+  get_monitors_json | jq -r '.monitors[].name'
+}
+
+get_active_monitor() {
+  local json="$1"
+  local active
+
+  active="$(jq -r '.monitors[] | select(.active == true) | .name' <<<"$json" | head -n1)"
+
+  if [[ -n "$active" && "$active" != "null" ]]; then
+    echo "$active"
+  else
+    jq -r '.monitors[0].name' <<<"$json"
+  fi
+}
+
+get_active_tag() {
+  local mon="$1"
+  get_monitors_json | jq -r --arg mon "$mon" '
+    .monitors[]
+    | select(.name == $mon)
+    | (.active_tags[0] // 1)
+  '
+}
+
+get_tag_clients() {
+  local mon="$1"
+  local tag="$2"
+
+  get_monitors_json | jq -r --arg mon "$mon" --argjson tag "$tag" '
+    .monitors[]
+    | select(.name == $mon)
+    | (.tags[] | select(.index == $tag) | .client_count) // 0
+  '
+}
+
+get_total_clients() {
+  local mon="$1"
+
+  get_monitors_json | jq -r --arg mon "$mon" '
+    .monitors[]
+    | select(.name == $mon)
+    | [.tags[].client_count]
+    | add // 0
+  '
+}
+
+dispatch() {
+  mmsg dispatch "$1" >/dev/null
+}
+
+json="$(get_monitors_json)"
+
+mapfile -t outputs < <(jq -r '.monitors[].name' <<<"$json")
+out_count="${#outputs[@]}"
 
 if (( out_count == 0 )); then
   echo "error: no monitors detected" >&2
   exit 1
 fi
+
 if (( out_count == 1 )); then
-  echo "info: only one monitor connected, nothing to move"
+  echo "info: only one monitor detected by MangoWM, nothing to move"
   exit 0
 fi
+
 if (( out_count > 2 )); then
   echo "error: script supports max 2 monitors, found ${out_count}" >&2
+  printf 'monitors:\n' >&2
+  printf '  %s\n' "${outputs[@]}" >&2
   exit 2
 fi
 
-active="$(mmsg -g -o | awk '$2=="selmon" && $3=="1" { print $1; exit }')"
-if [[ -z "$active" ]]; then
-  active="${outputs[0]}"
-fi
+active="$(get_active_monitor "$json")"
 
 target=""
 for out in "${outputs[@]}"; do
@@ -49,49 +122,12 @@ if [[ -z "$target" ]]; then
   exit 1
 fi
 
-get_active_tag() {
-  local mon="$1"
-  local active_mask
-  active_mask="$(mmsg -g -t | awk -v m="$mon" '$1==m && $2=="tags" && $3 ~ /^[0-9]+$/ && $4 ~ /^[0-9]+$/ { print $4; exit }')"
-  if [[ ! "$active_mask" =~ ^[0-9]+$ ]]; then
-    echo 1
-    return
-  fi
-
-  for tag in {1..9}; do
-    if (( active_mask & (1 << (tag - 1)) )); then
-      echo "$tag"
-      return
-    fi
-  done
-  echo 1
-}
-
-get_tag_clients() {
-  local mon="$1" tag="$2"
-  local n
-  n="$(mmsg -g -t | awk -v m="$mon" -v t="$tag" '$1==m && $2=="tag" && $3==t { print $5; exit }')"
-  if [[ "$n" =~ ^[0-9]+$ ]]; then
-    echo "$n"
-  else
-    echo 0
-  fi
-}
-
-get_total_clients() {
-  local mon="$1"
-  local n
-  n="$(mmsg -g -t | awk -v m="$mon" '$1==m && $2=="clients" { print $3; exit }')"
-  if [[ "$n" =~ ^[0-9]+$ ]]; then
-    echo "$n"
-  else
-    echo 0
-  fi
-}
-
 if [[ "$mode" == "single" ]]; then
   echo "move-single: active=${active} target=${target}"
-  mmsg -o "$active" -s -d "tagmon,${target},1" >/dev/null
+
+  dispatch "focusmon,${active}"
+  dispatch "tagmon,${target},1"
+
   echo "move-single: done"
   exit 0
 fi
@@ -107,16 +143,25 @@ fi
 echo "move-all: active=${active} target=${target} target_tag=${target_tag} total=${source_total}"
 
 moved=0
+
 for tag in {1..9}; do
   while :; do
     before="$(get_tag_clients "$active" "$tag")"
     (( before > 0 )) || break
 
-    mmsg -o "$active" -s -t "$tag" >/dev/null
-    mmsg -o "$active" -s -d "tagcrossmon,${target_tag},${target}" >/dev/null
-    mmsg -s -d "focusmon,${active}" >/dev/null || true
+    dispatch "focusmon,${active}"
+
+    # Select source tag.
+    # If your Mango build uses tag masks instead of tag indexes for view,
+    # this line may need changing.
+    dispatch "view,${tag}"
+
+    dispatch "tagcrossmon,${target_tag},${target}"
+
+    dispatch "focusmon,${active}" || true
 
     after="$(get_tag_clients "$active" "$tag")"
+
     if (( after < before )); then
       (( moved += (before - after) ))
     else
