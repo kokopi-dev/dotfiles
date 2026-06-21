@@ -4,6 +4,86 @@ local pack = require("commands.pack")
 local mason_utils = require("commands.mason")
 local lsp_tools = require("plugins.lsp-manager")
 
+local templ_lsp_refresh_timer
+
+local function uniq(items)
+	local seen = {}
+	local out = {}
+	for _, item in ipairs(items) do
+		if item and item ~= "" and not seen[item] then
+			seen[item] = true
+			table.insert(out, item)
+		end
+	end
+	return out
+end
+
+local function any_active_client(names)
+	for _, name in ipairs(names) do
+		if #vim.lsp.get_clients({ name = name }) > 0 then
+			return true
+		end
+	end
+	return false
+end
+
+local function lsp_names_for_buf(bufnr)
+	local names = {}
+	for _, client in ipairs(vim.lsp.get_clients({ bufnr = bufnr })) do
+		table.insert(names, client.name)
+	end
+
+	local ft = vim.bo[bufnr].filetype
+	if ft == "templ" then
+		vim.list_extend(names, { "templ", "gopls", "html", "tailwindcss" })
+	elseif ft == "go" then
+		table.insert(names, "gopls")
+	end
+
+	return uniq(names)
+end
+
+local function restart_lsp_configs(names, reason)
+	names = uniq(names)
+	if #names == 0 or not any_active_client(names) then
+		return
+	end
+
+	vim.cmd("silent! checktime")
+	vim.lsp.document_color.enable(false)
+	vim.lsp.enable(names, false)
+	vim.defer_fn(function()
+		vim.lsp.enable(names)
+		vim.lsp.document_color.enable(true)
+		vim.cmd("silent! checktime")
+		if reason then
+			vim.notify(("LSP refreshed: %s (%s)"):format(table.concat(names, ", "), reason), vim.log.levels.INFO)
+		end
+	end, 150)
+end
+
+local function schedule_templ_lsp_refresh()
+	local names = { "templ", "gopls" }
+	if not any_active_client(names) then
+		return
+	end
+
+	if templ_lsp_refresh_timer then
+		templ_lsp_refresh_timer:stop()
+		templ_lsp_refresh_timer:close()
+	end
+
+	templ_lsp_refresh_timer = vim.uv.new_timer()
+	templ_lsp_refresh_timer:start(250, 0, function()
+		templ_lsp_refresh_timer:stop()
+		templ_lsp_refresh_timer:close()
+		templ_lsp_refresh_timer = nil
+		vim.schedule(function()
+			restart_lsp_configs(names)
+		end)
+	end)
+end
+
 function M.setup()
 	pack.add({ "mason", "nvim-lspconfig", "conform", "symbol-usage" })
 
@@ -58,9 +138,14 @@ function M.setup()
 		require("conform").format({ async = true, lsp_fallback = true })
 	end, { desc = "Format buffer" })
 
+	vim.keymap.set("n", "<leader>l", function()
+		restart_lsp_configs(lsp_names_for_buf(vim.api.nvim_get_current_buf()), "manual")
+	end, { desc = "Refresh relevant LSP" })
+
 	mason_utils.setup_install_defaults_command(lsp_tools.tools)
 
 	vim.diagnostic.config({ virtual_text = false })
+	vim.lsp.document_color.enable(true, nil, { style = "virtual" })
 
 	local function pause_diagnostic_float_until_move(bufnr)
 		vim.b[bufnr].pause_diagnostic_float = true
@@ -116,6 +201,13 @@ function M.setup()
         text_format = text_format,
 	})
 
+	local templ_lsp_group = vim.api.nvim_create_augroup("UserTemplLspRefresh", { clear = true })
+	vim.api.nvim_create_autocmd("BufWritePost", {
+		group = templ_lsp_group,
+		pattern = "*.templ",
+		callback = schedule_templ_lsp_refresh,
+	})
+
 	local lsp_group = vim.api.nvim_create_augroup("UserLspAttach", { clear = true })
 	vim.api.nvim_create_autocmd("LspAttach", {
 		group = lsp_group,
@@ -131,9 +223,6 @@ function M.setup()
 			end
 			if client:supports_method("textDocument/definition") then
 				vim.bo[bufnr].tagfunc = "v:lua.vim.lsp.tagfunc"
-			end
-			if client:supports_method("textDocument/documentColor") then
-				vim.lsp.document_color.enable(true, { bufnr = bufnr }, { style = "virtual" })
 			end
 
 			local map = function(mode, lhs, rhs, desc)
